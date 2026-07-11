@@ -1,0 +1,86 @@
+server:
+  host: "0.0.0.0"
+  port: 18080
+  mode: "release"
+  
+  jwt:
+    secret: "your-secret-key-here"
+    expire: 24
+  
+  cors:
+    allowOrigins: ["*"]
+    allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+    allowHeaders: ["Origin", "Content-Type", "Authorization"]
+
+sip:
+  listen_ip: "0.0.0.0"
+  listen_port: 8116
+  transport: "udp"
+  
+  domain: "4101050000"
+  server_id: "41010500002000000001"
+  password: "12345678"
+  
+  expires: 3600
+  max_retry: 3
+
+mysql:
+  host: "127.0.0.1"
+  port: 3306
+  username: "root"
+  password: "12345678"
+  dbname: "wvp"
+
+pgsql:
+  host: "127.0.0.1"
+  port: 5432
+  username: "postgres"
+  password: "12345678"
+  dbname: "wvp"
+
+redis:
+  host: "127.0.0.1"
+  port: 6379
+  password: ""
+  db: 0
+
+wvp:
+  sip:
+    listen_ip: "0.0.0.0"
+    listen_port: 8116
+    transport: "udp"
+    domain: "4101050000"
+    server_id: "41010500002000000001"
+    password: "12345678"
+    expires: 3600
+    max_retry: 3
+  
+  zlmediakit:
+    servers:
+      - id: "zlm-local"
+        ip: "127.0.0.1"
+        http_port: 9092
+        secret: "your-zlm-secret"
+        default: true
+    stream:
+      app: "live"
+      vhost: "__defaultVhost__"
+    rtp:
+      enable: true
+      port_range: "40000,45000"
+      send_port_range: "50000,55000"
+  
+  record:
+    enable: true
+    storage:
+      type: "local"
+      path: "/data/record"
+    ffmpeg:
+      path: "/usr/bin/ffmpeg"
+      threads: 4
+  
+  user_settings:
+    play_timeout: 180000
+    ssrc_random: false
+    auto_apply_play: true
+    stream_on_demand: true
