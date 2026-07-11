@@ -57,13 +57,87 @@ func (e *ensureTables) MigrateTable(ctx context.Context) (context.Context, error
 		sysModel.SysLoginLog{},
 		sysModel.SysApiToken{},
 		adapter.CasbinRule{},
+		sysModel.Device{},
+		sysModel.DeviceChannel{},
+		sysModel.Alarm{},
+		sysModel.DevicePosition{},
+		sysModel.RecordPlan{},
+		sysModel.RecordFile{},
+		sysModel.Platform{},
+		sysModel.PlatformChannel{},
 	}
 	for _, t := range tables {
 		_ = db.AutoMigrate(&t)
 		// 视图 authority_menu 会被当成表来创建，引发冲突错误（更新版本的gorm似乎不会）
 		// 由于 AutoMigrate() 基本无需考虑错误，因此显式忽略
 	}
+
+	// 手动确保 GB28181 表拥有 GVA_MODEL 所需的字段
+	// AutoMigrate 对已有表有时无法正确添加列
+	ensureGB28181Columns(db)
+
 	return ctx, nil
+}
+
+// ensureGB28181Columns 通过 raw SQL 确保 GB28181 相关表包含 GVA_MODEL 标准字段
+func ensureGB28181Columns(db *gorm.DB) {
+	type columnDef struct {
+		table string
+		col   string
+		def   string
+	}
+	columns := []columnDef{
+		{"wvp_device", "id", "INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY"},
+		{"wvp_device", "created_at", "DATETIME(3) NULL"},
+		{"wvp_device", "updated_at", "DATETIME(3) NULL"},
+		{"wvp_device", "deleted_at", "DATETIME(3) NULL"},
+		{"wvp_device", "online", "TINYINT(1) DEFAULT 0"},
+
+		{"wvp_device_channel", "id", "INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY"},
+		{"wvp_device_channel", "created_at", "DATETIME(3) NULL"},
+		{"wvp_device_channel", "updated_at", "DATETIME(3) NULL"},
+		{"wvp_device_channel", "deleted_at", "DATETIME(3) NULL"},
+
+		{"wvp_alarm", "id", "INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY"},
+		{"wvp_alarm", "created_at", "DATETIME(3) NULL"},
+		{"wvp_alarm", "updated_at", "DATETIME(3) NULL"},
+		{"wvp_alarm", "deleted_at", "DATETIME(3) NULL"},
+
+		{"wvp_device_position", "id", "INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY"},
+		{"wvp_device_position", "created_at", "DATETIME(3) NULL"},
+		{"wvp_device_position", "updated_at", "DATETIME(3) NULL"},
+		{"wvp_device_position", "deleted_at", "DATETIME(3) NULL"},
+
+		{"wvp_record_plan", "id", "INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY"},
+		{"wvp_record_plan", "created_at", "DATETIME(3) NULL"},
+		{"wvp_record_plan", "updated_at", "DATETIME(3) NULL"},
+		{"wvp_record_plan", "deleted_at", "DATETIME(3) NULL"},
+
+		{"wvp_record_file", "id", "INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY"},
+		{"wvp_record_file", "created_at", "DATETIME(3) NULL"},
+		{"wvp_record_file", "updated_at", "DATETIME(3) NULL"},
+		{"wvp_record_file", "deleted_at", "DATETIME(3) NULL"},
+
+		{"wvp_platform", "id", "INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY"},
+		{"wvp_platform", "created_at", "DATETIME(3) NULL"},
+		{"wvp_platform", "updated_at", "DATETIME(3) NULL"},
+		{"wvp_platform", "deleted_at", "DATETIME(3) NULL"},
+
+		{"wvp_platform_channel", "id", "INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY"},
+		{"wvp_platform_channel", "created_at", "DATETIME(3) NULL"},
+		{"wvp_platform_channel", "updated_at", "DATETIME(3) NULL"},
+		{"wvp_platform_channel", "deleted_at", "DATETIME(3) NULL"},
+	}
+
+	for _, c := range columns {
+		if !db.Migrator().HasTable(c.table) {
+			continue
+		}
+		if !db.Migrator().HasColumn(c.table, c.col) {
+			sql := "ALTER TABLE `" + c.table + "` ADD COLUMN `" + c.col + "` " + c.def
+			db.Exec(sql)
+		}
+	}
 }
 
 func (e *ensureTables) TableCreated(ctx context.Context) bool {

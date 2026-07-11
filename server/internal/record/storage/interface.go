@@ -1,9 +1,6 @@
 package storage
 
-import (
-	"errors"
-	"io"
-)
+import "io"
 
 type FileInfo struct {
 	FileName   string

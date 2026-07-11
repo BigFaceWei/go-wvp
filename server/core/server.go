@@ -5,7 +5,9 @@ import (
 	"time"
 
 	"wvp-go/server/global"
+	gbsip "wvp-go/server/internal/gb28181/sip"
 	"wvp-go/server/initialize"
+	"wvp-go/server/internal/gb28181/message"
 	mcpTool "wvp-go/server/mcp"
 	"wvp-go/server/service/system"
 	"go.uber.org/zap"
@@ -29,6 +31,8 @@ func RunServer() {
 		system.LoadAll()
 	}
 
+	go startSIPServer()
+
 	Router := initialize.Routers()
 	address := fmt.Sprintf(":%d", global.GVA_CONFIG.System.Addr)
 	mcpBaseURL := mcpTool.ResolveMCPServiceURL()
@@ -42,7 +46,65 @@ func RunServer() {
 	MCP 独立服务请手动启动: go run ./cmd/mcp -config ./cmd/mcp/config.yaml
 	默认MCP StreamHTTP地址:%s
 	默认前端文件运行地址:http://127.0.0.1:8080
-`, global.Version, address, mcpBaseURL)
+	GB28181 SIP 监听地址:%s:%d
+`, global.Version, address, mcpBaseURL,
+		global.GVA_CONFIG.WVP.SIP.ListenIP,
+		global.GVA_CONFIG.WVP.SIP.ListenPort)
 
 	initServer(address, Router, 10*time.Minute, 10*time.Minute)
+}
+
+func startSIPServer() {
+	sipCfg := global.GVA_CONFIG.WVP.SIP
+	if sipCfg.ListenPort == 0 {
+		return
+	}
+
+	logger := zap.L().Named("sip-server")
+
+	srvConfig := &gbsip.ServerConfig{
+		ListenIP:   sipCfg.ListenIP,
+		ListenPort: sipCfg.ListenPort,
+		Domain:     sipCfg.Domain,
+		ServerID:   sipCfg.ServerID,
+		Transport:  sipCfg.Transport,
+	}
+
+	srv := gbsip.NewServer(srvConfig, logger)
+
+	registerHandler := message.NewRegisterHandler(logger)
+	keepaliveHandler := message.NewKeepaliveHandler(logger)
+
+	srv.RegisterHandler("REGISTER", func(msg *gbsip.SIPMessage, addr string) {
+		req, err := registerHandler.ParseRegister(msg)
+		if err != nil {
+			logger.Error("parse REGISTER failed", zap.Error(err))
+			return
+		}
+		if err := registerHandler.HandleRegister(req); err != nil {
+			logger.Error("handle REGISTER failed", zap.Error(err))
+		}
+	})
+
+	srv.RegisterHandler("MESSAGE", func(msg *gbsip.SIPMessage, addr string) {
+		req, err := keepaliveHandler.ParseKeepalive(msg)
+		if err != nil {
+			logger.Error("parse MESSAGE failed", zap.Error(err))
+			return
+		}
+		if err := keepaliveHandler.HandleKeepalive(req); err != nil {
+			logger.Error("handle keepalive failed", zap.Error(err))
+		}
+	})
+
+	if err := srv.Start(); err != nil {
+		logger.Error("SIP server start failed", zap.Error(err))
+		return
+	}
+
+	logger.Info("SIP server started",
+		zap.String("listen", fmt.Sprintf("%s:%d", sipCfg.ListenIP, sipCfg.ListenPort)),
+	)
+
+	select {}
 }

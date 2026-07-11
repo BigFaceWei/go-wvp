@@ -128,6 +128,10 @@ func (m *SIPMessage) AddHeader(name, value string) {
 	m.Headers[name] = append(m.Headers[name], value)
 }
 
+func (m *SIPMessage) SetBody(body []byte) {
+	m.Body = body
+}
+
 func (m *SIPMessage) String() string {
 	var sb strings.Builder
 

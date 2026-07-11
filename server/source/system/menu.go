@@ -61,6 +61,7 @@ func (i *initMenu) InitializeData(ctx context.Context) (next context.Context, er
 		{MenuLevel: 0, Hidden: false, ParentId: 0, Path: "https://www.gin-vue-admin.com", Name: "https://www.gin-vue-admin.com", Component: "/", Sort: 0, Meta: Meta{Title: "官方网站", Icon: "customer-gva"}},
 		{MenuLevel: 0, Hidden: false, ParentId: 0, Path: "state", Name: "state", Component: "view/system/state.vue", Sort: 8, Meta: Meta{Title: "服务器状态", Icon: "cloudy"}},
 		{MenuLevel: 0, Hidden: false, ParentId: 0, Path: "plugin", Name: "plugin", Component: "view/routerHolder.vue", Sort: 6, Meta: Meta{Title: "插件系统", Icon: "cherry"}},
+		{MenuLevel: 0, Hidden: false, ParentId: 0, Path: "gb28181", Name: "gb28181", Component: "view/routerHolder.vue", Sort: 2, Meta: Meta{Title: "国标GB28181", Icon: "monitor"}},
 	}
 
 	// 先创建父级菜单（ParentId = 0 的菜单）
@@ -106,6 +107,13 @@ func (i *initMenu) InitializeData(ctx context.Context) (next context.Context, er
 		{MenuLevel: 1, Hidden: false, ParentId: menuNameMap["plugin"], Path: "https://plugin.gin-vue-admin.com/", Name: "https://plugin.gin-vue-admin.com/", Component: "https://plugin.gin-vue-admin.com/", Sort: 0, Meta: Meta{Title: "插件市场", Icon: "shop"}},
 		{MenuLevel: 1, Hidden: false, ParentId: menuNameMap["plugin"], Path: "installPlugin", Name: "installPlugin", Component: "view/systemTools/installPlugin/index.vue", Sort: 1, Meta: Meta{Title: "插件安装", Icon: "box"}},
 		{MenuLevel: 1, Hidden: false, ParentId: menuNameMap["plugin"], Path: "pubPlug", Name: "pubPlug", Component: "view/systemTools/pubPlug/pubPlug.vue", Sort: 3, Meta: Meta{Title: "打包插件", Icon: "files"}},
+
+		// gb28181子菜单
+		{MenuLevel: 1, Hidden: false, ParentId: menuNameMap["gb28181"], Path: "device", Name: "device", Component: "view/device/index.vue", Sort: 1, Meta: Meta{Title: "设备管理", Icon: "monitor"}},
+		{MenuLevel: 1, Hidden: false, ParentId: menuNameMap["gb28181"], Path: "platform", Name: "platform", Component: "view/platform/index.vue", Sort: 2, Meta: Meta{Title: "平台级联", Icon: "connection"}},
+		{MenuLevel: 1, Hidden: false, ParentId: menuNameMap["gb28181"], Path: "alarm", Name: "alarm", Component: "view/alarm/index.vue", Sort: 3, Meta: Meta{Title: "报警管理", Icon: "warning"}},
+		{MenuLevel: 1, Hidden: false, ParentId: menuNameMap["gb28181"], Path: "position", Name: "position", Component: "view/position/index.vue", Sort: 4, Meta: Meta{Title: "移动位置", Icon: "location"}},
+		{MenuLevel: 1, Hidden: false, ParentId: menuNameMap["gb28181"], Path: "record", Name: "record", Component: "view/record/index.vue", Sort: 5, Meta: Meta{Title: "录像管理", Icon: "video-camera"}},
 	}
 
 	// 创建子菜单
@@ -124,7 +132,7 @@ func (i *initMenu) DataInserted(ctx context.Context) bool {
 	if !ok {
 		return false
 	}
-	if errors.Is(db.Where("path = ?", "autoPkg").First(&SysBaseMenu{}).Error, gorm.ErrRecordNotFound) { // 判断是否存在数据
+	if errors.Is(db.Where("path = ?", "gb28181").First(&SysBaseMenu{}).Error, gorm.ErrRecordNotFound) {
 		return false
 	}
 	return true

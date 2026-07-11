@@ -6,25 +6,25 @@ import (
 	"time"
 
 	"wvp-go/server/global"
+	gbsip "wvp-go/server/internal/gb28181/sip"
 	"wvp-go/server/model/system"
-	"wvp-go/server/pkg/sip"
 
 	"go.uber.org/zap"
 )
 
 type CascadeManager struct {
-	sipServer    *sip.Server
-	sipClients   map[string]*sip.Client // platformID -> client
-	deviceChannels map[string][]system.DeviceChannel // deviceID -> channels
-	mu           sync.RWMutex
-	logger       *zap.Logger
-	running      bool
+	sipServer      *gbsip.Server
+	sipClients     map[string]*gbsip.Client
+	deviceChannels map[string][]system.DeviceChannel
+	mu             sync.RWMutex
+	logger         *zap.Logger
+	running        bool
 }
 
-func NewCascadeManager(sipServer *sip.Server, logger *zap.Logger) *CascadeManager {
+func NewCascadeManager(sipServer *gbsip.Server, logger *zap.Logger) *CascadeManager {
 	return &CascadeManager{
 		sipServer:      sipServer,
-		sipClients:     make(map[string]*sip.Client),
+		sipClients:     make(map[string]*gbsip.Client),
 		deviceChannels: make(map[string][]system.DeviceChannel),
 		logger:         logger,
 	}
@@ -60,9 +60,9 @@ func (cm *CascadeManager) RegisterToUpperPlatform(platform system.Platform) erro
 	cm.mu.Lock()
 	defer cm.mu.Unlock()
 
-	clientConfig := &sip.ClientConfig{
-		LocalIP:    global.GVA_CONFIG.Sip.SipIP,
-		LocalPort:  global.GVA_CONFIG.Sip.SipPort,
+	clientConfig := &gbsip.ClientConfig{
+		LocalIP:    global.GVA_CONFIG.WVP.SIP.ListenIP,
+		LocalPort:  global.GVA_CONFIG.WVP.SIP.ListenPort,
 		Domain:     platform.Domain,
 		ServerID:   platform.PlatformID,
 		RemoteIP:   platform.IP,
@@ -70,7 +70,7 @@ func (cm *CascadeManager) RegisterToUpperPlatform(platform system.Platform) erro
 		Transport:  platform.Transport,
 	}
 
-	client := sip.NewClient(clientConfig, cm.logger)
+	client := gbsip.NewClient(clientConfig, cm.logger)
 	if err := client.Start(); err != nil {
 		return fmt.Errorf("start SIP client for platform %s failed: %w", platform.PlatformID, err)
 	}

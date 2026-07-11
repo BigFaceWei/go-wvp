@@ -8,6 +8,7 @@ import (
 
 	"wvp-go/server/global"
 	"wvp-go/server/model/system"
+	"wvp-go/server/pkg/sip"
 
 	"go.uber.org/zap"
 )
@@ -33,7 +34,7 @@ type RegisterRequest struct {
 	Response    string
 }
 
-func (h *RegisterHandler) ParseRegister(msg *SIPMessage) (*RegisterRequest, error) {
+func (h *RegisterHandler) ParseRegister(msg *sip.SIPMessage) (*RegisterRequest, error) {
 	if !msg.IsRequest || msg.RequestLine.Method != "REGISTER" {
 		return nil, fmt.Errorf("not a REGISTER message")
 	}

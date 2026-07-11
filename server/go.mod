@@ -24,7 +24,6 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/gookit/color v1.5.4
 	github.com/huaweicloud/huaweicloud-sdk-go-obs v3.24.9+incompatible
-	github.com/jordan-wright/email v4.0.1-0.20210109023952-943e75fe5223+incompatible
 	github.com/mark3labs/mcp-go v0.41.1
 	github.com/mholt/archives v0.1.1
 	github.com/minio/minio-go/v7 v7.0.84
@@ -53,11 +52,9 @@ require (
 	golang.org/x/sys v0.39.0
 	golang.org/x/text v0.32.0
 	gopkg.in/yaml.v3 v3.0.1
-	gorm.io/datatypes v1.2.5
 	gorm.io/driver/mysql v1.6.0
 	gorm.io/driver/postgres v1.6.0
 	gorm.io/driver/sqlserver v1.6.3
-	gorm.io/gen v0.3.26
 	gorm.io/gorm v1.31.1
 )
 
@@ -192,13 +189,11 @@ require (
 	golang.org/x/arch v0.13.0 // indirect
 	golang.org/x/exp v0.0.0-20251219203646-944ab1f22d93 // indirect
 	golang.org/x/image v0.23.0 // indirect
-	golang.org/x/mod v0.31.0 // indirect
 	golang.org/x/net v0.48.0 // indirect
 	golang.org/x/time v0.9.0 // indirect
 	golang.org/x/tools v0.40.0 // indirect
 	google.golang.org/protobuf v1.36.6 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
-	gorm.io/hints v1.1.2 // indirect
 	gorm.io/plugin/dbresolver v1.6.2 // indirect
 	modernc.org/fileutil v1.3.40 // indirect
 	modernc.org/libc v1.67.4 // indirect

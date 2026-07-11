@@ -6,6 +6,7 @@ import (
 
 	"wvp-go/server/global"
 	"wvp-go/server/model/system"
+	"wvp-go/server/pkg/sip"
 
 	"go.uber.org/zap"
 )
@@ -24,7 +25,7 @@ type KeepaliveRequest struct {
 	RemoteAddr string
 }
 
-func (h *KeepaliveHandler) ParseKeepalive(msg *SIPMessage) (*KeepaliveRequest, error) {
+func (h *KeepaliveHandler) ParseKeepalive(msg *sip.SIPMessage) (*KeepaliveRequest, error) {
 	if !msg.IsRequest || msg.RequestLine.Method != "MESSAGE" {
 		return nil, fmt.Errorf("not a MESSAGE message")
 	}

@@ -1,8 +1,8 @@
-import service from '@/utils/service'
+import service from '@/utils/request'
 
 export function getAlarmList(params) {
   return service({
-    url: '/api/alarm/list',
+    url: '/alarm/list',
     method: 'get',
     params
   })
@@ -10,7 +10,7 @@ export function getAlarmList(params) {
 
 export function getAlarmStatistics(params) {
   return service({
-    url: '/api/alarm/statistics',
+    url: '/alarm/statistics',
     method: 'get',
     params
   })
@@ -18,14 +18,14 @@ export function getAlarmStatistics(params) {
 
 export function getAlarm(id) {
   return service({
-    url: `/api/alarm/${id}`,
+    url: `/alarm/${id}`,
     method: 'get'
   })
 }
 
 export function handleAlarm(id, data) {
   return service({
-    url: `/api/alarm/${id}/handle`,
+    url: `/alarm/${id}/handle`,
     method: 'post',
     data
   })
@@ -33,7 +33,7 @@ export function handleAlarm(id, data) {
 
 export function deleteAlarm(id) {
   return service({
-    url: `/api/alarm/${id}`,
+    url: `/alarm/${id}`,
     method: 'delete'
   })
 }
