@@ -1,6 +1,7 @@
 {
   "/src/view/about/index.vue": "About",
   "/src/view/alarm/index.vue": "Index",
+  "/src/view/channel/index.vue": "Index",
   "/src/view/dashboard/components/banner.vue": "Banner",
   "/src/view/dashboard/components/card.vue": "Card",
   "/src/view/dashboard/components/charts-content-numbers.vue": "ChartsContentNumbers",

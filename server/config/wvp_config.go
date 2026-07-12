@@ -40,6 +40,9 @@ type SIPConfig struct {
 	
 	// 最大重试次数
 	MaxRetry int `mapstructure:"max_retry" json:"max_retry" yaml:"max_retry"`
+	
+	// 是否开启SIP信令日志
+	SIPLog bool `mapstructure:"sip_log" json:"sip_log" yaml:"sip_log"`
 }
 
 // ZLMediaKitConfig ZLMediaKit配置

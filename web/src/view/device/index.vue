@@ -42,9 +42,10 @@
           </template>
         </el-table-column>
         <el-table-column prop="ip" label="IP地址" width="140" />
-        <el-table-column label="操作" width="280">
+        <el-table-column label="操作" width="350">
           <template #default="scope">
             <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
+            <el-button size="small" type="success" @click="handleChannels(scope.row)">通道</el-button>
             <el-button size="small" type="primary" @click="handleCatalog(scope.row)">查询目录</el-button>
             <el-button size="small" type="danger" @click="handleDelete(scope.row)">删除</el-button>
           </template>
@@ -101,8 +102,11 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { getDeviceList, createDevice, updateDevice, deleteDevice, queryDeviceCatalog } from '@/api/device'
+
+const router = useRouter()
 
 const loading = ref(false)
 const deviceList = ref([])
@@ -232,6 +236,16 @@ const handleCatalog = async (row) => {
   } catch (error) {
     console.error('查询目录失败:', error)
   }
+}
+
+const handleChannels = (row) => {
+  router.push({
+    path: '/channel',
+    query: {
+      device_id: row.device_id,
+      device_name: row.name
+    }
+  })
 }
 
 onMounted(() => {

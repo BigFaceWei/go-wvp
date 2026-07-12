@@ -3,8 +3,15 @@ package message
 import (
 	"fmt"
 	"strings"
+	"sync/atomic"
+	"time"
 
 	"go.uber.org/zap"
+)
+
+var (
+	inviteBranchCounter uint64
+	inviteSSRCCounter   uint64
 )
 
 type InviteHandler struct {
@@ -113,7 +120,9 @@ func (h *InviteHandler) BuildInviteSDP(req *InviteRequest) string {
 }
 
 func (h *InviteHandler) GenerateSSRC() string {
-	return fmt.Sprintf("%010d", 1000000000+999999999)
+	n := atomic.AddUint64(&inviteSSRCCounter, 1)
+	ts := uint64(time.Now().UnixNano())
+	return fmt.Sprintf("%010d", (ts%10000000000)+n)
 }
 
 type BYEHandler struct {
@@ -132,8 +141,9 @@ type BYERequest struct {
 }
 
 func (h *BYEHandler) BuildBYEMessage(callID, fromTag, toTag string, cseq int) string {
+	n := atomic.AddUint64(&inviteBranchCounter, 1)
 	msg := fmt.Sprintf("BYE SIP/2.0\r\n")
-	msg += fmt.Sprintf("Via: SIP/2.0/UDP 0.0.0.0:5060;branch=z9hG4bK%d\r\n", 1000000000+999999999)
+	msg += fmt.Sprintf("Via: SIP/2.0/UDP 0.0.0.0:5060;branch=z9hG4bK%d-%d\r\n", time.Now().UnixNano(), n)
 	msg += fmt.Sprintf("From: <sip:41010500002000000001@4101050000>;tag=%s\r\n", fromTag)
 	msg += fmt.Sprintf("To: <sip:%s@4101050000>;tag=%s\r\n", "device", toTag)
 	msg += fmt.Sprintf("Call-ID: %s\r\n", callID)

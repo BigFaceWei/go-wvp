@@ -25,6 +25,15 @@ const routes = [
     component: () => import('@/view/device/index.vue')
   },
   {
+    path: '/channel',
+    name: 'Channel',
+    meta: {
+      title: '通道管理',
+      requireAuth: true
+    },
+    component: () => import('@/view/channel/index.vue')
+  },
+  {
     path: '/platform',
     name: 'Platform',
     meta: {

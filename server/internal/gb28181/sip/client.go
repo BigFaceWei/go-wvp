@@ -77,6 +77,8 @@ func (c *Client) handleMessage(addr string, data []byte) {
 		return
 	}
 
+	c.logger.Info("\n" + FormatIncoming(msg, addr))
+
 	if !msg.IsRequest {
 		branch := msg.GetHeader("Via")
 		txn := c.transactionMgr.FindByBranch(branch)
@@ -90,6 +92,7 @@ func (c *Client) SendRequest(method, requestURI string, headers map[string]strin
 	remoteAddr := fmt.Sprintf("%s:%d", c.config.RemoteIP, c.config.RemotePort)
 
 	builder := NewBuilder()
+	builder.SetListenAddr(fmt.Sprintf("%s:%d", c.config.LocalIP, c.config.LocalPort))
 	from := fmt.Sprintf("<sip:%s@%s>;tag=%s", c.config.ServerID, c.config.Domain, generateTag())
 	to := fmt.Sprintf("<sip:%s@%s>", c.config.ServerID, c.config.Domain)
 	callID := generateCallID()

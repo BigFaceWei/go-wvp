@@ -1,9 +1,13 @@
 package gb28181
 
 import (
+	"fmt"
+	"strings"
 	"wvp-go/server/global"
 	"wvp-go/server/model/system"
 	"wvp-go/server/utils/response"
+
+	gbsip "wvp-go/server/internal/gb28181/sip"
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
@@ -26,7 +30,7 @@ func GetDeviceList(c *gin.Context) {
 		PageSize int    `form:"page_size" binding:"required,min=1,max=100"`
 		DeviceID string `form:"device_id"`
 		Name     string `form:"name"`
-		Online   *bool  `form:"online"`
+		Online   string `form:"online"` // 使用 string 类型，空字符串表示未传值
 	}
 
 	if err := c.ShouldBindQuery(&pageInfo); err != nil {
@@ -42,8 +46,10 @@ func GetDeviceList(c *gin.Context) {
 	if pageInfo.Name != "" {
 		db = db.Where("name LIKE ?", "%"+pageInfo.Name+"%")
 	}
-	if pageInfo.Online != nil {
-		db = db.Where("online = ?", *pageInfo.Online)
+	// 只有明确传了 online 参数才筛选
+	if pageInfo.Online != "" {
+		online := pageInfo.Online == "true" || pageInfo.Online == "1"
+		db = db.Where("online = ?", online)
 	}
 
 	var total int64
@@ -226,6 +232,45 @@ func QueryDeviceCatalog(c *gin.Context) {
 		response.Fail(c, response.DEVICE_OFFLINE, nil)
 		return
 	}
+
+	sipServer, ok := global.GVA_SIP_SERVER.(*gbsip.Server)
+	if !ok {
+		global.GVA_LOG.Error("SIP server not available")
+		response.Fail(c, response.SIP_INIT_FAILED, nil)
+		return
+	}
+
+	xmlBody := fmt.Sprintf(`<?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>1</SN>
+  <DeviceID>%s</DeviceID>
+</Query>`, deviceID)
+
+	requestURI := fmt.Sprintf("sip:%s@%s", deviceID, global.GVA_CONFIG.WVP.SIP.Domain)
+ headers := map[string]string{
+		"To":           fmt.Sprintf("<sip:%s@%s>", deviceID, global.GVA_CONFIG.WVP.SIP.Domain),
+		"Content-Type": "Application/MANSCDP+xml",
+	}
+
+	var targetAddr string
+	if strings.Contains(device.IP, ":") {
+		targetAddr = device.IP
+	} else {
+		targetAddr = fmt.Sprintf("%s:%d", device.IP, device.Port)
+	}
+
+	_, err := sipServer.SendRequestTo("MESSAGE", requestURI, targetAddr, headers, []byte(xmlBody))
+	if err != nil {
+		global.GVA_LOG.Error("Send catalog query failed", zap.Error(err))
+		response.Fail(c, response.SIP_SEND_FAILED, nil)
+		return
+	}
+
+	global.GVA_LOG.Info("Catalog query sent",
+		zap.String("device_id", deviceID),
+		zap.String("addr", targetAddr),
+	)
 
 	response.SuccessWithMessage(c, "目录查询请求已发送", nil)
 }

@@ -149,10 +149,10 @@ mysql:
     config: charset=utf8mb4&parseTime=True&loc=Local
     db-name: wvp
     username: root
-    password: 123456
+    password: admin123
     path: 127.0.0.1
     engine: ""
-    log-mode: error
+    log-mode: info
     max-idle-conns: 10
     max-open-conns: 100
     conn-max-lifetime: 0
@@ -199,7 +199,7 @@ qiniu:
 redis:
     name: ""
     addr: 127.0.0.1:6379
-    password: ""
+    password: admin123
     db: 0
     useCluster: false
     clusterAddrs:
@@ -260,6 +260,7 @@ wvp:
         password: "12345678"
         expires: 3600
         max_retry: 10
+        sip_log: true
     zlmediakit:
         servers: []
         stream:

@@ -3,6 +3,8 @@ package message
 import (
 	"encoding/xml"
 	"fmt"
+	"sync"
+	"time"
 
 	"wvp-go/server/global"
 	"wvp-go/server/model/system"
@@ -10,12 +12,50 @@ import (
 	"go.uber.org/zap"
 )
 
+const (
+	catalogDedupWindow = 10 * time.Second
+	catalogCleanupInterval = 60 * time.Second
+)
+
+type catalogDedupEntry struct {
+	processedAt time.Time
+}
+
 type CatalogHandler struct {
 	logger *zap.Logger
+	dedup  sync.Map
 }
 
 func NewCatalogHandler(logger *zap.Logger) *CatalogHandler {
-	return &CatalogHandler{logger: logger}
+	h := &CatalogHandler{logger: logger}
+	go h.cleanupLoop()
+	return h
+}
+
+func (h *CatalogHandler) cleanupLoop() {
+	ticker := time.NewTicker(catalogCleanupInterval)
+	defer ticker.Stop()
+	for range ticker.C {
+		h.dedup.Range(func(key, value any) bool {
+			entry := value.(*catalogDedupEntry)
+			if time.Since(entry.processedAt) > catalogCleanupInterval {
+				h.dedup.Delete(key)
+			}
+			return true
+		})
+	}
+}
+
+func (h *CatalogHandler) isDuplicate(deviceID, sn string) bool {
+	key := deviceID + ":" + sn
+	if v, ok := h.dedup.Load(key); ok {
+		entry := v.(*catalogDedupEntry)
+		if time.Since(entry.processedAt) < catalogDedupWindow {
+			return true
+		}
+	}
+	h.dedup.Store(key, &catalogDedupEntry{processedAt: time.Now()})
+	return false
 }
 
 type CatalogRequest struct {
@@ -45,8 +85,8 @@ type CatalogItem struct {
 	XMLName        xml.Name `xml:"Item"`
 	DeviceID       string   `xml:"DeviceID"`
 	Name           string   `xml:"Name"`
-	Manufacturer   string   `xml:"DeviceManufacturer"`
-	Model          string   `xml:"DeviceModel"`
+	Manufacturer   string   `xml:"Manufacturer"`
+	Model          string   `xml:"Model"`
 	Owner          string   `xml:"Owner"`
 	CivilCode      string   `xml:"CivilCode"`
 	Address        string   `xml:"Address"`
@@ -69,6 +109,92 @@ func (h *CatalogHandler) ParseCatalogRequest(body []byte) (*CatalogRequest, erro
 	}
 
 	return req, nil
+}
+
+func (h *CatalogHandler) ParseCatalogResponse(body []byte) (*CatalogResponse, error) {
+	resp := &CatalogResponse{}
+	if err := xml.Unmarshal(body, resp); err != nil {
+		return nil, fmt.Errorf("parse catalog response failed: %w", err)
+	}
+
+	if resp.CmdType != "Catalog" {
+		return nil, fmt.Errorf("invalid cmd type: %s", resp.CmdType)
+	}
+
+	return resp, nil
+}
+
+func (h *CatalogHandler) HandleCatalogResponse(resp *CatalogResponse) error {
+	deviceID := resp.DeviceID
+	channelCount := len(resp.DeviceList.Items)
+
+	h.logger.Info("Catalog response received",
+		zap.String("device_id", deviceID),
+		zap.String("sn", resp.SN),
+		zap.Int("sum_num", resp.SumNum),
+		zap.Int("channel_count", channelCount),
+	)
+
+	if h.isDuplicate(deviceID, resp.SN) {
+		h.logger.Info("Duplicate catalog response skipped, 200 OK will be sent",
+			zap.String("device_id", deviceID),
+			zap.String("sn", resp.SN),
+		)
+		return nil
+	}
+
+	for _, item := range resp.DeviceList.Items {
+		var existing system.DeviceChannel
+		result := global.GVA_DB.Where("device_id = ? AND channel_id = ?", deviceID, item.DeviceID).First(&existing)
+		
+		if result.Error == nil {
+			existing.Name = item.Name
+			existing.Manufacturer = item.Manufacturer
+			existing.Model = item.Model
+			existing.Owner = item.Owner
+			existing.CivilCode = item.CivilCode
+			existing.Address = item.Address
+			existing.Parental = item.Parental
+			existing.ParentID = item.ParentID
+			existing.SafetyWay = item.SafetyWay
+			existing.RegisterWay = item.RegisterWay
+			existing.Secrecy = item.Secrecy
+			existing.Status = item.Status
+			global.GVA_DB.Save(&existing)
+		} else {
+			channel := system.DeviceChannel{
+				DeviceID:     deviceID,
+				ChannelID:    item.DeviceID,
+				Name:         item.Name,
+				Manufacturer: item.Manufacturer,
+				Model:        item.Model,
+				Owner:        item.Owner,
+				CivilCode:    item.CivilCode,
+				Address:      item.Address,
+				Parental:     item.Parental,
+				ParentID:     item.ParentID,
+				SafetyWay:    item.SafetyWay,
+				RegisterWay:  item.RegisterWay,
+				Secrecy:      item.Secrecy,
+				Status:       item.Status,
+			}
+			if err := global.GVA_DB.Create(&channel).Error; err != nil {
+				h.logger.Error("create channel failed",
+					zap.String("device_id", deviceID),
+					zap.String("channel_id", item.DeviceID),
+					zap.Error(err),
+				)
+				continue
+			}
+		}
+	}
+
+	h.logger.Info("Catalog response handled",
+		zap.String("device_id", deviceID),
+		zap.Int("channels", len(resp.DeviceList.Items)),
+	)
+
+	return nil
 }
 
 func (h *CatalogHandler) HandleCatalogRequest(req *CatalogRequest) (*CatalogResponse, error) {

@@ -3,17 +3,32 @@ package sip
 import (
 	"fmt"
 	"strings"
+	"sync/atomic"
+	"time"
+)
+
+var (
+	branchCounter uint64
+	tagCounter    uint64
+	callIDCounter uint64
 )
 
 type Builder struct {
-	headers map[string][]string
-	body    []byte
+	headers    map[string][]string
+	body       []byte
+	listenAddr string // Via header sent-by address, e.g. "192.168.1.100:5060"
 }
 
 func NewBuilder() *Builder {
 	return &Builder{
-		headers: make(map[string][]string),
+		headers:    make(map[string][]string),
+		listenAddr: "0.0.0.0:5060", // fallback default
 	}
+}
+
+func (b *Builder) SetListenAddr(addr string) *Builder {
+	b.listenAddr = addr
+	return b
 }
 
 func (b *Builder) SetMethod(method, requestURI string) *RequestLine {
@@ -63,7 +78,7 @@ func (b *Builder) BuildRequest(method, requestURI, from, to, callID, cseq string
 		msg.Headers[key] = values
 	}
 
-	msg.SetHeader("Via", fmt.Sprintf("SIP/2.0/UDP %s;branch=z9hG4bK%s", "0.0.0.0:5060", generateBranch()))
+	msg.SetHeader("Via", fmt.Sprintf("SIP/2.0/UDP %s;branch=%s", b.listenAddr, generateBranch()))
 	msg.SetHeader("From", from)
 	msg.SetHeader("To", to)
 	msg.SetHeader("Call-ID", callID)
@@ -95,7 +110,7 @@ func (b *Builder) BuildResponse(statusCode int, reason, branch, from, to, callID
 		msg.Headers[key] = values
 	}
 
-	msg.SetHeader("Via", fmt.Sprintf("SIP/2.0/UDP %s;branch=%s", "0.0.0.0:5060", branch))
+	msg.SetHeader("Via", fmt.Sprintf("SIP/2.0/UDP %s;branch=%s", b.listenAddr, branch))
 	msg.SetHeader("From", from)
 	msg.SetHeader("To", to)
 	msg.SetHeader("Call-ID", callID)
@@ -110,11 +125,13 @@ func (b *Builder) BuildResponse(statusCode int, reason, branch, from, to, callID
 }
 
 func generateBranch() string {
-	return fmt.Sprintf("z9hG4bK%d", 1000000000+999999999)
+	n := atomic.AddUint64(&branchCounter, 1)
+	return fmt.Sprintf("z9hG4bK%d-%d", time.Now().UnixNano(), n)
 }
 
 func BuildRegisterRequest(domain, serverIP string, expires int) *SIPMessage {
 	builder := NewBuilder()
+	builder.SetListenAddr(fmt.Sprintf("%s:%d", serverIP, 5060))
 	from := fmt.Sprintf("<sip:%s@%s>;tag=%s", "41010500002000000001", domain, generateTag())
 	to := fmt.Sprintf("<sip:%s@%s>", "41010500002000000001", domain)
 	callID := generateCallID()
@@ -129,7 +146,7 @@ func BuildRegisterRequest(domain, serverIP string, expires int) *SIPMessage {
 
 func BuildKeepaliveResponse(request *SIPMessage) *SIPMessage {
 	branch := request.GetHeader("Via")
-	branch = extractBranch(branch)
+	branch = ExtractBranch(branch)
 	from := request.GetHeader("From")
 	to := request.GetHeader("To")
 	callID := request.GetHeader("Call-ID")
@@ -141,7 +158,7 @@ func BuildKeepaliveResponse(request *SIPMessage) *SIPMessage {
 
 func BuildCatalogResponse(request *SIPMessage, deviceID string) *SIPMessage {
 	branch := request.GetHeader("Via")
-	branch = extractBranch(branch)
+	branch = ExtractBranch(branch)
 	from := request.GetHeader("From")
 	to := request.GetHeader("To")
 	callID := request.GetHeader("Call-ID")
@@ -180,7 +197,7 @@ func BuildCatalogResponse(request *SIPMessage, deviceID string) *SIPMessage {
 	return msg
 }
 
-func extractBranch(via string) string {
+func ExtractBranch(via string) string {
 	if strings.Contains(via, "branch=") {
 		parts := strings.Split(via, "branch=")
 		if len(parts) > 1 {
@@ -191,9 +208,11 @@ func extractBranch(via string) string {
 }
 
 func generateTag() string {
-	return fmt.Sprintf("tag%d", 1000000000+999999999)
+	n := atomic.AddUint64(&tagCounter, 1)
+	return fmt.Sprintf("tag%d-%d", time.Now().UnixNano(), n)
 }
 
 func generateCallID() string {
-	return fmt.Sprintf("%d@wvp-gb28181", 1000000000+999999999)
+	n := atomic.AddUint64(&callIDCounter, 1)
+	return fmt.Sprintf("%d-%d@wvp-gb28181", time.Now().UnixNano(), n)
 }

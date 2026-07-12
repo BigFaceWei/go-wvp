@@ -66,11 +66,10 @@ func (h *KeepaliveHandler) ParseKeepalive(msg *sip.SIPMessage) (*KeepaliveReques
 				}
 				if idx := indexOf(uri, '@'); idx != -1 {
 					rest := uri[idx+1:]
-					if endIdx := indexOf(rest, ':'); endIdx != -1 {
-						req.RemoteAddr = rest[:endIdx]
-					} else {
-						req.RemoteAddr = rest
+					if endIdx := indexOf(rest, '>'); endIdx != -1 {
+						rest = rest[:endIdx]
 					}
+					req.RemoteAddr = rest
 				}
 				break
 			}

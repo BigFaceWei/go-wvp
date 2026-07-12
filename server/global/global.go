@@ -37,6 +37,7 @@ var (
 	GVA_ROUTERS             gin.RoutesInfo
 	GVA_ACTIVE_DBNAME       *string
 	GVA_MCP_SERVER          *server.MCPServer
+	GVA_SIP_SERVER          interface{}
 	BlackCache              local_cache.Cache
 	lock                    sync.RWMutex
 )

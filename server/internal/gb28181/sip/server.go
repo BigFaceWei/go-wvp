@@ -2,6 +2,8 @@ package sip
 
 import (
 	"fmt"
+	"strconv"
+	"strings"
 	"sync"
 
 	"go.uber.org/zap"
@@ -24,6 +26,7 @@ type ServerConfig struct {
 	Domain      string
 	ServerID    string
 	Transport   string
+	SIPLog      bool
 }
 
 func NewServer(config *ServerConfig, logger *zap.Logger) *Server {
@@ -83,11 +86,23 @@ func (s *Server) RegisterHandler(method string, handler func(*SIPMessage, string
 func (s *Server) handleMessage(addr string, data []byte) {
 	msg, err := ParseMessage(data)
 	if err != nil {
-		s.logger.Error("Parse SIP message failed",
-			zap.String("addr", addr),
-			zap.Error(err),
-		)
+		if s.config.SIPLog {
+			s.logger.Warn("SIP Parse failed",
+				zap.String("addr", addr),
+				zap.String("raw", string(data)),
+				zap.Error(err),
+			)
+		} else {
+			s.logger.Error("Parse SIP message failed",
+				zap.String("addr", addr),
+				zap.Error(err),
+			)
+		}
 		return
+	}
+
+	if s.config.SIPLog {
+		s.logger.Info("\n" + FormatIncoming(msg, addr))
 	}
 
 	if msg.IsRequest {
@@ -115,6 +130,7 @@ func (s *Server) handleRequest(msg *SIPMessage, addr string) {
 
 	if exists {
 		handler(msg, addr)
+		s.sendResponse(txn, 200, "OK")
 	} else {
 		s.logger.Warn("No handler for SIP method",
 			zap.String("method", method),
@@ -150,11 +166,16 @@ func (s *Server) sendResponse(txn *Transaction, statusCode int, reason string) {
 		response.SetHeader("CSeq", txn.Request.GetHeader("CSeq"))
 	}
 
+	if s.config.SIPLog {
+		s.logger.Info("\n" + FormatOutgoing(response, txn.RemoteAddr))
+	}
+
 	txn.SendResponse(response)
 }
 
 func (s *Server) SendRequest(method, requestURI string, headers map[string]string, body []byte) (*Transaction, error) {
 	builder := NewBuilder()
+	builder.SetListenAddr(fmt.Sprintf("%s:%d", s.config.ListenIP, s.config.ListenPort))
 	from := fmt.Sprintf("<sip:%s@%s>;tag=%s", s.config.ServerID, s.config.Domain, generateTag())
 	to := fmt.Sprintf("<sip:%s@%s>", s.config.ServerID, s.config.Domain)
 	callID := generateCallID()
@@ -168,6 +189,10 @@ func (s *Server) SendRequest(method, requestURI string, headers map[string]strin
 		msg.SetBody(body)
 	}
 
+	if s.config.SIPLog {
+		s.logger.Info("\n" + FormatOutgoing(msg, requestURI))
+	}
+
 	txn, err := s.transactionMgr.CreateClientTransaction(msg, s.transport, requestURI)
 	if err != nil {
 		return nil, err
@@ -178,4 +203,58 @@ func (s *Server) SendRequest(method, requestURI string, headers map[string]strin
 	}
 
 	return txn, nil
+}
+
+func (s *Server) SendRequestTo(method, requestURI, targetAddr string, headers map[string]string, body []byte) (*Transaction, error) {
+	host, port := parseAddr(targetAddr)
+	if host == s.config.ListenIP || host == "127.0.0.1" || host == "0.0.0.0" {
+		if port == s.config.ListenPort || port == 0 {
+			s.logger.Warn("Skip sending to self",
+				zap.String("target", targetAddr),
+			)
+			return nil, fmt.Errorf("cannot send to self: %s", targetAddr)
+		}
+	}
+
+	builder := NewBuilder()
+	builder.SetListenAddr(fmt.Sprintf("%s:%d", s.config.ListenIP, s.config.ListenPort))
+	from := fmt.Sprintf("<sip:%s@%s>;tag=%s", s.config.ServerID, s.config.Domain, generateTag())
+	to := headers["To"]
+	if to == "" {
+		to = fmt.Sprintf("<sip:%s@%s>", s.config.ServerID, s.config.Domain)
+	}
+	callID := generateCallID()
+	cseq := fmt.Sprintf("1 %s", method)
+
+	msg := builder.BuildRequest(method, requestURI, from, to, callID, cseq)
+	for key, value := range headers {
+		msg.SetHeader(key, value)
+	}
+	if body != nil {
+		msg.SetBody(body)
+	}
+
+	if s.config.SIPLog {
+		s.logger.Info("\n" + FormatOutgoing(msg, targetAddr))
+	}
+
+	txn, err := s.transactionMgr.CreateClientTransaction(msg, s.transport, targetAddr)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := txn.SendRequest(); err != nil {
+		return nil, err
+	}
+
+	return txn, nil
+}
+
+func parseAddr(addr string) (string, int) {
+	if idx := strings.LastIndex(addr, ":"); idx != -1 {
+		host := addr[:idx]
+		port, _ := strconv.Atoi(addr[idx+1:])
+		return host, port
+	}
+	return addr, 0
 }

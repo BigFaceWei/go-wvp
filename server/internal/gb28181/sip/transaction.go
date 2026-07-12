@@ -49,9 +49,14 @@ func NewTransactionManager(logger *zap.Logger) *TransactionManager {
 }
 
 func (tm *TransactionManager) CreateClientTransaction(request *SIPMessage, transport Transport, remoteAddr string) (*Transaction, error) {
-	branchID := request.GetHeader("Via")
-	if branchID == "" {
+	viaFull := request.GetHeader("Via")
+	if viaFull == "" {
 		return nil, fmt.Errorf("missing Via header")
+	}
+
+	branchID := ExtractBranchParam(viaFull)
+	if branchID == "" {
+		return nil, fmt.Errorf("missing branch parameter in Via header")
 	}
 
 	txnID := generateTransactionID(branchID, request.RequestLine.Method)
@@ -82,9 +87,14 @@ func (tm *TransactionManager) CreateClientTransaction(request *SIPMessage, trans
 }
 
 func (tm *TransactionManager) CreateServerTransaction(request *SIPMessage, transport Transport, remoteAddr string) (*Transaction, error) {
-	branchID := request.GetHeader("Via")
-	if branchID == "" {
+	viaFull := request.GetHeader("Via")
+	if viaFull == "" {
 		return nil, fmt.Errorf("missing Via header")
+	}
+
+	branchID := ExtractBranchParam(viaFull)
+	if branchID == "" {
+		return nil, fmt.Errorf("missing branch parameter in Via header")
 	}
 
 	txnID := generateTransactionID(branchID, request.RequestLine.Method)
@@ -127,12 +137,17 @@ func (tm *TransactionManager) RemoveTransaction(id string) {
 	delete(tm.transactions, id)
 }
 
-func (tm *TransactionManager) FindByBranch(branchID string) *Transaction {
+func (tm *TransactionManager) FindByBranch(viaHeader string) *Transaction {
 	tm.mu.RLock()
 	defer tm.mu.RUnlock()
 
+	branchParam := ExtractBranchParam(viaHeader)
+	if branchParam == "" {
+		return nil
+	}
+
 	for _, txn := range tm.transactions {
-		if txn.BranchID == branchID {
+		if txn.BranchID == branchParam {
 			return txn
 		}
 	}

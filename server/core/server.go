@@ -2,6 +2,7 @@ package core
 
 import (
 	"fmt"
+	"strings"
 	"time"
 
 	"wvp-go/server/global"
@@ -68,12 +69,15 @@ func startSIPServer() {
 		Domain:     sipCfg.Domain,
 		ServerID:   sipCfg.ServerID,
 		Transport:  sipCfg.Transport,
+		SIPLog:     sipCfg.SIPLog,
 	}
 
 	srv := gbsip.NewServer(srvConfig, logger)
+	global.GVA_SIP_SERVER = srv
 
 	registerHandler := message.NewRegisterHandler(logger)
 	keepaliveHandler := message.NewKeepaliveHandler(logger)
+	catalogHandler := message.NewCatalogHandler(logger)
 
 	srv.RegisterHandler("REGISTER", func(msg *gbsip.SIPMessage, addr string) {
 		req, err := registerHandler.ParseRegister(msg)
@@ -87,6 +91,26 @@ func startSIPServer() {
 	})
 
 	srv.RegisterHandler("MESSAGE", func(msg *gbsip.SIPMessage, addr string) {
+		body := msg.Body
+		from := msg.GetHeader("From")
+		
+		if strings.Contains(from, global.GVA_CONFIG.WVP.SIP.ServerID) {
+			logger.Debug("Skip MESSAGE from self")
+			return
+		}
+
+		if strings.Contains(string(body), "<CmdType>Catalog</CmdType>") && strings.Contains(string(body), "<Response>") {
+			resp, err := catalogHandler.ParseCatalogResponse(body)
+			if err != nil {
+				logger.Error("parse catalog response failed", zap.Error(err))
+				return
+			}
+			if err := catalogHandler.HandleCatalogResponse(resp); err != nil {
+				logger.Error("handle catalog response failed", zap.Error(err))
+			}
+			return
+		}
+
 		req, err := keepaliveHandler.ParseKeepalive(msg)
 		if err != nil {
 			logger.Error("parse MESSAGE failed", zap.Error(err))
