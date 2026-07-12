@@ -19,20 +19,21 @@ const (
 )
 
 type Transaction struct {
-	ID        string
-	Request   *SIPMessage
-	BranchID  string
-	Method    string
-	State     TransactionState
-	Transport Transport
+	ID         string
+	Request    *SIPMessage
+	BranchID   string
+	Method     string
+	State      TransactionState
+	Transport  Transport
 	RemoteAddr string
-	Responses []*SIPMessage
-	TimerA    *time.Timer
-	TimerB    *time.Timer
-	TimerD    *time.Timer
-	CreatedAt time.Time
-	mu        sync.RWMutex
-	logger    *zap.Logger
+	Responses  []*SIPMessage
+	TimerA     *time.Timer
+	TimerB     *time.Timer
+	TimerD     *time.Timer
+	CreatedAt  time.Time
+	responseCh chan *SIPMessage
+	mu         sync.RWMutex
+	logger     *zap.Logger
 }
 
 type TransactionManager struct {
@@ -70,6 +71,7 @@ func (tm *TransactionManager) CreateClientTransaction(request *SIPMessage, trans
 		Transport:  transport,
 		RemoteAddr: remoteAddr,
 		CreatedAt:  time.Now(),
+		responseCh: make(chan *SIPMessage, 4),
 		logger:     tm.logger,
 	}
 
@@ -206,6 +208,11 @@ func (t *Transaction) HandleResponse(response *SIPMessage) {
 	if response.StatusLine != nil {
 		if response.StatusLine.StatusCode >= 200 {
 			t.State = TransactionCompleted
+			// Notify WaitForResponse callers
+			select {
+			case t.responseCh <- response:
+			default:
+			}
 		} else if response.StatusLine.StatusCode >= 100 {
 			t.State = TransactionProceeding
 		}
@@ -257,4 +264,16 @@ func (t *Transaction) IsTerminated() bool {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	return t.State == TransactionTerminated || t.State == TransactionCompleted
+}
+
+func (t *Transaction) WaitForResponse(timeout time.Duration) (*SIPMessage, error) {
+	timer := time.NewTimer(timeout)
+	defer timer.Stop()
+
+	select {
+	case resp := <-t.responseCh:
+		return resp, nil
+	case <-timer.C:
+		return nil, fmt.Errorf("timeout waiting for SIP response (transaction %s)", t.ID)
+	}
 }

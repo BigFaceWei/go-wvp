@@ -151,7 +151,7 @@
       :show-close="false"
     >
       <warning-bar
-        title="同步API，不输入路由分组将不会被自动同步，如果api不需要参与鉴权，可以按忽略按钮进行忽略。"
+        title="同步API，不输入路由分组将不会被自动同步，如果api不需要参与鉴权，可以按忽略按钮进行忽略。新增分组：在分组列输入名称后按回车键确认。"
       />
       <template #header>
         <div class="flex justify-between items-center">
@@ -201,20 +201,22 @@
           prop="apiGroup"
         >
           <template #default="{ row }">
-            <el-select
-              v-model="row.apiGroup"
-              placeholder="请选择或新增"
-              allow-create
-              filterable
-              default-first-option
-            >
-              <el-option
-                v-for="item in apiGroupOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              />
-            </el-select>
+            <el-tooltip content="输入新分组名称后按回车键确认" placement="top">
+              <el-select
+                v-model="row.apiGroup"
+                placeholder="选择或输入新分组(按回车确认)"
+                allow-create
+                filterable
+                default-first-option
+              >
+                <el-option
+                  v-for="item in apiGroupOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                />
+              </el-select>
+            </el-tooltip>
           </template>
         </el-table-column>
         <el-table-column
@@ -383,20 +385,23 @@
           </el-select>
         </el-form-item>
         <el-form-item label="api分组" prop="apiGroup">
-          <el-select
-            v-model="form.apiGroup"
-            placeholder="请选择或新增"
-            allow-create
-            filterable
-            default-first-option
-          >
-            <el-option
-              v-for="item in apiGroupOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            />
-          </el-select>
+          <el-tooltip content="输入新分组名称后按回车键确认" placement="top">
+            <el-select
+              v-model="form.apiGroup"
+              placeholder="选择或输入新分组(按回车确认)"
+              allow-create
+              filterable
+              default-first-option
+              style="width: 100%"
+            >
+              <el-option
+                v-for="item in apiGroupOptions"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              />
+            </el-select>
+          </el-tooltip>
         </el-form-item>
         <el-form-item label="api简介" prop="description">
           <el-input v-model="form.description" autocomplete="off" />

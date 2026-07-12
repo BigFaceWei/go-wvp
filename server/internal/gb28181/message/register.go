@@ -3,6 +3,7 @@ package message
 import (
 	"crypto/md5"
 	"fmt"
+	"net"
 	"strings"
 	"time"
 
@@ -115,15 +116,18 @@ func (h *RegisterHandler) VerifyDigest(req *RegisterRequest, password string) bo
 }
 
 func (h *RegisterHandler) HandleRegister(req *RegisterRequest) error {
+	ip, port := parseHostPort(req.RemoteAddr)
+
 	device := &system.Device{}
 	result := global.GVA_DB.Where("device_id = ?", req.DeviceID).First(device)
 	if result.Error != nil {
 		device = &system.Device{
-			DeviceID:    req.DeviceID,
-			Name:        fmt.Sprintf("Device-%s", req.DeviceID),
-			Transport:   req.Transport,
-			IP:          req.RemoteAddr,
-			Online:      true,
+			DeviceID:     req.DeviceID,
+			Name:         fmt.Sprintf("Device-%s", req.DeviceID),
+			Transport:    req.Transport,
+			IP:           ip,
+			Port:         port,
+			Online:       true,
 			RegisterTime: time.Now(),
 			KeepaliveTime: time.Now(),
 		}
@@ -131,7 +135,8 @@ func (h *RegisterHandler) HandleRegister(req *RegisterRequest) error {
 			return fmt.Errorf("create device failed: %w", err)
 		}
 	} else {
-		device.IP = req.RemoteAddr
+		device.IP = ip
+		device.Port = port
 		device.Transport = req.Transport
 		device.Online = true
 		device.RegisterTime = time.Now()
@@ -157,4 +162,17 @@ func (h *RegisterHandler) GenerateNonce() string {
 func (h *RegisterHandler) GenerateChallenge(realm string) string {
 	nonce := h.GenerateNonce()
 	return fmt.Sprintf("Digest realm=\"%s\", nonce=\"%s\", algorithm=MD5, qop=\"auth\"", realm, nonce)
+}
+
+func parseHostPort(addr string) (string, int) {
+	host, portStr, err := net.SplitHostPort(addr)
+	if err != nil {
+		return addr, 5060
+	}
+	var port int
+	fmt.Sscanf(portStr, "%d", &port)
+	if port == 0 {
+		port = 5060
+	}
+	return host, port
 }

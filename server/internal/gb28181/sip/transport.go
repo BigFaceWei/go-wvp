@@ -6,8 +6,6 @@ import (
 	"sync"
 	"time"
 
-	"wvp-go/server/utils/wvplog"
-
 	"go.uber.org/zap"
 )
 
@@ -37,7 +35,7 @@ type UDPTransport struct {
 
 func NewUDPTransport(logger *zap.Logger) *UDPTransport {
 	if logger == nil {
-		logger = wvplog.With(zap.String("component", "sip_transport"))
+		logger = zap.NewNop()
 	}
 	return &UDPTransport{
 		logger: logger,
@@ -147,7 +145,7 @@ type TCPTransport struct {
 
 func NewTCPTransport(logger *zap.Logger) *TCPTransport {
 	if logger == nil {
-		logger = wvplog.With(zap.String("component", "sip_transport"))
+		logger = zap.NewNop()
 	}
 	return &TCPTransport{
 		logger:      logger,

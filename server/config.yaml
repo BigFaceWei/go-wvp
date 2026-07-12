@@ -262,14 +262,19 @@ wvp:
         max_retry: 10
         sip_log: true
     zlmediakit:
-        servers: []
+        servers:
+          - id: "your_server_id"
+            ip: "192.168.12.130"
+            http_port: 18080
+            secret: "5gUHHs6raRKFyN3juxGgWXuiAoge2WuF"
+            default: true
         stream:
-            app: ""
-            vhost: ""
+            app: "live"
+            vhost: "__defaultVhost__"
         rtp:
-            enable: false
-            port_range: ""
-            send_port_range: ""
+            enable: true
+            port_range: "10000-10100"
+            send_port_range: "30000-35000"
     record:
         enable: false
         storage:

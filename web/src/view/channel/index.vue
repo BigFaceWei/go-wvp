@@ -30,14 +30,8 @@
       </el-table>
     </el-card>
 
-    <!-- 播放对话框 -->
-    <el-dialog v-model="playDialogVisible" title="视频点播" width="800px" destroy-on-close>
-      <div class="video-player">
-        <video ref="videoPlayer" controls autoplay class="video-element">
-          <source :src="playUrl" type="application/x-mpegURL">
-          您的浏览器不支持视频播放
-        </video>
-      </div>
+    <el-dialog v-model="playDialogVisible" title="视频点播" width="1000px" destroy-on-close @closed="handleDialogClosed">
+      <JessibucaPlayer ref="playerRef" :urls="playUrls" />
       <template #footer>
         <el-button @click="handleStop">停止播放</el-button>
         <el-button @click="playDialogVisible = false">关闭</el-button>
@@ -51,6 +45,7 @@ import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { getDeviceChannels, playVideo, stopVideo } from '@/api/channel'
+import JessibucaPlayer from '@/components/JessibucaPlayer/index.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -61,10 +56,9 @@ const deviceName = ref('')
 const deviceId = ref('')
 
 const playDialogVisible = ref(false)
-const playUrl = ref('')
+const playUrls = ref({})
 const currentDeviceId = ref('')
-const currentChannelId = ref('')
-const videoPlayer = ref(null)
+const playerRef = ref(null)
 
 const fetchChannels = async () => {
   loading.value = true
@@ -84,9 +78,8 @@ const handlePlay = async (row) => {
       device_id: deviceId.value,
       channel_id: row.channel_id
     })
-    playUrl.value = res.data.play_url
+    playUrls.value = res.data || {}
     currentDeviceId.value = deviceId.value
-    currentChannelId.value = row.channel_id
     playDialogVisible.value = true
     ElMessage.success('点播请求已发送')
   } catch (error) {
@@ -96,13 +89,23 @@ const handlePlay = async (row) => {
 
 const handleStop = async () => {
   try {
+    if (playerRef.value) {
+      playerRef.value.stop()
+    }
     await stopVideo(currentDeviceId.value)
     playDialogVisible.value = false
-    playUrl.value = ''
+    playUrls.value = {}
     ElMessage.success('已停止播放')
   } catch (error) {
     console.error('停止播放失败:', error)
   }
+}
+
+const handleDialogClosed = () => {
+  if (playerRef.value) {
+    playerRef.value.stop()
+  }
+  playUrls.value = {}
 }
 
 const goBack = () => {
@@ -127,18 +130,5 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.video-player {
-  display: flex;
-  justify-content: center;
-  background: #000;
-  border-radius: 4px;
-  padding: 10px;
-}
-
-.video-element {
-  width: 100%;
-  max-height: 500px;
 }
 </style>

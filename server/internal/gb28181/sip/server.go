@@ -258,3 +258,11 @@ func parseAddr(addr string) (string, int) {
 	}
 	return addr, 0
 }
+
+func (s *Server) SendInvite(deviceID, targetAddr, sdp string) (*Transaction, error) {
+	requestURI := fmt.Sprintf("sip:%s@%s", deviceID, s.config.Domain)
+	headers := map[string]string{
+		"To": fmt.Sprintf("<sip:%s@%s>", deviceID, s.config.Domain),
+	}
+	return s.SendRequestTo("INVITE", requestURI, targetAddr, headers, []byte(sdp))
+}

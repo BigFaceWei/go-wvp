@@ -7,8 +7,6 @@ import (
 	"wvp-go/server/model/system"
 	"wvp-go/server/utils/response"
 
-	gbsip "wvp-go/server/internal/gb28181/sip"
-
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
@@ -233,8 +231,7 @@ func QueryDeviceCatalog(c *gin.Context) {
 		return
 	}
 
-	sipServer, ok := global.GVA_SIP_SERVER.(*gbsip.Server)
-	if !ok {
+	if global.GVA_SIP_SERVER == nil {
 		global.GVA_LOG.Error("SIP server not available")
 		response.Fail(c, response.SIP_INIT_FAILED, nil)
 		return
@@ -260,7 +257,7 @@ func QueryDeviceCatalog(c *gin.Context) {
 		targetAddr = fmt.Sprintf("%s:%d", device.IP, device.Port)
 	}
 
-	_, err := sipServer.SendRequestTo("MESSAGE", requestURI, targetAddr, headers, []byte(xmlBody))
+	_, err := global.GVA_SIP_SERVER.SendRequestTo("MESSAGE", requestURI, targetAddr, headers, []byte(xmlBody))
 	if err != nil {
 		global.GVA_LOG.Error("Send catalog query failed", zap.Error(err))
 		response.Fail(c, response.SIP_SEND_FAILED, nil)

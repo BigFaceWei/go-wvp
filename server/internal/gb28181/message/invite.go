@@ -113,8 +113,6 @@ func (h *InviteHandler) BuildInviteSDP(req *InviteRequest) string {
 	}
 
 	sdp += fmt.Sprintf("a=recvonly\r\n")
-	sdp += fmt.Sprintf("a=setup:passive\r\n")
-	sdp += fmt.Sprintf("a=connect\r\n")
 
 	return sdp
 }

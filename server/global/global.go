@@ -2,12 +2,13 @@ package global
 
 import (
 	"fmt"
-	"github.com/mark3labs/mcp-go/server"
 	"sync"
 
 	"github.com/gin-gonic/gin"
+	"github.com/mark3labs/mcp-go/server"
 	"github.com/qiniu/qmgo"
 
+	gbsip "wvp-go/server/internal/gb28181/sip"
 	"wvp-go/server/utils/timer"
 	"github.com/songzhibin97/gkit/cache/local_cache"
 
@@ -37,7 +38,7 @@ var (
 	GVA_ROUTERS             gin.RoutesInfo
 	GVA_ACTIVE_DBNAME       *string
 	GVA_MCP_SERVER          *server.MCPServer
-	GVA_SIP_SERVER          interface{}
+	GVA_SIP_SERVER          *gbsip.Server
 	BlackCache              local_cache.Cache
 	lock                    sync.RWMutex
 )

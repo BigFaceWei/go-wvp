@@ -2,6 +2,7 @@ package message
 
 import (
 	"fmt"
+	"net"
 	"time"
 
 	"wvp-go/server/global"
@@ -101,7 +102,17 @@ func (h *KeepaliveHandler) HandleKeepalive(req *KeepaliveRequest) error {
 
 	device.Online = true
 	device.KeepaliveTime = time.Now()
-	device.IP = req.RemoteAddr
+
+	if host, portStr, err := net.SplitHostPort(req.RemoteAddr); err == nil {
+		device.IP = host
+		var port int
+		fmt.Sscanf(portStr, "%d", &port)
+		if port > 0 {
+			device.Port = port
+		}
+	} else {
+		device.IP = req.RemoteAddr
+	}
 
 	if err := global.GVA_DB.Save(device).Error; err != nil {
 		return fmt.Errorf("update keepalive failed: %w", err)
