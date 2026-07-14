@@ -1,8 +1,11 @@
 package sip
 
 import (
+	"bytes"
 	"fmt"
 	"net"
+	"strconv"
+	"strings"
 	"sync"
 	"time"
 
@@ -22,6 +25,12 @@ type Transport interface {
 	SetMessageHandler(handler func(addr string, data []byte))
 	Close() error
 	Protocol() TransportProtocol
+}
+
+// tcpConnState holds per-connection state for TCP message framing.
+type tcpConnState struct {
+	conn net.Conn
+	buf  bytes.Buffer // accumulated partial data waiting to form a complete SIP message
 }
 
 type UDPTransport struct {
@@ -77,6 +86,9 @@ func (t *UDPTransport) readLoop() {
 		default:
 		}
 
+		if t.conn == nil {
+			return
+		}
 		t.conn.SetReadDeadline(time.Now().Add(time.Second))
 		n, remoteAddr, err := t.conn.ReadFromUDP(buf)
 		if err != nil {
@@ -97,6 +109,9 @@ func (t *UDPTransport) readLoop() {
 }
 
 func (t *UDPTransport) Send(addr string, data []byte) error {
+	if t.conn == nil {
+		return fmt.Errorf("UDP transport not connected")
+	}
 	udpAddr, err := net.ResolveUDPAddr("udp", addr)
 	if err != nil {
 		return fmt.Errorf("resolve addr failed: %w", err)
@@ -134,13 +149,13 @@ func (t *UDPTransport) Close() error {
 }
 
 type TCPTransport struct {
-	listener   net.Listener
-	handler    func(addr string, data []byte)
-	running    bool
-	mu         sync.RWMutex
-	connections map[string]net.Conn
-	stopCh     chan struct{}
-	logger     *zap.Logger
+	listener    net.Listener
+	handler     func(addr string, data []byte)
+	running     bool
+	mu          sync.RWMutex
+	connections map[string]*tcpConnState
+	stopCh      chan struct{}
+	logger      *zap.Logger
 }
 
 func NewTCPTransport(logger *zap.Logger) *TCPTransport {
@@ -149,7 +164,7 @@ func NewTCPTransport(logger *zap.Logger) *TCPTransport {
 	}
 	return &TCPTransport{
 		logger:      logger,
-		connections: make(map[string]net.Conn),
+		connections: make(map[string]*tcpConnState),
 		stopCh:      make(chan struct{}),
 	}
 }
@@ -189,17 +204,64 @@ func (t *TCPTransport) acceptLoop() {
 		}
 
 		addr := conn.RemoteAddr().String()
+		state := &tcpConnState{conn: conn}
 		t.mu.Lock()
-		t.connections[addr] = conn
+		t.connections[addr] = state
 		t.mu.Unlock()
 
-		go t.handleConnection(conn, addr)
+		go t.handleConnection(state, addr)
 	}
 }
 
-func (t *TCPTransport) handleConnection(conn net.Conn, addr string) {
+// readSIPMessage tries to extract one complete SIP message from the buffer.
+// Returns nil if we don't have enough data yet.
+func readSIPMessage(buf *bytes.Buffer) []byte {
+	data := buf.Bytes()
+	// Find the empty line (\r\n\r\n) that separates headers from body
+	headerEnd := bytes.Index(data, []byte("\r\n\r\n"))
+	if headerEnd == -1 {
+		// Incomplete headers — need more data
+		return nil
+	}
+
+	// Parse Content-Length from headers
+	headersPart := string(data[:headerEnd])
+	contentLength := 0
+	for _, line := range strings.Split(headersPart, "\r\n") {
+		if strings.HasPrefix(strings.ToLower(line), "content-length:") {
+			val := strings.TrimSpace(line[len("content-length:"):])
+			if n, err := strconv.Atoi(val); err == nil {
+				contentLength = n
+			}
+			break
+		}
+	}
+
+	// Body starts after \r\n\r\n
+	bodyStart := headerEnd + 4
+	totalLen := bodyStart + contentLength
+
+	if len(data) < totalLen {
+		// Haven't received the full body yet
+		return nil
+	}
+
+	// Extract the complete message
+	msg := make([]byte, totalLen)
+	copy(msg, data[:totalLen])
+
+	// Remove the consumed message from the buffer
+	remaining := make([]byte, buf.Len()-totalLen)
+	copy(remaining, data[totalLen:])
+	buf.Reset()
+	buf.Write(remaining)
+
+	return msg
+}
+
+func (t *TCPTransport) handleConnection(state *tcpConnState, addr string) {
 	defer func() {
-		conn.Close()
+		state.conn.Close()
 		t.mu.Lock()
 		delete(t.connections, addr)
 		t.mu.Unlock()
@@ -213,28 +275,55 @@ func (t *TCPTransport) handleConnection(conn net.Conn, addr string) {
 		default:
 		}
 
-		conn.SetReadDeadline(time.Now().Add(time.Second))
-		n, err := conn.Read(buf)
+		state.conn.SetReadDeadline(time.Now().Add(time.Second))
+		n, err := state.conn.Read(buf)
 		if err != nil {
 			if netErr, ok := err.(net.Error); ok && netErr.Timeout() {
+				// On timeout, try to extract any pending complete messages from buffer
+				for {
+					msg := readSIPMessage(&state.buf)
+					if msg == nil {
+						break
+					}
+					if t.handler != nil {
+						go t.handler(addr, msg)
+					}
+				}
 				continue
+			}
+			// Before closing, flush any remaining complete messages
+			for {
+				msg := readSIPMessage(&state.buf)
+				if msg == nil {
+					break
+				}
+				if t.handler != nil {
+					t.handler(addr, msg)
+				}
 			}
 			t.logger.Error("TCP read error", zap.String("addr", addr), zap.Error(err))
 			return
 		}
 
-		data := make([]byte, n)
-		copy(data, buf[:n])
+		// Append new data to connection buffer
+		state.buf.Write(buf[:n])
 
-		if t.handler != nil {
-			go t.handler(addr, data)
+		// Extract all complete messages from buffer
+		for {
+			msg := readSIPMessage(&state.buf)
+			if msg == nil {
+				break
+			}
+			if t.handler != nil {
+				go t.handler(addr, msg)
+			}
 		}
 	}
 }
 
 func (t *TCPTransport) Send(addr string, data []byte) error {
 	t.mu.RLock()
-	conn, ok := t.connections[addr]
+	state, ok := t.connections[addr]
 	t.mu.RUnlock()
 
 	if !ok {
@@ -242,18 +331,18 @@ func (t *TCPTransport) Send(addr string, data []byte) error {
 		if err != nil {
 			return fmt.Errorf("connect TCP failed: %w", err)
 		}
-		conn = newConn
+		state = &tcpConnState{conn: newConn}
 		t.mu.Lock()
-		t.connections[addr] = conn
+		t.connections[addr] = state
 		t.mu.Unlock()
 	}
 
-	_, err := conn.Write(data)
+	_, err := state.conn.Write(data)
 	if err != nil {
 		t.mu.Lock()
 		delete(t.connections, addr)
 		t.mu.Unlock()
-		conn.Close()
+		state.conn.Close()
 		return fmt.Errorf("send TCP failed: %w", err)
 	}
 
@@ -277,8 +366,8 @@ func (t *TCPTransport) Close() error {
 	t.running = false
 	close(t.stopCh)
 
-	for addr, conn := range t.connections {
-		conn.Close()
+	for addr, state := range t.connections {
+		state.conn.Close()
 		delete(t.connections, addr)
 	}
 

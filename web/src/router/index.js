@@ -70,6 +70,42 @@ const routes = [
     component: () => import('@/view/record/index.vue')
   },
   {
+    path: '/streamProxy',
+    name: 'StreamProxy',
+    meta: {
+      title: '拉流代理',
+      requireAuth: true
+    },
+    component: () => import('@/view/streamProxy/index.vue')
+  },
+  {
+    path: '/streamPush',
+    name: 'StreamPush',
+    meta: {
+      title: '推流管理',
+      requireAuth: true
+    },
+    component: () => import('@/view/streamPush/index.vue')
+  },
+  {
+    path: '/group',
+    name: 'Group',
+    meta: {
+      title: '业务分组',
+      requireAuth: true
+    },
+    component: () => import('@/view/group/index.vue')
+  },
+  {
+    path: '/region',
+    name: 'Region',
+    meta: {
+      title: '行政区域',
+      requireAuth: true
+    },
+    component: () => import('@/view/region/index.vue')
+  },
+  {
     path: '/:catchAll(.*)',
     meta: {
       closeTab: true

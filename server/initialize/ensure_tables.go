@@ -65,6 +65,10 @@ func (e *ensureTables) MigrateTable(ctx context.Context) (context.Context, error
 		sysModel.RecordFile{},
 		sysModel.Platform{},
 		sysModel.PlatformChannel{},
+		sysModel.StreamProxy{},
+		sysModel.StreamPush{},
+		sysModel.BusinessGroup{},
+		sysModel.Region{},
 	}
 	for _, t := range tables {
 		_ = db.AutoMigrate(&t)
@@ -127,6 +131,26 @@ func ensureGB28181Columns(db *gorm.DB) {
 		{"wvp_platform_channel", "created_at", "DATETIME(3) NULL"},
 		{"wvp_platform_channel", "updated_at", "DATETIME(3) NULL"},
 		{"wvp_platform_channel", "deleted_at", "DATETIME(3) NULL"},
+
+		{"wvp_stream_proxy", "id", "INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY"},
+		{"wvp_stream_proxy", "created_at", "DATETIME(3) NULL"},
+		{"wvp_stream_proxy", "updated_at", "DATETIME(3) NULL"},
+		{"wvp_stream_proxy", "deleted_at", "DATETIME(3) NULL"},
+
+		{"wvp_stream_push", "id", "INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY"},
+		{"wvp_stream_push", "created_at", "DATETIME(3) NULL"},
+		{"wvp_stream_push", "updated_at", "DATETIME(3) NULL"},
+		{"wvp_stream_push", "deleted_at", "DATETIME(3) NULL"},
+
+		{"wvp_group", "id", "INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY"},
+		{"wvp_group", "created_at", "DATETIME(3) NULL"},
+		{"wvp_group", "updated_at", "DATETIME(3) NULL"},
+		{"wvp_group", "deleted_at", "DATETIME(3) NULL"},
+
+		{"wvp_region", "id", "VARCHAR(64) NOT NULL PRIMARY KEY"},
+		{"wvp_region", "created_at", "DATETIME(3) NULL"},
+		{"wvp_region", "updated_at", "DATETIME(3) NULL"},
+		{"wvp_region", "deleted_at", "DATETIME(3) NULL"},
 	}
 
 	for _, c := range columns {

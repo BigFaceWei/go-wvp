@@ -106,6 +106,21 @@ func (h *PTZHandler) BuildPTZCommand(deviceID, direction string, speed int, zoom
 	return ptzCmd, nil
 }
 
+// Common DeviceControl XML builder helper
+func buildDeviceControlXML(cmdType, deviceID, sn string, extraFields map[string]string) ([]byte, error) {
+	var sb strings.Builder
+	sb.WriteString(xml.Header)
+	sb.WriteString(fmt.Sprintf("<Control>\n"))
+	sb.WriteString(fmt.Sprintf("  <CmdType>%s</CmdType>\n", cmdType))
+	sb.WriteString(fmt.Sprintf("  <SN>%s</SN>\n", sn))
+	sb.WriteString(fmt.Sprintf("  <DeviceID>%s</DeviceID>\n", deviceID))
+	for k, v := range extraFields {
+		sb.WriteString(fmt.Sprintf("  <%s>%s</%s>\n", k, v, k))
+	}
+	sb.WriteString("</Control>")
+	return []byte(sb.String()), nil
+}
+
 func (h *PTZHandler) BuildPTZXML(deviceID, ptzCmd string, sn string) ([]byte, error) {
 	cmd := PTZCmdCode{
 		CmdType:  "DeviceControl",
@@ -120,6 +135,28 @@ func (h *PTZHandler) BuildPTZXML(deviceID, ptzCmd string, sn string) ([]byte, er
 	}
 
 	return append([]byte(xml.Header), output...), nil
+}
+
+func (h *PTZHandler) BuildPresetXML(deviceID, sn, presetID, cmdType string) ([]byte, error) {
+	// cmdType: "set" / "goto" / "remove"
+	return buildDeviceControlXML("DeviceControl", deviceID, sn, map[string]string{
+		"PresetCmd": cmdType,
+		"PresetID":  presetID,
+	})
+}
+
+func (h *PTZHandler) BuildCruiseXML(deviceID, sn, cruiseID string, cruisePoints []string) ([]byte, error) {
+	// cmdType: "start" / "stop" / "add"
+	return buildDeviceControlXML("DeviceControl", deviceID, sn, map[string]string{
+		"CruiseCmd": cruiseID,
+	})
+}
+
+func (h *PTZHandler) BuildScanXML(deviceID, sn, scanID, cmdType string) ([]byte, error) {
+	return buildDeviceControlXML("DeviceControl", deviceID, sn, map[string]string{
+		"ScanCmd": cmdType,
+		"ScanID":  scanID,
+	})
 }
 
 func (h *PTZHandler) ParsePTZCommand(body []byte) (*PTZCommand, error) {
@@ -141,7 +178,7 @@ func (h *PTZHandler) HandlePTZCommand(deviceID, direction string, speed, zoom in
 		return err
 	}
 
-	h.logger.Info("PTZ command",
+	h.logger.Info("PTZ command built",
 		zap.String("device_id", deviceID),
 		zap.String("direction", direction),
 		zap.Int("speed", speed),
@@ -152,6 +189,7 @@ func (h *PTZHandler) HandlePTZCommand(deviceID, direction string, speed, zoom in
 	return nil
 }
 
+// HandlePreset is kept for backward compatibility — use BuildPresetXML for building XML.
 func (h *PTZHandler) HandlePreset(deviceID, presetID string) error {
 	h.logger.Info("Preset command",
 		zap.String("device_id", deviceID),
@@ -160,6 +198,7 @@ func (h *PTZHandler) HandlePreset(deviceID, presetID string) error {
 	return nil
 }
 
+// HandleCruise is kept for backward compatibility — use BuildCruiseXML for building XML.
 func (h *PTZHandler) HandleCruise(deviceID, cruiseID string, cruisePoints []string) error {
 	h.logger.Info("Cruise command",
 		zap.String("device_id", deviceID),

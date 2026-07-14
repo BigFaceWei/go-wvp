@@ -145,12 +145,12 @@ mssql:
     log-zap: false
 mysql:
     prefix: ""
-    port: "3306"
+    port: "23306"
     config: charset=utf8mb4&parseTime=True&loc=Local
     db-name: wvp
     username: root
-    password: admin123
-    path: 127.0.0.1
+    password: Nari_jysp3.0
+    path: 192.168.10.116
     engine: ""
     log-mode: info
     max-idle-conns: 10
@@ -198,8 +198,8 @@ qiniu:
     use-cdn-domains: false
 redis:
     name: ""
-    addr: 127.0.0.1:6379
-    password: admin123
+    addr: 192.168.10.116:26379
+    password: Nari_jysp3.0
     db: 0
     useCluster: false
     clusterAddrs:

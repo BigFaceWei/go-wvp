@@ -9,12 +9,17 @@ import (
 	"go.uber.org/zap"
 )
 
+// MessageHandler processes a SIP request and sends an appropriate response
+// via the provided Transaction. The handler MUST call txn.SendResponse() for
+// every request it handles (including non-2xx responses).
+type MessageHandler func(msg *SIPMessage, addr string, txn *Transaction)
+
 type Server struct {
 	config          *ServerConfig
 	transport       Transport
 	transactionMgr  *TransactionManager
 	dialogMgr       *DialogManager
-	messageHandlers map[string]func(*SIPMessage, string)
+	messageHandlers map[string]MessageHandler
 	running         bool
 	mu              sync.RWMutex
 	logger          *zap.Logger
@@ -40,7 +45,7 @@ func NewServer(config *ServerConfig, logger *zap.Logger) *Server {
 		transport:       NewTransport(protocol, logger),
 		transactionMgr:  NewTransactionManager(logger),
 		dialogMgr:       NewDialogManager(logger),
-		messageHandlers: make(map[string]func(*SIPMessage, string)),
+		messageHandlers: make(map[string]MessageHandler),
 		logger:          logger,
 	}
 }
@@ -77,7 +82,7 @@ func (s *Server) Stop() error {
 	return s.transport.Close()
 }
 
-func (s *Server) RegisterHandler(method string, handler func(*SIPMessage, string)) {
+func (s *Server) RegisterHandler(method string, handler MessageHandler) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 	s.messageHandlers[method] = handler
@@ -129,13 +134,14 @@ func (s *Server) handleRequest(msg *SIPMessage, addr string) {
 	s.mu.RUnlock()
 
 	if exists {
-		handler(msg, addr)
-		s.sendResponse(txn, 200, "OK")
+		// Handler is responsible for sending its own response via txn.SendResponse()
+		handler(msg, addr, txn)
 	} else {
 		s.logger.Warn("No handler for SIP method",
 			zap.String("method", method),
 		)
-		s.sendResponse(txn, 405, "Method Not Allowed")
+		// Default: send 405 Method Not Allowed
+		s.sendResponse(txn, 405, "Method Not Allowed", nil)
 	}
 }
 
@@ -147,7 +153,10 @@ func (s *Server) handleResponse(msg *SIPMessage, addr string) {
 	}
 }
 
-func (s *Server) sendResponse(txn *Transaction, statusCode int, reason string) {
+// sendResponse constructs a SIP response from the transaction request context
+// and sends it. The optional extraHeaders map allows adding or overriding headers
+// (e.g. WWW-Authenticate for 401 challenges).
+func (s *Server) sendResponse(txn *Transaction, statusCode int, reason string, extraHeaders map[string]string) {
 	response := &SIPMessage{
 		IsRequest: false,
 		StatusLine: &StatusLine{
@@ -159,11 +168,21 @@ func (s *Server) sendResponse(txn *Transaction, statusCode int, reason string) {
 	}
 
 	if txn.Request != nil {
-		response.SetHeader("Via", txn.Request.GetHeader("Via"))
+		// Copy ALL Via headers in order (RFC 3261 §8.2.6)
+		if vias, ok := txn.Request.Headers["Via"]; ok {
+			for _, v := range vias {
+				response.AddHeader("Via", v)
+			}
+		}
 		response.SetHeader("From", txn.Request.GetHeader("From"))
 		response.SetHeader("To", txn.Request.GetHeader("To"))
 		response.SetHeader("Call-ID", txn.Request.GetHeader("Call-ID"))
 		response.SetHeader("CSeq", txn.Request.GetHeader("CSeq"))
+	}
+
+	// Apply any extra headers (e.g. WWW-Authenticate for 401)
+	for key, value := range extraHeaders {
+		response.SetHeader(key, value)
 	}
 
 	if s.config.SIPLog {
@@ -171,6 +190,19 @@ func (s *Server) sendResponse(txn *Transaction, statusCode int, reason string) {
 	}
 
 	txn.SendResponse(response)
+}
+
+// SendUnauthorized sends a 401 response with WWW-Authenticate Digest challenge.
+func (s *Server) SendUnauthorized(txn *Transaction, realm, nonce string) {
+	extraHeaders := map[string]string{
+		"WWW-Authenticate": fmt.Sprintf(`Digest realm="%s", nonce="%s", algorithm=MD5, qop="auth"`, realm, nonce),
+	}
+	s.sendResponse(txn, 401, "Unauthorized", extraHeaders)
+}
+
+// SendOK sends a 200 OK response for the given transaction.
+func (s *Server) SendOK(txn *Transaction) {
+	s.sendResponse(txn, 200, "OK", nil)
 }
 
 func (s *Server) SendRequest(method, requestURI string, headers map[string]string, body []byte) (*Transaction, error) {
@@ -265,4 +297,25 @@ func (s *Server) SendInvite(deviceID, targetAddr, sdp string) (*Transaction, err
 		"To": fmt.Sprintf("<sip:%s@%s>", deviceID, s.config.Domain),
 	}
 	return s.SendRequestTo("INVITE", requestURI, targetAddr, headers, []byte(sdp))
+}
+
+// SendACK sends an ACK request for an established INVITE dialog.
+func (s *Server) SendACK(targetAddr, callID, fromTag, toTag, cseq string) error {
+	ackMsg := fmt.Sprintf("ACK sip:%s SIP/2.0\r\n"+
+		"Via: SIP/2.0/%s %s:%d;branch=%s\r\n"+
+		"From: <sip:%s@%s>;tag=%s\r\n"+
+		"To: <sip:%s@%s>;tag=%s\r\n"+
+		"Call-ID: %s\r\n"+
+		"CSeq: %s ACK\r\n"+
+		"Max-Forwards: 70\r\n"+
+		"Content-Length: 0\r\n"+
+		"\r\n",
+		targetAddr,
+		s.config.Transport, s.config.ListenIP, s.config.ListenPort, generateBranch(),
+		s.config.ServerID, s.config.Domain, fromTag,
+		s.config.ServerID, s.config.Domain, toTag,
+		callID, cseq)
+
+	data := []byte(ackMsg)
+	return s.transport.Send(targetAddr, data)
 }

@@ -225,3 +225,145 @@ func getInt64(m map[string]interface{}, key string) int64 {
 	}
 	return 0
 }
+
+// AddStreamProxy adds a stream proxy in ZLMediaKit to pull an external stream.
+// Returns the stream key on success.
+func (c *Client) AddStreamProxy(vhost, app, stream, url, srcURL, timeoutSec string) (string, error) {
+	params := map[string]string{
+		"vhost": vhost,
+		"app":   app,
+		"stream": stream,
+		"url":   url,
+		"src_url": srcURL,
+		"timeout_sec": timeoutSec,
+		"enable_rtsp": "1",
+		"enable_rtmp": "1",
+		"enable_hls":  "1",
+		"enable_fmp4": "1",
+		"enable_ts":   "1",
+		"enable_audio": "1",
+	}
+
+	result, err := c.callAPI("/index/api/addStreamProxy", params)
+	if err != nil {
+		return "", fmt.Errorf("add stream proxy failed: %w", err)
+	}
+
+	if code, ok := result["code"].(float64); ok && code != 0 {
+		return "", fmt.Errorf("add stream proxy error: %v", result["msg"])
+	}
+
+	if key, ok := result["key"].(string); ok {
+		return key, nil
+	}
+	return "", nil
+}
+
+// DelStreamProxy removes a stream proxy from ZLMediaKit.
+func (c *Client) DelStreamProxy(vhost, app, stream string) error {
+	params := map[string]string{
+		"vhost":  vhost,
+		"app":    app,
+		"stream": stream,
+	}
+
+	result, err := c.callAPI("/index/api/delStreamProxy", params)
+	if err != nil {
+		return fmt.Errorf("del stream proxy failed: %w", err)
+	}
+
+	if code, ok := result["code"].(float64); ok && code != 0 {
+		return fmt.Errorf("del stream proxy error: %v", result["msg"])
+	}
+
+	return nil
+}
+
+// AddStreamPusherProxy adds a stream pusher in ZLMediaKit to push a stream to a target.
+// Returns the push key on success.
+func (c *Client) AddStreamPusherProxy(vhost, app, stream, dstURL string) (string, error) {
+	params := map[string]string{
+		"vhost":  vhost,
+		"app":    app,
+		"stream": stream,
+		"dst_url": dstURL,
+	}
+
+	result, err := c.callAPI("/index/api/addStreamPusherProxy", params)
+	if err != nil {
+		return "", fmt.Errorf("add stream pusher failed: %w", err)
+	}
+
+	if code, ok := result["code"].(float64); ok && code != 0 {
+		return "", fmt.Errorf("add stream pusher error: %v", result["msg"])
+	}
+
+	if key, ok := result["key"].(string); ok {
+		return key, nil
+	}
+	return "", nil
+}
+
+// DelStreamPusherProxy removes a stream pusher from ZLMediaKit.
+func (c *Client) DelStreamPusherProxy(vhost, app, stream string) error {
+	params := map[string]string{
+		"vhost":  vhost,
+		"app":    app,
+		"stream": stream,
+	}
+
+	result, err := c.callAPI("/index/api/delStreamPusherProxy", params)
+	if err != nil {
+		return fmt.Errorf("del stream pusher failed: %w", err)
+	}
+
+	if code, ok := result["code"].(float64); ok && code != 0 {
+		return fmt.Errorf("del stream pusher error: %v", result["msg"])
+	}
+
+	return nil
+}
+
+// SetRecordSpeed sets recording status for a specific stream (app/stream).
+func (c *Client) SetRecordSpeed(vhost, app, stream string, speed int) error {
+	params := map[string]string{
+		"vhost":  vhost,
+		"app":    app,
+		"stream": stream,
+		"speed":  fmt.Sprintf("%d", speed),
+	}
+	_, err := c.callAPI("/index/api/setRecordSpeed", params)
+	return err
+}
+
+// AddFFmpegSource adds an ffmpeg pull source.
+func (c *Client) AddFFmpegSource(srcURL, dstURL, timeoutSec string) (string, error) {
+	params := map[string]string{
+		"src_url":     srcURL,
+		"dst_url":     dstURL,
+		"timeout_sec": timeoutSec,
+	}
+
+	result, err := c.callAPI("/index/api/addFFmpegSource", params)
+	if err != nil {
+		return "", fmt.Errorf("add ffmpeg source failed: %w", err)
+	}
+
+	if code, ok := result["code"].(float64); ok && code != 0 {
+		return "", fmt.Errorf("add ffmpeg source error: %v", result["msg"])
+	}
+
+	if key, ok := result["key"].(string); ok {
+		return key, nil
+	}
+	return "", nil
+}
+
+// DelFFmpegSource removes an ffmpeg pull source.
+func (c *Client) DelFFmpegSource(key string) error {
+	params := map[string]string{
+		"key": key,
+	}
+	_, err := c.callAPI("/index/api/delFFmpegSource", params)
+	return err
+}

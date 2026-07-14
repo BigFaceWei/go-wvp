@@ -5,6 +5,7 @@ type ErrorCode int
 const (
 	SUCCESS ErrorCode = 0
 
+	ERROR            ErrorCode = -1
 	INVALID_PARAMS ErrorCode = 400
 	UNAUTHORIZED   ErrorCode = 401
 	FORBIDDEN      ErrorCode = 403
@@ -45,6 +46,7 @@ const (
 
 var errorCodeMessages = map[ErrorCode]string{
 	SUCCESS: "成功",
+	ERROR:   "操作失败",
 	INVALID_PARAMS:   "请求参数无效",
 	UNAUTHORIZED:     "未授权",
 	FORBIDDEN:        "禁止访问",
@@ -87,6 +89,8 @@ func (e ErrorCode) HTTPStatus() int {
 	switch {
 	case e == SUCCESS:
 		return 200
+	case e == ERROR:
+		return 500
 	case e >= 1000 && e < 2000:
 		return 400
 	case e >= 2000 && e < 3000:

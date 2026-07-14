@@ -27,6 +27,11 @@ func generateTag() string {
 	return fmt.Sprintf("tag%d-%d", time.Now().UnixNano(), n)
 }
 
+func generateBranch() string {
+	n := atomic.AddUint64(&internalTagCounter, 1) // reuse counter
+	return fmt.Sprintf("z9hG4bK%d-%d", time.Now().UnixNano(), n)
+}
+
 func generateCallID() string {
 	n := atomic.AddUint64(&internalCallIDCounter, 1)
 	return fmt.Sprintf("%d-%d@wvp-gb28181", time.Now().UnixNano(), n)

@@ -174,7 +174,7 @@ func BuildCatalogResponse(request *SIPMessage, deviceID string) *SIPMessage {
         <Item>
             <DeviceID>%s</DeviceID>
             <Name>Camera01</Name>
-            <Manufacturer>Hikvision</DeviceManufacturer>
+            <Manufacturer>Hikvision</Manufacturer>
             <Model>DS-2CD2T25FD</Model>
             <Owner></Owner>
             <CivilCode>410105</CivilCode>

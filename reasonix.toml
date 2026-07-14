@@ -1,0 +1,2 @@
+[permissions]
+allow = ["explore", "Bash(sudo apt update && sudo apt install -y bubblewrap)"]

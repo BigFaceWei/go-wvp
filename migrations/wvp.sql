@@ -1,17 +1,17 @@
 /*
  Navicat Premium Dump SQL
 
- Source Server         : 192.168.12.130
+ Source Server         : 192.168.10.116
  Source Server Type    : MySQL
- Source Server Version : 80033 (8.0.33)
- Source Host           : 192.168.12.130:3306
+ Source Server Version : 80020 (8.0.20)
+ Source Host           : 192.168.10.116:23306
  Source Schema         : wvp
 
  Target Server Type    : MySQL
- Target Server Version : 80033 (8.0.33)
+ Target Server Version : 80020 (8.0.20)
  File Encoding         : 65001
 
- Date: 11/07/2026 19:43:18
+ Date: 14/07/2026 21:03:33
 */
 
 SET NAMES utf8mb4;
@@ -32,280 +32,283 @@ CREATE TABLE `casbin_rule`  (
   `v5` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `idx_casbin_rule`(`ptype` ASC, `v0` ASC, `v1` ASC, `v2` ASC, `v3` ASC, `v4` ASC, `v5` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 370 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 690 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of casbin_rule
 -- ----------------------------
-INSERT INTO `casbin_rule` VALUES (314, 'p', '888', '/alarm/:id', 'DELETE', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (353, 'p', '888', '/alarm/:id', 'DELETE', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (312, 'p', '888', '/alarm/:id', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (351, 'p', '888', '/alarm/:id', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (313, 'p', '888', '/alarm/:id/handle', 'POST', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (352, 'p', '888', '/alarm/:id/handle', 'POST', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (310, 'p', '888', '/alarm/list', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (349, 'p', '888', '/alarm/list', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (311, 'p', '888', '/alarm/statistics', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (350, 'p', '888', '/alarm/statistics', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (9, 'p', '888', '/api/createApi', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (12, 'p', '888', '/api/deleteApi', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (15, 'p', '888', '/api/deleteApisByIds', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (18, 'p', '888', '/api/enterSyncApi', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (14, 'p', '888', '/api/getAllApis', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (11, 'p', '888', '/api/getApiById', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (17, 'p', '888', '/api/getApiGroups', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (10, 'p', '888', '/api/getApiList', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (20, 'p', '888', '/api/getApiRoles', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (19, 'p', '888', '/api/ignoreApi', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (21, 'p', '888', '/api/setApiRoles', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (16, 'p', '888', '/api/syncApi', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (13, 'p', '888', '/api/updateApi', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (183, 'p', '888', '/attachmentCategory/addCategory', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (184, 'p', '888', '/attachmentCategory/deleteCategory', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (182, 'p', '888', '/attachmentCategory/getCategoryList', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (22, 'p', '888', '/authority/copyAuthority', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (24, 'p', '888', '/authority/createAuthority', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (25, 'p', '888', '/authority/deleteAuthority', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (26, 'p', '888', '/authority/getAuthorityList', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (28, 'p', '888', '/authority/getUsersByAuthority', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (27, 'p', '888', '/authority/setDataAuthority', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (29, 'p', '888', '/authority/setRoleUsers', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (23, 'p', '888', '/authority/updateAuthority', 'PUT', '', '', '');
-INSERT INTO `casbin_rule` VALUES (151, 'p', '888', '/authorityBtn/canRemoveAuthorityBtn', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (150, 'p', '888', '/authorityBtn/getAuthorityBtn', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (149, 'p', '888', '/authorityBtn/setAuthorityBtn', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (109, 'p', '888', '/autoCode/addFunc', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (100, 'p', '888', '/autoCode/createPackage', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (104, 'p', '888', '/autoCode/createPlug', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (97, 'p', '888', '/autoCode/createTemp', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (120, 'p', '888', '/autoCode/deleteAIWorkflowSession', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (103, 'p', '888', '/autoCode/delPackage', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (98, 'p', '888', '/autoCode/delSysHistory', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (121, 'p', '888', '/autoCode/dumpAIWorkflowMarkdown', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (119, 'p', '888', '/autoCode/getAIWorkflowSessionDetail', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (118, 'p', '888', '/autoCode/getAIWorkflowSessionList', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (95, 'p', '888', '/autoCode/getColumn', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (91, 'p', '888', '/autoCode/getDB', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (92, 'p', '888', '/autoCode/getMeta', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (102, 'p', '888', '/autoCode/getPackage', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (108, 'p', '888', '/autoCode/getPluginList', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (99, 'p', '888', '/autoCode/getSysHistory', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (94, 'p', '888', '/autoCode/getTables', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (101, 'p', '888', '/autoCode/getTemplates', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (105, 'p', '888', '/autoCode/installPlugin', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (110, 'p', '888', '/autoCode/mcp', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (116, 'p', '888', '/autoCode/mcpList', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (114, 'p', '888', '/autoCode/mcpRoutes', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (112, 'p', '888', '/autoCode/mcpStart', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (111, 'p', '888', '/autoCode/mcpStatus', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (113, 'p', '888', '/autoCode/mcpStop', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (115, 'p', '888', '/autoCode/mcpTest', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (93, 'p', '888', '/autoCode/preview', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (106, 'p', '888', '/autoCode/pubPlug', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (107, 'p', '888', '/autoCode/removePlugin', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (96, 'p', '888', '/autoCode/rollback', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (117, 'p', '888', '/autoCode/saveAIWorkflowSession', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (61, 'p', '888', '/casbin/getPolicyPathByAuthorityId', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (60, 'p', '888', '/casbin/updateCasbin', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (89, 'p', '888', '/customer/customer', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (86, 'p', '888', '/customer/customer', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (88, 'p', '888', '/customer/customer', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (87, 'p', '888', '/customer/customer', 'PUT', '', '', '');
-INSERT INTO `casbin_rule` VALUES (90, 'p', '888', '/customer/customerList', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (294, 'p', '888', '/device', 'POST', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (333, 'p', '888', '/device', 'POST', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (296, 'p', '888', '/device/:id', 'DELETE', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (335, 'p', '888', '/device/:id', 'DELETE', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (293, 'p', '888', '/device/:id', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (332, 'p', '888', '/device/:id', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (295, 'p', '888', '/device/:id', 'PUT', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (334, 'p', '888', '/device/:id', 'PUT', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (298, 'p', '888', '/device/:id/catalog', 'POST', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (337, 'p', '888', '/device/:id/catalog', 'POST', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (297, 'p', '888', '/device/:id/channels', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (336, 'p', '888', '/device/:id/channels', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (299, 'p', '888', '/device/:id/status', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (338, 'p', '888', '/device/:id/status', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (292, 'p', '888', '/device/list', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (331, 'p', '888', '/device/list', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (144, 'p', '888', '/email/emailTest', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (145, 'p', '888', '/email/sendEmail', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (53, 'p', '888', '/fileUploadAndDownload/breakpointContinue', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (52, 'p', '888', '/fileUploadAndDownload/breakpointContinueFinish', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (56, 'p', '888', '/fileUploadAndDownload/deleteFile', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (57, 'p', '888', '/fileUploadAndDownload/editFileName', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (51, 'p', '888', '/fileUploadAndDownload/findFile', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (58, 'p', '888', '/fileUploadAndDownload/getFileList', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (59, 'p', '888', '/fileUploadAndDownload/importURL', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (54, 'p', '888', '/fileUploadAndDownload/removeChunk', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (55, 'p', '888', '/fileUploadAndDownload/upload', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (169, 'p', '888', '/info/createInfo', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (170, 'p', '888', '/info/deleteInfo', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (171, 'p', '888', '/info/deleteInfoByIds', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (173, 'p', '888', '/info/findInfo', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (174, 'p', '888', '/info/getInfoList', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (172, 'p', '888', '/info/updateInfo', 'PUT', '', '', '');
-INSERT INTO `casbin_rule` VALUES (62, 'p', '888', '/jwt/jsonInBlacklist', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (32, 'p', '888', '/menu/addBaseMenu', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (34, 'p', '888', '/menu/addMenuAuthority', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (38, 'p', '888', '/menu/deleteBaseMenu', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (40, 'p', '888', '/menu/getBaseMenuById', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (33, 'p', '888', '/menu/getBaseMenuTree', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (30, 'p', '888', '/menu/getMenu', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (35, 'p', '888', '/menu/getMenuAuthority', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (31, 'p', '888', '/menu/getMenuList', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (36, 'p', '888', '/menu/getMenuRoles', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (37, 'p', '888', '/menu/setMenuRoles', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (39, 'p', '888', '/menu/updateBaseMenu', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (303, 'p', '888', '/platform', 'POST', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (342, 'p', '888', '/platform', 'POST', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (305, 'p', '888', '/platform/:id', 'DELETE', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (344, 'p', '888', '/platform/:id', 'DELETE', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (302, 'p', '888', '/platform/:id', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (341, 'p', '888', '/platform/:id', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (304, 'p', '888', '/platform/:id', 'PUT', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (343, 'p', '888', '/platform/:id', 'PUT', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (306, 'p', '888', '/platform/:id/channels', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (345, 'p', '888', '/platform/:id/channels', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (308, 'p', '888', '/platform/:id/start', 'POST', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (347, 'p', '888', '/platform/:id/start', 'POST', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (309, 'p', '888', '/platform/:id/stop', 'POST', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (348, 'p', '888', '/platform/:id/stop', 'POST', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (307, 'p', '888', '/platform/:id/sync', 'POST', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (346, 'p', '888', '/platform/:id/sync', 'POST', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (300, 'p', '888', '/platform/list', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (339, 'p', '888', '/platform/list', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (301, 'p', '888', '/platform/online', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (340, 'p', '888', '/platform/online', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (318, 'p', '888', '/position/:id', 'DELETE', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (357, 'p', '888', '/position/:id', 'DELETE', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (316, 'p', '888', '/position/:id', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (355, 'p', '888', '/position/:id', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (317, 'p', '888', '/position/:id/track', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (356, 'p', '888', '/position/:id/track', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (315, 'p', '888', '/position/list', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (354, 'p', '888', '/position/list', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (327, 'p', '888', '/record/file/download/:id', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (366, 'p', '888', '/record/file/download/:id', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (326, 'p', '888', '/record/file/list', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (365, 'p', '888', '/record/file/list', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (328, 'p', '888', '/record/file/preview/:id', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (367, 'p', '888', '/record/file/preview/:id', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (321, 'p', '888', '/record/plan', 'POST', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (360, 'p', '888', '/record/plan', 'POST', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (323, 'p', '888', '/record/plan/:id', 'DELETE', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (362, 'p', '888', '/record/plan/:id', 'DELETE', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (320, 'p', '888', '/record/plan/:id', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (359, 'p', '888', '/record/plan/:id', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (322, 'p', '888', '/record/plan/:id', 'PUT', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (361, 'p', '888', '/record/plan/:id', 'PUT', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (324, 'p', '888', '/record/plan/:id/start', 'POST', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (363, 'p', '888', '/record/plan/:id/start', 'POST', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (325, 'p', '888', '/record/plan/:id/stop', 'POST', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (364, 'p', '888', '/record/plan/:id/stop', 'POST', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (319, 'p', '888', '/record/plan/list', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (358, 'p', '888', '/record/plan/list', 'GET', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (329, 'p', '888', '/record/playback', 'POST', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (368, 'p', '888', '/record/playback', 'POST', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (330, 'p', '888', '/record/playback/stop/:id', 'POST', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (369, 'p', '888', '/record/playback/stop/:id', 'POST', NULL, NULL, NULL);
-INSERT INTO `casbin_rule` VALUES (147, 'p', '888', '/simpleUploader/checkFileMd5', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (148, 'p', '888', '/simpleUploader/mergeFileMd5', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (146, 'p', '888', '/simpleUploader/upload', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (77, 'p', '888', '/skills/createReference', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (74, 'p', '888', '/skills/createResource', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (71, 'p', '888', '/skills/createScript', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (80, 'p', '888', '/skills/createTemplate', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (70, 'p', '888', '/skills/deleteSkill', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (83, 'p', '888', '/skills/getGlobalConstraint', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (78, 'p', '888', '/skills/getReference', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (75, 'p', '888', '/skills/getResource', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (72, 'p', '888', '/skills/getScript', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (68, 'p', '888', '/skills/getSkillDetail', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (67, 'p', '888', '/skills/getSkillList', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (81, 'p', '888', '/skills/getTemplate', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (66, 'p', '888', '/skills/getTools', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (85, 'p', '888', '/skills/packageSkill', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (84, 'p', '888', '/skills/saveGlobalConstraint', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (79, 'p', '888', '/skills/saveReference', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (76, 'p', '888', '/skills/saveResource', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (73, 'p', '888', '/skills/saveScript', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (69, 'p', '888', '/skills/saveSkill', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (82, 'p', '888', '/skills/saveTemplate', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (6, 'p', '888', '/sysApiToken/createApiToken', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (8, 'p', '888', '/sysApiToken/deleteApiToken', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (7, 'p', '888', '/sysApiToken/getApiTokenList', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (134, 'p', '888', '/sysDictionary/createSysDictionary', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (135, 'p', '888', '/sysDictionary/deleteSysDictionary', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (137, 'p', '888', '/sysDictionary/exportSysDictionary', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (131, 'p', '888', '/sysDictionary/findSysDictionary', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (133, 'p', '888', '/sysDictionary/getSysDictionaryList', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (136, 'p', '888', '/sysDictionary/importSysDictionary', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (132, 'p', '888', '/sysDictionary/updateSysDictionary', 'PUT', '', '', '');
-INSERT INTO `casbin_rule` VALUES (124, 'p', '888', '/sysDictionaryDetail/createSysDictionaryDetail', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (126, 'p', '888', '/sysDictionaryDetail/deleteSysDictionaryDetail', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (122, 'p', '888', '/sysDictionaryDetail/findSysDictionaryDetail', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (129, 'p', '888', '/sysDictionaryDetail/getDictionaryDetailsByParent', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (130, 'p', '888', '/sysDictionaryDetail/getDictionaryPath', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (127, 'p', '888', '/sysDictionaryDetail/getDictionaryTreeList', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (128, 'p', '888', '/sysDictionaryDetail/getDictionaryTreeListByType', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (125, 'p', '888', '/sysDictionaryDetail/getSysDictionaryDetailList', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (123, 'p', '888', '/sysDictionaryDetail/updateSysDictionaryDetail', 'PUT', '', '', '');
-INSERT INTO `casbin_rule` VALUES (162, 'p', '888', '/sysError/createSysError', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (163, 'p', '888', '/sysError/deleteSysError', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (164, 'p', '888', '/sysError/deleteSysErrorByIds', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (166, 'p', '888', '/sysError/findSysError', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (167, 'p', '888', '/sysError/getSysErrorList', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (168, 'p', '888', '/sysError/getSysErrorSolution', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (165, 'p', '888', '/sysError/updateSysError', 'PUT', '', '', '');
-INSERT INTO `casbin_rule` VALUES (152, 'p', '888', '/sysExportTemplate/createSysExportTemplate', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (153, 'p', '888', '/sysExportTemplate/deleteSysExportTemplate', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (154, 'p', '888', '/sysExportTemplate/deleteSysExportTemplateByIds', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (158, 'p', '888', '/sysExportTemplate/exportExcel', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (159, 'p', '888', '/sysExportTemplate/exportTemplate', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (156, 'p', '888', '/sysExportTemplate/findSysExportTemplate', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (157, 'p', '888', '/sysExportTemplate/getSysExportTemplateList', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (161, 'p', '888', '/sysExportTemplate/importExcel', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (160, 'p', '888', '/sysExportTemplate/previewSQL', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (155, 'p', '888', '/sysExportTemplate/updateSysExportTemplate', 'PUT', '', '', '');
-INSERT INTO `casbin_rule` VALUES (2, 'p', '888', '/sysLoginLog/deleteLoginLog', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (3, 'p', '888', '/sysLoginLog/deleteLoginLogByIds', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (4, 'p', '888', '/sysLoginLog/findLoginLog', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (5, 'p', '888', '/sysLoginLog/getLoginLogList', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (140, 'p', '888', '/sysOperationRecord/createSysOperationRecord', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (142, 'p', '888', '/sysOperationRecord/deleteSysOperationRecord', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (143, 'p', '888', '/sysOperationRecord/deleteSysOperationRecordByIds', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (138, 'p', '888', '/sysOperationRecord/findSysOperationRecord', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (141, 'p', '888', '/sysOperationRecord/getSysOperationRecordList', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (139, 'p', '888', '/sysOperationRecord/updateSysOperationRecord', 'PUT', '', '', '');
-INSERT INTO `casbin_rule` VALUES (175, 'p', '888', '/sysParams/createSysParams', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (176, 'p', '888', '/sysParams/deleteSysParams', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (177, 'p', '888', '/sysParams/deleteSysParamsByIds', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (179, 'p', '888', '/sysParams/findSysParams', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (181, 'p', '888', '/sysParams/getSysParam', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (180, 'p', '888', '/sysParams/getSysParamsList', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (178, 'p', '888', '/sysParams/updateSysParams', 'PUT', '', '', '');
-INSERT INTO `casbin_rule` VALUES (65, 'p', '888', '/system/getServerInfo', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (63, 'p', '888', '/system/getSystemConfig', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (64, 'p', '888', '/system/setSystemConfig', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (190, 'p', '888', '/sysVersion/deleteSysVersion', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (191, 'p', '888', '/sysVersion/deleteSysVersionByIds', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (187, 'p', '888', '/sysVersion/downloadVersionJson', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (188, 'p', '888', '/sysVersion/exportVersion', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (185, 'p', '888', '/sysVersion/findSysVersion', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (186, 'p', '888', '/sysVersion/getSysVersionList', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (189, 'p', '888', '/sysVersion/importVersion', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (1, 'p', '888', '/user/admin_register', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (46, 'p', '888', '/user/changePassword', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (45, 'p', '888', '/user/deleteUser', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (41, 'p', '888', '/user/getUserInfo', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (44, 'p', '888', '/user/getUserList', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (49, 'p', '888', '/user/resetPassword', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (43, 'p', '888', '/user/setSelfInfo', 'PUT', '', '', '');
-INSERT INTO `casbin_rule` VALUES (50, 'p', '888', '/user/setSelfSetting', 'PUT', '', '', '');
-INSERT INTO `casbin_rule` VALUES (48, 'p', '888', '/user/setUserAuthorities', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (47, 'p', '888', '/user/setUserAuthority', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (42, 'p', '888', '/user/setUserInfo', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (438, 'p', '888', '/alarm/:id', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (440, 'p', '888', '/alarm/:id', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (439, 'p', '888', '/alarm/:id/handle', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (442, 'p', '888', '/alarm/list', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (441, 'p', '888', '/alarm/statistics', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (670, 'p', '888', '/api/createApi', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (669, 'p', '888', '/api/deleteApi', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (664, 'p', '888', '/api/deleteApisByIds', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (661, 'p', '888', '/api/enterSyncApi', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (666, 'p', '888', '/api/getAllApis', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (665, 'p', '888', '/api/getApiById', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (662, 'p', '888', '/api/getApiGroups', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (667, 'p', '888', '/api/getApiList', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (659, 'p', '888', '/api/getApiRoles', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (660, 'p', '888', '/api/ignoreApi', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (658, 'p', '888', '/api/setApiRoles', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (663, 'p', '888', '/api/syncApi', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (668, 'p', '888', '/api/updateApi', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (509, 'p', '888', '/attachmentCategory/addCategory', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (508, 'p', '888', '/attachmentCategory/deleteCategory', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (510, 'p', '888', '/attachmentCategory/getCategoryList', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (657, 'p', '888', '/authority/copyAuthority', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (656, 'p', '888', '/authority/createAuthority', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (655, 'p', '888', '/authority/deleteAuthority', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (653, 'p', '888', '/authority/getAuthorityList', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (651, 'p', '888', '/authority/getUsersByAuthority', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (652, 'p', '888', '/authority/setDataAuthority', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (650, 'p', '888', '/authority/setRoleUsers', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (654, 'p', '888', '/authority/updateAuthority', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (541, 'p', '888', '/authorityBtn/canRemoveAuthorityBtn', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (542, 'p', '888', '/authorityBtn/getAuthorityBtn', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (543, 'p', '888', '/authorityBtn/setAuthorityBtn', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (570, 'p', '888', '/autoCode/addFunc', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (578, 'p', '888', '/autoCode/createPackage', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (597, 'p', '888', '/autoCode/createTemp', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (580, 'p', '888', '/autoCode/deleteAIWorkflowSession', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (575, 'p', '888', '/autoCode/delPackage', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (571, 'p', '888', '/autoCode/delSysHistory', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (579, 'p', '888', '/autoCode/dumpAIWorkflowMarkdown', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (581, 'p', '888', '/autoCode/getAIWorkflowSessionDetail', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (582, 'p', '888', '/autoCode/getAIWorkflowSessionList', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (595, 'p', '888', '/autoCode/getColumn', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (599, 'p', '888', '/autoCode/getDB', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (574, 'p', '888', '/autoCode/getMeta', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (576, 'p', '888', '/autoCode/getPackage', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (591, 'p', '888', '/autoCode/getPluginList', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (572, 'p', '888', '/autoCode/getSysHistory', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (598, 'p', '888', '/autoCode/getTables', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (577, 'p', '888', '/autoCode/getTemplates', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (594, 'p', '888', '/autoCode/installPlugin', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (590, 'p', '888', '/autoCode/mcp', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (584, 'p', '888', '/autoCode/mcpList', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (586, 'p', '888', '/autoCode/mcpRoutes', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (588, 'p', '888', '/autoCode/mcpStart', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (589, 'p', '888', '/autoCode/mcpStatus', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (587, 'p', '888', '/autoCode/mcpStop', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (585, 'p', '888', '/autoCode/mcpTest', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (596, 'p', '888', '/autoCode/preview', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (593, 'p', '888', '/autoCode/pubPlug', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (592, 'p', '888', '/autoCode/removePlugin', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (573, 'p', '888', '/autoCode/rollback', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (583, 'p', '888', '/autoCode/saveAIWorkflowSession', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (648, 'p', '888', '/casbin/getPolicyPathByAuthorityId', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (649, 'p', '888', '/casbin/updateCasbin', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (602, 'p', '888', '/customer/customer', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (601, 'p', '888', '/customer/customer', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (603, 'p', '888', '/customer/customer', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (604, 'p', '888', '/customer/customer', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (600, 'p', '888', '/customer/customerList', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (462, 'p', '888', '/device', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (460, 'p', '888', '/device/:id', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (463, 'p', '888', '/device/:id', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (461, 'p', '888', '/device/:id', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (458, 'p', '888', '/device/:id/catalog', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (459, 'p', '888', '/device/:id/channels', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (457, 'p', '888', '/device/:id/status', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (419, 'p', '888', '/device/broadcast/:deviceId', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (418, 'p', '888', '/device/broadcast/:deviceId/audio', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (428, 'p', '888', '/device/control/:deviceId/dragzoom/in', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (427, 'p', '888', '/device/control/:deviceId/dragzoom/out', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (431, 'p', '888', '/device/control/:deviceId/guard', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (430, 'p', '888', '/device/control/:deviceId/home', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (429, 'p', '888', '/device/control/:deviceId/iframe', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (432, 'p', '888', '/device/control/:deviceId/record', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (433, 'p', '888', '/device/control/:deviceId/teleboot', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (423, 'p', '888', '/device/cruise/:deviceId/start', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (422, 'p', '888', '/device/cruise/:deviceId/stop', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (464, 'p', '888', '/device/list', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (425, 'p', '888', '/device/preset/:deviceId/goto', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (424, 'p', '888', '/device/preset/:deviceId/remove', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (426, 'p', '888', '/device/preset/:deviceId/set', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (421, 'p', '888', '/device/scan/:deviceId/start', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (420, 'p', '888', '/device/scan/:deviceId/stop', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (545, 'p', '888', '/email/emailTest', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (544, 'p', '888', '/email/sendEmail', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (635, 'p', '888', '/fileUploadAndDownload/breakpointContinue', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (634, 'p', '888', '/fileUploadAndDownload/breakpointContinueFinish', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (631, 'p', '888', '/fileUploadAndDownload/deleteFile', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (630, 'p', '888', '/fileUploadAndDownload/editFileName', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (636, 'p', '888', '/fileUploadAndDownload/findFile', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (629, 'p', '888', '/fileUploadAndDownload/getFileList', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (628, 'p', '888', '/fileUploadAndDownload/importURL', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (633, 'p', '888', '/fileUploadAndDownload/removeChunk', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (632, 'p', '888', '/fileUploadAndDownload/upload', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (498, 'p', '888', '/group', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (496, 'p', '888', '/group/:id', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (497, 'p', '888', '/group/:id', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (499, 'p', '888', '/group/list', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (500, 'p', '888', '/group/tree', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (523, 'p', '888', '/info/createInfo', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (522, 'p', '888', '/info/deleteInfo', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (521, 'p', '888', '/info/deleteInfoByIds', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (519, 'p', '888', '/info/findInfo', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (518, 'p', '888', '/info/getInfoList', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (520, 'p', '888', '/info/updateInfo', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (689, 'p', '888', '/jwt/jsonInBlacklist', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (647, 'p', '888', '/menu/addBaseMenu', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (639, 'p', '888', '/menu/addMenuAuthority', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (645, 'p', '888', '/menu/deleteBaseMenu', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (643, 'p', '888', '/menu/getBaseMenuById', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (641, 'p', '888', '/menu/getBaseMenuTree', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (646, 'p', '888', '/menu/getMenu', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (640, 'p', '888', '/menu/getMenuAuthority', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (642, 'p', '888', '/menu/getMenuList', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (638, 'p', '888', '/menu/getMenuRoles', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (637, 'p', '888', '/menu/setMenuRoles', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (644, 'p', '888', '/menu/updateBaseMenu', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (449, 'p', '888', '/platform', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (447, 'p', '888', '/platform/:id', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (450, 'p', '888', '/platform/:id', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (448, 'p', '888', '/platform/:id', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (446, 'p', '888', '/platform/:id/channels', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (444, 'p', '888', '/platform/:id/start', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (443, 'p', '888', '/platform/:id/stop', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (445, 'p', '888', '/platform/:id/sync', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (452, 'p', '888', '/platform/list', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (451, 'p', '888', '/platform/online', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (434, 'p', '888', '/position/:id', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (436, 'p', '888', '/position/:id', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (435, 'p', '888', '/position/:id/track', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (437, 'p', '888', '/position/list', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (468, 'p', '888', '/record/file/download/:id', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (469, 'p', '888', '/record/file/list', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (467, 'p', '888', '/record/file/preview/:id', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (474, 'p', '888', '/record/plan', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (472, 'p', '888', '/record/plan/:id', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (475, 'p', '888', '/record/plan/:id', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (473, 'p', '888', '/record/plan/:id', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (471, 'p', '888', '/record/plan/:id/start', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (470, 'p', '888', '/record/plan/:id/stop', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (476, 'p', '888', '/record/plan/list', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (466, 'p', '888', '/record/playback', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (465, 'p', '888', '/record/playback/stop/:id', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (493, 'p', '888', '/region', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (491, 'p', '888', '/region/:code', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (492, 'p', '888', '/region/:code', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (494, 'p', '888', '/region/list', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (495, 'p', '888', '/region/tree', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (547, 'p', '888', '/simpleUploader/checkFileMd5', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (546, 'p', '888', '/simpleUploader/mergeFileMd5', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (548, 'p', '888', '/simpleUploader/upload', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (613, 'p', '888', '/skills/createReference', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (616, 'p', '888', '/skills/createResource', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (619, 'p', '888', '/skills/createScript', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (610, 'p', '888', '/skills/createTemplate', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (620, 'p', '888', '/skills/deleteSkill', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (607, 'p', '888', '/skills/getGlobalConstraint', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (612, 'p', '888', '/skills/getReference', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (615, 'p', '888', '/skills/getResource', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (618, 'p', '888', '/skills/getScript', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (622, 'p', '888', '/skills/getSkillDetail', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (623, 'p', '888', '/skills/getSkillList', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (609, 'p', '888', '/skills/getTemplate', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (624, 'p', '888', '/skills/getTools', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (605, 'p', '888', '/skills/packageSkill', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (606, 'p', '888', '/skills/saveGlobalConstraint', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (611, 'p', '888', '/skills/saveReference', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (614, 'p', '888', '/skills/saveResource', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (617, 'p', '888', '/skills/saveScript', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (621, 'p', '888', '/skills/saveSkill', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (608, 'p', '888', '/skills/saveTemplate', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (488, 'p', '888', '/stream/proxy', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (486, 'p', '888', '/stream/proxy/:id', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (489, 'p', '888', '/stream/proxy/:id', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (487, 'p', '888', '/stream/proxy/:id', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (485, 'p', '888', '/stream/proxy/:id/start', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (484, 'p', '888', '/stream/proxy/:id/stop', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (490, 'p', '888', '/stream/proxy/list', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (481, 'p', '888', '/stream/push', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (479, 'p', '888', '/stream/push/:id', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (482, 'p', '888', '/stream/push/:id', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (480, 'p', '888', '/stream/push/:id', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (478, 'p', '888', '/stream/push/:id/start', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (477, 'p', '888', '/stream/push/:id/stop', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (483, 'p', '888', '/stream/push/list', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (684, 'p', '888', '/sysApiToken/createApiToken', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (682, 'p', '888', '/sysApiToken/deleteApiToken', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (683, 'p', '888', '/sysApiToken/getApiTokenList', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (560, 'p', '888', '/sysDictionary/createSysDictionary', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (559, 'p', '888', '/sysDictionary/deleteSysDictionary', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (554, 'p', '888', '/sysDictionary/exportSysDictionary', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (557, 'p', '888', '/sysDictionary/findSysDictionary', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (556, 'p', '888', '/sysDictionary/getSysDictionaryList', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (555, 'p', '888', '/sysDictionary/importSysDictionary', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (558, 'p', '888', '/sysDictionary/updateSysDictionary', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (568, 'p', '888', '/sysDictionaryDetail/createSysDictionaryDetail', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (567, 'p', '888', '/sysDictionaryDetail/deleteSysDictionaryDetail', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (566, 'p', '888', '/sysDictionaryDetail/findSysDictionaryDetail', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (562, 'p', '888', '/sysDictionaryDetail/getDictionaryDetailsByParent', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (561, 'p', '888', '/sysDictionaryDetail/getDictionaryPath', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (564, 'p', '888', '/sysDictionaryDetail/getDictionaryTreeList', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (563, 'p', '888', '/sysDictionaryDetail/getDictionaryTreeListByType', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (565, 'p', '888', '/sysDictionaryDetail/getSysDictionaryDetailList', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (569, 'p', '888', '/sysDictionaryDetail/updateSysDictionaryDetail', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (530, 'p', '888', '/sysError/createSysError', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (529, 'p', '888', '/sysError/deleteSysError', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (528, 'p', '888', '/sysError/deleteSysErrorByIds', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (526, 'p', '888', '/sysError/findSysError', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (525, 'p', '888', '/sysError/getSysErrorList', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (524, 'p', '888', '/sysError/getSysErrorSolution', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (527, 'p', '888', '/sysError/updateSysError', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (540, 'p', '888', '/sysExportTemplate/createSysExportTemplate', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (539, 'p', '888', '/sysExportTemplate/deleteSysExportTemplate', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (538, 'p', '888', '/sysExportTemplate/deleteSysExportTemplateByIds', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (534, 'p', '888', '/sysExportTemplate/exportExcel', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (533, 'p', '888', '/sysExportTemplate/exportTemplate', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (536, 'p', '888', '/sysExportTemplate/findSysExportTemplate', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (535, 'p', '888', '/sysExportTemplate/getSysExportTemplateList', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (531, 'p', '888', '/sysExportTemplate/importExcel', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (532, 'p', '888', '/sysExportTemplate/previewSQL', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (537, 'p', '888', '/sysExportTemplate/updateSysExportTemplate', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (688, 'p', '888', '/sysLoginLog/deleteLoginLog', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (687, 'p', '888', '/sysLoginLog/deleteLoginLogByIds', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (686, 'p', '888', '/sysLoginLog/findLoginLog', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (685, 'p', '888', '/sysLoginLog/getLoginLogList', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (553, 'p', '888', '/sysOperationRecord/createSysOperationRecord', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (550, 'p', '888', '/sysOperationRecord/deleteSysOperationRecord', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (549, 'p', '888', '/sysOperationRecord/deleteSysOperationRecordByIds', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (552, 'p', '888', '/sysOperationRecord/findSysOperationRecord', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (551, 'p', '888', '/sysOperationRecord/getSysOperationRecordList', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (517, 'p', '888', '/sysParams/createSysParams', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (516, 'p', '888', '/sysParams/deleteSysParams', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (515, 'p', '888', '/sysParams/deleteSysParamsByIds', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (513, 'p', '888', '/sysParams/findSysParams', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (511, 'p', '888', '/sysParams/getSysParam', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (512, 'p', '888', '/sysParams/getSysParamsList', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (514, 'p', '888', '/sysParams/updateSysParams', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (627, 'p', '888', '/system/getServerInfo', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (626, 'p', '888', '/system/getSystemConfig', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (625, 'p', '888', '/system/setSystemConfig', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (502, 'p', '888', '/sysVersion/deleteSysVersion', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (501, 'p', '888', '/sysVersion/deleteSysVersionByIds', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (505, 'p', '888', '/sysVersion/downloadVersionJson', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (504, 'p', '888', '/sysVersion/exportVersion', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (507, 'p', '888', '/sysVersion/findSysVersion', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (506, 'p', '888', '/sysVersion/getSysVersionList', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (503, 'p', '888', '/sysVersion/importVersion', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (680, 'p', '888', '/user/admin_register', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (674, 'p', '888', '/user/changePassword', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (681, 'p', '888', '/user/deleteUser', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (676, 'p', '888', '/user/getUserInfo', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (679, 'p', '888', '/user/getUserList', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (672, 'p', '888', '/user/resetPassword', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (677, 'p', '888', '/user/setSelfInfo', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (671, 'p', '888', '/user/setSelfSetting', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (675, 'p', '888', '/user/setUserAuthorities', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (673, 'p', '888', '/user/setUserAuthority', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (678, 'p', '888', '/user/setUserInfo', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (456, 'p', '888', '/video/play', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (454, 'p', '888', '/video/ptz/:id', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (453, 'p', '888', '/video/status/:id', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (455, 'p', '888', '/video/stop/:id', 'POST', '', '', '');
 INSERT INTO `casbin_rule` VALUES (193, 'p', '8881', '/api/createApi', 'POST', '', '', '');
 INSERT INTO `casbin_rule` VALUES (196, 'p', '8881', '/api/deleteApi', 'POST', '', '', '');
 INSERT INTO `casbin_rule` VALUES (198, 'p', '8881', '/api/getAllApis', 'POST', '', '', '');
@@ -332,6 +335,11 @@ INSERT INTO `casbin_rule` VALUES (224, 'p', '8881', '/fileUploadAndDownload/edit
 INSERT INTO `casbin_rule` VALUES (222, 'p', '8881', '/fileUploadAndDownload/getFileList', 'POST', '', '', '');
 INSERT INTO `casbin_rule` VALUES (225, 'p', '8881', '/fileUploadAndDownload/importURL', 'POST', '', '', '');
 INSERT INTO `casbin_rule` VALUES (221, 'p', '8881', '/fileUploadAndDownload/upload', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (375, 'p', '8881', '/group', 'POST', NULL, NULL, NULL);
+INSERT INTO `casbin_rule` VALUES (379, 'p', '8881', '/group/:id', 'DELETE', NULL, NULL, NULL);
+INSERT INTO `casbin_rule` VALUES (377, 'p', '8881', '/group/:id', 'PUT', NULL, NULL, NULL);
+INSERT INTO `casbin_rule` VALUES (373, 'p', '8881', '/group/list', 'GET', NULL, NULL, NULL);
+INSERT INTO `casbin_rule` VALUES (371, 'p', '8881', '/group/tree', 'GET', NULL, NULL, NULL);
 INSERT INTO `casbin_rule` VALUES (228, 'p', '8881', '/jwt/jsonInBlacklist', 'POST', '', '', '');
 INSERT INTO `casbin_rule` VALUES (209, 'p', '8881', '/menu/addBaseMenu', 'POST', '', '', '');
 INSERT INTO `casbin_rule` VALUES (211, 'p', '8881', '/menu/addMenuAuthority', 'POST', '', '', '');
@@ -344,6 +352,25 @@ INSERT INTO `casbin_rule` VALUES (208, 'p', '8881', '/menu/getMenuList', 'POST',
 INSERT INTO `casbin_rule` VALUES (213, 'p', '8881', '/menu/getMenuRoles', 'GET', '', '', '');
 INSERT INTO `casbin_rule` VALUES (214, 'p', '8881', '/menu/setMenuRoles', 'POST', '', '', '');
 INSERT INTO `casbin_rule` VALUES (216, 'p', '8881', '/menu/updateBaseMenu', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (385, 'p', '8881', '/region', 'POST', NULL, NULL, NULL);
+INSERT INTO `casbin_rule` VALUES (389, 'p', '8881', '/region/:code', 'DELETE', NULL, NULL, NULL);
+INSERT INTO `casbin_rule` VALUES (387, 'p', '8881', '/region/:code', 'PUT', NULL, NULL, NULL);
+INSERT INTO `casbin_rule` VALUES (383, 'p', '8881', '/region/list', 'GET', NULL, NULL, NULL);
+INSERT INTO `casbin_rule` VALUES (381, 'p', '8881', '/region/tree', 'GET', NULL, NULL, NULL);
+INSERT INTO `casbin_rule` VALUES (395, 'p', '8881', '/stream/proxy', 'POST', NULL, NULL, NULL);
+INSERT INTO `casbin_rule` VALUES (399, 'p', '8881', '/stream/proxy/:id', 'DELETE', NULL, NULL, NULL);
+INSERT INTO `casbin_rule` VALUES (393, 'p', '8881', '/stream/proxy/:id', 'GET', NULL, NULL, NULL);
+INSERT INTO `casbin_rule` VALUES (397, 'p', '8881', '/stream/proxy/:id', 'PUT', NULL, NULL, NULL);
+INSERT INTO `casbin_rule` VALUES (401, 'p', '8881', '/stream/proxy/:id/start', 'POST', NULL, NULL, NULL);
+INSERT INTO `casbin_rule` VALUES (403, 'p', '8881', '/stream/proxy/:id/stop', 'POST', NULL, NULL, NULL);
+INSERT INTO `casbin_rule` VALUES (391, 'p', '8881', '/stream/proxy/list', 'GET', NULL, NULL, NULL);
+INSERT INTO `casbin_rule` VALUES (409, 'p', '8881', '/stream/push', 'POST', NULL, NULL, NULL);
+INSERT INTO `casbin_rule` VALUES (413, 'p', '8881', '/stream/push/:id', 'DELETE', NULL, NULL, NULL);
+INSERT INTO `casbin_rule` VALUES (407, 'p', '8881', '/stream/push/:id', 'GET', NULL, NULL, NULL);
+INSERT INTO `casbin_rule` VALUES (411, 'p', '8881', '/stream/push/:id', 'PUT', NULL, NULL, NULL);
+INSERT INTO `casbin_rule` VALUES (415, 'p', '8881', '/stream/push/:id/start', 'POST', NULL, NULL, NULL);
+INSERT INTO `casbin_rule` VALUES (417, 'p', '8881', '/stream/push/:id/stop', 'POST', NULL, NULL, NULL);
+INSERT INTO `casbin_rule` VALUES (405, 'p', '8881', '/stream/push/list', 'GET', NULL, NULL, NULL);
 INSERT INTO `casbin_rule` VALUES (229, 'p', '8881', '/system/getSystemConfig', 'POST', '', '', '');
 INSERT INTO `casbin_rule` VALUES (230, 'p', '8881', '/system/setSystemConfig', 'POST', '', '', '');
 INSERT INTO `casbin_rule` VALUES (192, 'p', '8881', '/user/admin_register', 'POST', '', '', '');
@@ -419,7 +446,7 @@ CREATE TABLE `jwt_blacklists`  (
   `jwt` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT 'jwt',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_jwt_blacklists_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of jwt_blacklists
@@ -450,7 +477,7 @@ CREATE TABLE `sys_ai_workflow_sessions`  (
   INDEX `idx_sys_ai_workflow_sessions_deleted_at`(`deleted_at` ASC) USING BTREE,
   INDEX `idx_sys_ai_workflow_sessions_user_id`(`user_id` ASC) USING BTREE,
   INDEX `idx_sys_ai_workflow_sessions_tab`(`tab` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_ai_workflow_sessions
@@ -473,7 +500,7 @@ CREATE TABLE `sys_api_tokens`  (
   `remark` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_sys_api_tokens_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_api_tokens
@@ -494,7 +521,7 @@ CREATE TABLE `sys_apis`  (
   `method` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'POST' COMMENT '方法',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_sys_apis_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 190 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 273 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_apis
@@ -688,6 +715,89 @@ INSERT INTO `sys_apis` VALUES (186, '2026-07-11 18:24:19.557', '2026-07-11 18:24
 INSERT INTO `sys_apis` VALUES (187, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/sysVersion/importVersion', '同步版本', '版本控制', 'POST');
 INSERT INTO `sys_apis` VALUES (188, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/sysVersion/deleteSysVersion', '删除版本', '版本控制', 'DELETE');
 INSERT INTO `sys_apis` VALUES (189, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/sysVersion/deleteSysVersionByIds', '批量删除版本', '版本控制', 'DELETE');
+INSERT INTO `sys_apis` VALUES (190, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/group/tree', '获取分组树', '业务分组', 'GET');
+INSERT INTO `sys_apis` VALUES (191, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/group/list', '获取分组列表', '业务分组', 'GET');
+INSERT INTO `sys_apis` VALUES (192, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/group', '创建分组', '业务分组', 'POST');
+INSERT INTO `sys_apis` VALUES (193, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/group/:id', '更新分组', '业务分组', 'PUT');
+INSERT INTO `sys_apis` VALUES (194, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/group/:id', '删除分组', '业务分组', 'DELETE');
+INSERT INTO `sys_apis` VALUES (195, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/region/tree', '获取区域树', '行政区域', 'GET');
+INSERT INTO `sys_apis` VALUES (196, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/region/list', '获取区域列表', '行政区域', 'GET');
+INSERT INTO `sys_apis` VALUES (197, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/region', '创建区域', '行政区域', 'POST');
+INSERT INTO `sys_apis` VALUES (198, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/region/:code', '更新区域', '行政区域', 'PUT');
+INSERT INTO `sys_apis` VALUES (199, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/region/:code', '删除区域', '行政区域', 'DELETE');
+INSERT INTO `sys_apis` VALUES (200, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/stream/proxy/list', '获取拉流代理列表', '拉流代理', 'GET');
+INSERT INTO `sys_apis` VALUES (201, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/stream/proxy/:id', '获取拉流代理详情', '拉流代理', 'GET');
+INSERT INTO `sys_apis` VALUES (202, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/stream/proxy', '创建拉流代理', '拉流代理', 'POST');
+INSERT INTO `sys_apis` VALUES (203, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/stream/proxy/:id', '更新拉流代理', '拉流代理', 'PUT');
+INSERT INTO `sys_apis` VALUES (204, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/stream/proxy/:id', '删除拉流代理', '拉流代理', 'DELETE');
+INSERT INTO `sys_apis` VALUES (205, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/stream/proxy/:id/start', '启动拉流代理', '拉流代理', 'POST');
+INSERT INTO `sys_apis` VALUES (206, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/stream/proxy/:id/stop', '停止拉流代理', '拉流代理', 'POST');
+INSERT INTO `sys_apis` VALUES (207, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/stream/push/list', '获取推流列表', '推流管理', 'GET');
+INSERT INTO `sys_apis` VALUES (208, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/stream/push/:id', '获取推流详情', '推流管理', 'GET');
+INSERT INTO `sys_apis` VALUES (209, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/stream/push', '创建推流', '推流管理', 'POST');
+INSERT INTO `sys_apis` VALUES (210, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/stream/push/:id', '更新推流', '推流管理', 'PUT');
+INSERT INTO `sys_apis` VALUES (211, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/stream/push/:id', '删除推流', '推流管理', 'DELETE');
+INSERT INTO `sys_apis` VALUES (212, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/stream/push/:id/start', '启动推流', '推流管理', 'POST');
+INSERT INTO `sys_apis` VALUES (213, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/stream/push/:id/stop', '停止推流', '推流管理', 'POST');
+INSERT INTO `sys_apis` VALUES (214, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/record/plan/list', '获取录像计划列表', '录像计划', 'GET');
+INSERT INTO `sys_apis` VALUES (215, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/record/plan/:id', '获取录像计划详情', '录像计划', 'GET');
+INSERT INTO `sys_apis` VALUES (216, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/record/plan', '创建录像计划', '录像计划', 'POST');
+INSERT INTO `sys_apis` VALUES (217, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/record/plan/:id', '更新录像计划', '录像计划', 'PUT');
+INSERT INTO `sys_apis` VALUES (218, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/record/plan/:id', '删除录像计划', '录像计划', 'DELETE');
+INSERT INTO `sys_apis` VALUES (219, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/record/plan/:id/start', '启动录像计划', '录像计划', 'POST');
+INSERT INTO `sys_apis` VALUES (220, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/record/plan/:id/stop', '停止录像计划', '录像计划', 'POST');
+INSERT INTO `sys_apis` VALUES (221, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/record/file/list', '获取录像文件列表', '录像文件', 'GET');
+INSERT INTO `sys_apis` VALUES (222, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/record/file/download/:id', '下载录像文件', '录像文件', 'GET');
+INSERT INTO `sys_apis` VALUES (223, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/record/file/preview/:id', '预览录像文件', '录像文件', 'GET');
+INSERT INTO `sys_apis` VALUES (224, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/record/playback', '开始录像回放', '录像回放', 'POST');
+INSERT INTO `sys_apis` VALUES (225, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/record/playback/stop/:id', '停止录像回放', '录像回放', 'POST');
+INSERT INTO `sys_apis` VALUES (226, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/device/list', '获取设备列表', '设备管理', 'GET');
+INSERT INTO `sys_apis` VALUES (227, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/device/:id', '获取设备详情', '设备管理', 'GET');
+INSERT INTO `sys_apis` VALUES (228, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/device', '创建设备', '设备管理', 'POST');
+INSERT INTO `sys_apis` VALUES (229, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/device/:id', '更新设备', '设备管理', 'PUT');
+INSERT INTO `sys_apis` VALUES (230, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/device/:id', '删除设备', '设备管理', 'DELETE');
+INSERT INTO `sys_apis` VALUES (231, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/device/:id/channels', '获取设备通道列表', '设备管理', 'GET');
+INSERT INTO `sys_apis` VALUES (232, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/device/:id/catalog', '查询设备目录', '设备管理', 'POST');
+INSERT INTO `sys_apis` VALUES (233, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/device/:id/status', '获取设备状态', '设备管理', 'GET');
+INSERT INTO `sys_apis` VALUES (234, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/video/play', '播放视频', '视频点播', 'POST');
+INSERT INTO `sys_apis` VALUES (235, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/video/stop/:id', '停止播放', '视频点播', 'POST');
+INSERT INTO `sys_apis` VALUES (236, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/video/ptz/:id', '云台控制', '视频点播', 'POST');
+INSERT INTO `sys_apis` VALUES (237, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/video/status/:id', '获取视频状态', '视频点播', 'GET');
+INSERT INTO `sys_apis` VALUES (238, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/platform/list', '获取平台列表', '平台级联', 'GET');
+INSERT INTO `sys_apis` VALUES (239, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/platform/online', '获取在线平台', '平台级联', 'GET');
+INSERT INTO `sys_apis` VALUES (240, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/platform/:id', '获取平台详情', '平台级联', 'GET');
+INSERT INTO `sys_apis` VALUES (241, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/platform', '创建平台', '平台级联', 'POST');
+INSERT INTO `sys_apis` VALUES (242, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/platform/:id', '更新平台', '平台级联', 'PUT');
+INSERT INTO `sys_apis` VALUES (243, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/platform/:id', '删除平台', '平台级联', 'DELETE');
+INSERT INTO `sys_apis` VALUES (244, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/platform/:id/channels', '获取平台通道列表', '平台级联', 'GET');
+INSERT INTO `sys_apis` VALUES (245, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/platform/:id/sync', '同步平台目录', '平台级联', 'POST');
+INSERT INTO `sys_apis` VALUES (246, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/platform/:id/start', '启动平台级联', '平台级联', 'POST');
+INSERT INTO `sys_apis` VALUES (247, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/platform/:id/stop', '停止平台级联', '平台级联', 'POST');
+INSERT INTO `sys_apis` VALUES (248, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/alarm/list', '获取报警列表', '报警管理', 'GET');
+INSERT INTO `sys_apis` VALUES (249, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/alarm/statistics', '获取报警统计', '报警管理', 'GET');
+INSERT INTO `sys_apis` VALUES (250, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/alarm/:id', '获取报警详情', '报警管理', 'GET');
+INSERT INTO `sys_apis` VALUES (251, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/alarm/:id/handle', '处理报警', '报警管理', 'POST');
+INSERT INTO `sys_apis` VALUES (252, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/alarm/:id', '删除报警', '报警管理', 'DELETE');
+INSERT INTO `sys_apis` VALUES (253, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/position/list', '获取位置列表', '移动位置', 'GET');
+INSERT INTO `sys_apis` VALUES (254, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/position/:id', '获取设备位置', '移动位置', 'GET');
+INSERT INTO `sys_apis` VALUES (255, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/position/:id/track', '获取位置轨迹', '移动位置', 'GET');
+INSERT INTO `sys_apis` VALUES (256, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/position/:id', '删除位置', '移动位置', 'DELETE');
+INSERT INTO `sys_apis` VALUES (257, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/device/control/:deviceId/teleboot', '远程开机', '设备控制', 'POST');
+INSERT INTO `sys_apis` VALUES (258, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/device/control/:deviceId/record', '设备录像控制', '设备控制', 'POST');
+INSERT INTO `sys_apis` VALUES (259, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/device/control/:deviceId/guard', '设备布防/撤防', '设备控制', 'POST');
+INSERT INTO `sys_apis` VALUES (260, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/device/control/:deviceId/home', '设备归位', '设备控制', 'POST');
+INSERT INTO `sys_apis` VALUES (261, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/device/control/:deviceId/iframe', '关键帧', '设备控制', 'POST');
+INSERT INTO `sys_apis` VALUES (262, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/device/control/:deviceId/dragzoom/in', '拉近', '设备控制', 'POST');
+INSERT INTO `sys_apis` VALUES (263, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/device/control/:deviceId/dragzoom/out', '拉远', '设备控制', 'POST');
+INSERT INTO `sys_apis` VALUES (264, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/device/preset/:deviceId/set', '设置预置位', '设备控制', 'POST');
+INSERT INTO `sys_apis` VALUES (265, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/device/preset/:deviceId/goto', '调用预置位', '设备控制', 'POST');
+INSERT INTO `sys_apis` VALUES (266, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/device/preset/:deviceId/remove', '删除预置位', '设备控制', 'POST');
+INSERT INTO `sys_apis` VALUES (267, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/device/cruise/:deviceId/start', '开始巡航', '设备控制', 'POST');
+INSERT INTO `sys_apis` VALUES (268, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/device/cruise/:deviceId/stop', '停止巡航', '设备控制', 'POST');
+INSERT INTO `sys_apis` VALUES (269, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/device/scan/:deviceId/start', '开始扫描', '设备控制', 'POST');
+INSERT INTO `sys_apis` VALUES (270, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/device/scan/:deviceId/stop', '停止扫描', '设备控制', 'POST');
+INSERT INTO `sys_apis` VALUES (271, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/device/broadcast/:deviceId', '语音广播', '设备控制', 'POST');
+INSERT INTO `sys_apis` VALUES (272, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/device/broadcast/:deviceId/audio', '音频广播/对讲', '设备控制', 'POST');
 
 -- ----------------------------
 -- Table structure for sys_authorities
@@ -703,7 +813,7 @@ CREATE TABLE `sys_authorities`  (
   `default_router` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'dashboard' COMMENT '默认菜单',
   PRIMARY KEY (`authority_id`) USING BTREE,
   UNIQUE INDEX `uni_sys_authorities_authority_id`(`authority_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9529 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9529 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_authorities
@@ -720,7 +830,7 @@ CREATE TABLE `sys_authority_btns`  (
   `authority_id` bigint UNSIGNED NULL DEFAULT NULL COMMENT '角色ID',
   `sys_menu_id` bigint UNSIGNED NULL DEFAULT NULL COMMENT '菜单ID',
   `sys_base_menu_btn_id` bigint UNSIGNED NULL DEFAULT NULL COMMENT '菜单按钮ID'
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_authority_btns
@@ -734,7 +844,7 @@ CREATE TABLE `sys_authority_menus`  (
   `sys_base_menu_id` bigint UNSIGNED NOT NULL,
   `sys_authority_authority_id` bigint UNSIGNED NOT NULL COMMENT '角色ID',
   PRIMARY KEY (`sys_base_menu_id`, `sys_authority_authority_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_authority_menus
@@ -802,6 +912,14 @@ INSERT INTO `sys_authority_menus` VALUES (37, 888);
 INSERT INTO `sys_authority_menus` VALUES (38, 888);
 INSERT INTO `sys_authority_menus` VALUES (39, 888);
 INSERT INTO `sys_authority_menus` VALUES (40, 888);
+INSERT INTO `sys_authority_menus` VALUES (41, 888);
+INSERT INTO `sys_authority_menus` VALUES (41, 8881);
+INSERT INTO `sys_authority_menus` VALUES (42, 888);
+INSERT INTO `sys_authority_menus` VALUES (42, 8881);
+INSERT INTO `sys_authority_menus` VALUES (43, 888);
+INSERT INTO `sys_authority_menus` VALUES (43, 8881);
+INSERT INTO `sys_authority_menus` VALUES (44, 888);
+INSERT INTO `sys_authority_menus` VALUES (44, 8881);
 
 -- ----------------------------
 -- Table structure for sys_auto_code_histories
@@ -828,7 +946,7 @@ CREATE TABLE `sys_auto_code_histories`  (
   `package_id` bigint UNSIGNED NULL DEFAULT NULL COMMENT '包ID',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_sys_auto_code_histories_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_auto_code_histories
@@ -850,7 +968,7 @@ CREATE TABLE `sys_auto_code_packages`  (
   `module` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_sys_auto_code_packages_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_auto_code_packages
@@ -870,7 +988,7 @@ CREATE TABLE `sys_base_menu_btns`  (
   `sys_base_menu_id` bigint UNSIGNED NULL DEFAULT NULL COMMENT '菜单ID',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_sys_base_menu_btns_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_base_menu_btns
@@ -891,7 +1009,7 @@ CREATE TABLE `sys_base_menu_parameters`  (
   `value` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '地址栏携带参数的值',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_sys_base_menu_parameters_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_base_menu_parameters
@@ -922,7 +1040,7 @@ CREATE TABLE `sys_base_menus`  (
   `transition_type` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '路由切换动画',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_sys_base_menus_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 41 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 45 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_base_menus
@@ -967,6 +1085,10 @@ INSERT INTO `sys_base_menus` VALUES (37, '2026-07-11 18:56:25.000', '2026-07-11 
 INSERT INTO `sys_base_menus` VALUES (38, '2026-07-11 18:56:25.000', '2026-07-11 18:56:25.000', NULL, 1, 35, 'alarm', 'alarm', 0, 'view/alarm/index.vue', 3, '', 0, 0, '报警管理', 'warning', 0, '');
 INSERT INTO `sys_base_menus` VALUES (39, '2026-07-11 18:56:25.000', '2026-07-11 18:56:25.000', NULL, 1, 35, 'position', 'position', 0, 'view/position/index.vue', 4, '', 0, 0, '移动位置', 'location', 0, '');
 INSERT INTO `sys_base_menus` VALUES (40, '2026-07-11 18:56:25.000', '2026-07-11 18:56:25.000', NULL, 1, 35, 'record', 'record', 0, 'view/record/index.vue', 5, '', 0, 0, '录像管理', 'video-camera', 0, '');
+INSERT INTO `sys_base_menus` VALUES (41, '2026-07-11 18:56:25.000', '2026-07-11 18:56:25.000', NULL, 1, 35, 'streamProxy', 'streamProxy', 0, 'view/streamProxy/index.vue', 6, '', 0, 0, '拉流代理', 'video-camera', 0, '');
+INSERT INTO `sys_base_menus` VALUES (42, '2026-07-11 18:56:25.000', '2026-07-11 18:56:25.000', NULL, 1, 35, 'streamPush', 'streamPush', 0, 'view/streamPush/index.vue', 7, '', 0, 0, '推流管理', 'upload', 0, '');
+INSERT INTO `sys_base_menus` VALUES (43, '2026-07-11 18:56:25.000', '2026-07-11 18:56:25.000', NULL, 1, 35, 'group', 'group', 0, 'view/group/index.vue', 8, '', 0, 0, '业务分组', 'folder', 0, '');
+INSERT INTO `sys_base_menus` VALUES (44, '2026-07-11 18:56:25.000', '2026-07-11 18:56:25.000', NULL, 1, 35, 'region', 'region', 0, 'view/region/index.vue', 9, '', 0, 0, '行政区域', 'map-location', 0, '');
 
 -- ----------------------------
 -- Table structure for sys_data_authority_id
@@ -976,7 +1098,7 @@ CREATE TABLE `sys_data_authority_id`  (
   `sys_authority_authority_id` bigint UNSIGNED NOT NULL COMMENT '角色ID',
   `data_authority_id_authority_id` bigint UNSIGNED NOT NULL COMMENT '角色ID',
   PRIMARY KEY (`sys_authority_authority_id`, `data_authority_id_authority_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_data_authority_id
@@ -1003,7 +1125,7 @@ CREATE TABLE `sys_dictionaries`  (
   `parent_id` bigint UNSIGNED NULL DEFAULT NULL COMMENT '父级字典ID',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_sys_dictionaries_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_dictionaries
@@ -1035,7 +1157,7 @@ CREATE TABLE `sys_dictionary_details`  (
   `path` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '层级路径',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_sys_dictionary_details_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_dictionary_details
@@ -1090,7 +1212,7 @@ CREATE TABLE `sys_error`  (
   `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '未处理' COMMENT '处理状态',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_sys_error_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_error
@@ -1118,6 +1240,7 @@ INSERT INTO `sys_error` VALUES (20, '2026-07-11 19:11:21.473', '2026-07-11 19:11
 INSERT INTO `sys_error` VALUES (21, '2026-07-11 19:20:33.815', '2026-07-11 19:20:33.815', NULL, '后端', 'count devices failed | 错误: Error 1146 (42S02): Table \'wvp.wvp_device\' doesn\'t exist \n 源文件:/home/wyd/gb28181/wvp-go/server/api/v1/gb28181/device.go:51 \n 调用栈：wvp-go/server/api/v1/gb28181.GetDeviceList\n	/home/wyd/gb28181/wvp-go/server/api/v1/gb28181/device.go:51\ngithub.com/gin-gonic/gin.(*Context).Next\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185\nwvp-go/server/initialize.Routers.CasbinHandler.func4\n	/home/wyd/gb28181/wvp-go/server/middleware/casbin_rbac.go:30\ngithub.com/gin-gonic/gin.(*Context).Next\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185\nwvp-go/server/initialize.Routers.JWTAuth.func3\n	/home/wyd/gb28181/wvp-go/server/middleware/jwt.go:69\ngithub.com/gin-gonic/gin.(*Context).Next\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185\ngithub.com/gin-gonic/gin.LoggerWithConfig.func1\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/logger.go:249\ngithub.com/gin-gonic/gin.(*Context).Next\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185\nwvp-go/server/initialize.Routers.GinRecovery.func2\n	/home/wyd/gb28181/wvp-go/server/middleware/error.go:78\ngithub.com/gin-gonic/gin.(*Context).Next\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185\ngithub.com/gin-gonic/gin.(*Engine).handleHTTPRequest\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/gin.go:633\ngithub.com/gin-gonic/gin.(*Engine).ServeHTTP\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/gin.go:589\nnet/http.serverHandler.ServeHTTP\n	/usr/local/go/src/net/http/server.go:3301\nnet/http.(*conn).serve\n	/usr/local/go/src/net/http/server.go:2102 \n 最终调用方法:/home/wyd/gb28181/wvp-go/server/api/v1/gb28181/device.go:51 (GetDeviceList lines 23-72)\n----- 产生日志的方法代码如下 -----\nfunc GetDeviceList(c *gin.Context) {\n	var pageInfo struct {\n		Page     int    `form:\"page\" binding:\"required,min=1\"`\n		PageSize int    `form:\"page_size\" binding:\"required,min=1,max=100\"`\n		DeviceID string `form:\"device_id\"`\n		Name     string `form:\"name\"`\n		Online   *bool  `form:\"online\"`\n	}\n\n	if err := c.ShouldBindQuery(&pageInfo); err != nil {\n		response.Fail(c, response.INVALID_PARAMS, nil)\n		return\n	}\n\n	db := global.GVA_DB.Model(&system.Device{})\n\n	if pageInfo.DeviceID != \"\" {\n		db = db.Where(\"device_id LIKE ?\", \"%\"+pageInfo.DeviceID+\"%\")\n	}\n	if pageInfo.Name != \"\" {\n		db = db.Where(\"name LIKE ?\", \"%\"+pageInfo.Name+\"%\")\n	}\n	if pageInfo.Online != nil {\n		db = db.Where(\"online = ?\", *pageInfo.Online)\n	}\n\n	var total int64\n	if err := db.Count(&total).Error; err != nil {\n		global.GVA_LOG.Error(\"count devices failed\", zap.Error(err))\n		response.Fail(c, response.DB_ERROR, nil)\n		return\n	}\n\n	var devices []system.Device\n	if err := db.Offset((pageInfo.Page - 1) * pageInfo.PageSize).\n		Limit(pageInfo.PageSize).\n		Order(\"created_at DESC\").\n		Find(&devices).Error; err != nil {\n		global.GVA_LOG.Error(\"query devices failed\", zap.Error(err))\n		response.Fail(c, response.DB_ERROR, nil)\n		return\n	}\n\n	response.Success(c, gin.H{\n		\"list\":      devices,\n		\"total\":     total,\n		\"page\":      pageInfo.Page,\n		\"page_size\": pageInfo.PageSize,\n	})\n}', 'error', NULL, '未处理');
 INSERT INTO `sys_error` VALUES (22, '2026-07-11 19:24:04.878', '2026-07-11 19:24:04.878', NULL, '后端', 'count devices failed | 错误: Error 1054 (42S22): Unknown column \'online\' in \'where clause\' \n 源文件:/home/wyd/gb28181/wvp-go/server/api/v1/gb28181/device.go:51 \n 调用栈：wvp-go/server/api/v1/gb28181.GetDeviceList\n	/home/wyd/gb28181/wvp-go/server/api/v1/gb28181/device.go:51\ngithub.com/gin-gonic/gin.(*Context).Next\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185\nwvp-go/server/initialize.Routers.CasbinHandler.func4\n	/home/wyd/gb28181/wvp-go/server/middleware/casbin_rbac.go:30\ngithub.com/gin-gonic/gin.(*Context).Next\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185\nwvp-go/server/initialize.Routers.JWTAuth.func3\n	/home/wyd/gb28181/wvp-go/server/middleware/jwt.go:69\ngithub.com/gin-gonic/gin.(*Context).Next\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185\ngithub.com/gin-gonic/gin.LoggerWithConfig.func1\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/logger.go:249\ngithub.com/gin-gonic/gin.(*Context).Next\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185\nwvp-go/server/initialize.Routers.GinRecovery.func2\n	/home/wyd/gb28181/wvp-go/server/middleware/error.go:78\ngithub.com/gin-gonic/gin.(*Context).Next\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185\ngithub.com/gin-gonic/gin.(*Engine).handleHTTPRequest\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/gin.go:633\ngithub.com/gin-gonic/gin.(*Engine).ServeHTTP\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/gin.go:589\nnet/http.serverHandler.ServeHTTP\n	/usr/local/go/src/net/http/server.go:3301\nnet/http.(*conn).serve\n	/usr/local/go/src/net/http/server.go:2102 \n 最终调用方法:/home/wyd/gb28181/wvp-go/server/api/v1/gb28181/device.go:51 (GetDeviceList lines 23-72)\n----- 产生日志的方法代码如下 -----\nfunc GetDeviceList(c *gin.Context) {\n	var pageInfo struct {\n		Page     int    `form:\"page\" binding:\"required,min=1\"`\n		PageSize int    `form:\"page_size\" binding:\"required,min=1,max=100\"`\n		DeviceID string `form:\"device_id\"`\n		Name     string `form:\"name\"`\n		Online   *bool  `form:\"online\"`\n	}\n\n	if err := c.ShouldBindQuery(&pageInfo); err != nil {\n		response.Fail(c, response.INVALID_PARAMS, nil)\n		return\n	}\n\n	db := global.GVA_DB.Model(&system.Device{})\n\n	if pageInfo.DeviceID != \"\" {\n		db = db.Where(\"device_id LIKE ?\", \"%\"+pageInfo.DeviceID+\"%\")\n	}\n	if pageInfo.Name != \"\" {\n		db = db.Where(\"name LIKE ?\", \"%\"+pageInfo.Name+\"%\")\n	}\n	if pageInfo.Online != nil {\n		db = db.Where(\"online = ?\", *pageInfo.Online)\n	}\n\n	var total int64\n	if err := db.Count(&total).Error; err != nil {\n		global.GVA_LOG.Error(\"count devices failed\", zap.Error(err))\n		response.Fail(c, response.DB_ERROR, nil)\n		return\n	}\n\n	var devices []system.Device\n	if err := db.Offset((pageInfo.Page - 1) * pageInfo.PageSize).\n		Limit(pageInfo.PageSize).\n		Order(\"created_at DESC\").\n		Find(&devices).Error; err != nil {\n		global.GVA_LOG.Error(\"query devices failed\", zap.Error(err))\n		response.Fail(c, response.DB_ERROR, nil)\n		return\n	}\n\n	response.Success(c, gin.H{\n		\"list\":      devices,\n		\"total\":     total,\n		\"page\":      pageInfo.Page,\n		\"page_size\": pageInfo.PageSize,\n	})\n}', 'error', NULL, '未处理');
 INSERT INTO `sys_error` VALUES (23, '2026-07-11 19:26:00.690', '2026-07-11 19:26:00.690', NULL, '后端', 'count devices failed | 错误: Error 1054 (42S22): Unknown column \'wvp_device.deleted_at\' in \'where clause\' \n 源文件:/home/wyd/gb28181/wvp-go/server/api/v1/gb28181/device.go:51 \n 调用栈：wvp-go/server/api/v1/gb28181.GetDeviceList\n	/home/wyd/gb28181/wvp-go/server/api/v1/gb28181/device.go:51\ngithub.com/gin-gonic/gin.(*Context).Next\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185\nwvp-go/server/initialize.Routers.CasbinHandler.func4\n	/home/wyd/gb28181/wvp-go/server/middleware/casbin_rbac.go:30\ngithub.com/gin-gonic/gin.(*Context).Next\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185\nwvp-go/server/initialize.Routers.JWTAuth.func3\n	/home/wyd/gb28181/wvp-go/server/middleware/jwt.go:69\ngithub.com/gin-gonic/gin.(*Context).Next\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185\ngithub.com/gin-gonic/gin.LoggerWithConfig.func1\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/logger.go:249\ngithub.com/gin-gonic/gin.(*Context).Next\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185\nwvp-go/server/initialize.Routers.GinRecovery.func2\n	/home/wyd/gb28181/wvp-go/server/middleware/error.go:78\ngithub.com/gin-gonic/gin.(*Context).Next\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185\ngithub.com/gin-gonic/gin.(*Engine).handleHTTPRequest\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/gin.go:633\ngithub.com/gin-gonic/gin.(*Engine).ServeHTTP\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/gin.go:589\nnet/http.serverHandler.ServeHTTP\n	/usr/local/go/src/net/http/server.go:3301\nnet/http.(*conn).serve\n	/usr/local/go/src/net/http/server.go:2102 \n 最终调用方法:/home/wyd/gb28181/wvp-go/server/api/v1/gb28181/device.go:51 (GetDeviceList lines 23-72)\n----- 产生日志的方法代码如下 -----\nfunc GetDeviceList(c *gin.Context) {\n	var pageInfo struct {\n		Page     int    `form:\"page\" binding:\"required,min=1\"`\n		PageSize int    `form:\"page_size\" binding:\"required,min=1,max=100\"`\n		DeviceID string `form:\"device_id\"`\n		Name     string `form:\"name\"`\n		Online   *bool  `form:\"online\"`\n	}\n\n	if err := c.ShouldBindQuery(&pageInfo); err != nil {\n		response.Fail(c, response.INVALID_PARAMS, nil)\n		return\n	}\n\n	db := global.GVA_DB.Model(&system.Device{})\n\n	if pageInfo.DeviceID != \"\" {\n		db = db.Where(\"device_id LIKE ?\", \"%\"+pageInfo.DeviceID+\"%\")\n	}\n	if pageInfo.Name != \"\" {\n		db = db.Where(\"name LIKE ?\", \"%\"+pageInfo.Name+\"%\")\n	}\n	if pageInfo.Online != nil {\n		db = db.Where(\"online = ?\", *pageInfo.Online)\n	}\n\n	var total int64\n	if err := db.Count(&total).Error; err != nil {\n		global.GVA_LOG.Error(\"count devices failed\", zap.Error(err))\n		response.Fail(c, response.DB_ERROR, nil)\n		return\n	}\n\n	var devices []system.Device\n	if err := db.Offset((pageInfo.Page - 1) * pageInfo.PageSize).\n		Limit(pageInfo.PageSize).\n		Order(\"created_at DESC\").\n		Find(&devices).Error; err != nil {\n		global.GVA_LOG.Error(\"query devices failed\", zap.Error(err))\n		response.Fail(c, response.DB_ERROR, nil)\n		return\n	}\n\n	response.Success(c, gin.H{\n		\"list\":      devices,\n		\"total\":     total,\n		\"page\":      pageInfo.Page,\n		\"page_size\": pageInfo.PageSize,\n	})\n}', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (24, '2026-07-14 21:03:00.153', '2026-07-14 21:03:00.153', NULL, '前端', '错误信息: AxiosError: Request failed with status code 403\nStack: 调用栈: AxiosError: Request failed with status code 403\n    at settle (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1494:14)\n    at XMLHttpRequest.onloadend (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1801:4)\n    at Axios$1.request (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:2296:37)\n    at async loadCommits (http://localhost:8080/src/view/dashboard/components/table.vue:38:22)', 'error', NULL, '未处理');
 
 -- ----------------------------
 -- Table structure for sys_export_template_condition
@@ -1134,7 +1257,7 @@ CREATE TABLE `sys_export_template_condition`  (
   `operator` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '操作符',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_sys_export_template_condition_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_export_template_condition
@@ -1155,7 +1278,7 @@ CREATE TABLE `sys_export_template_join`  (
   `on` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '关联条件',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_sys_export_template_join_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_export_template_join
@@ -1181,7 +1304,7 @@ CREATE TABLE `sys_export_templates`  (
   `order` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_sys_export_templates_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_export_templates
@@ -1201,7 +1324,7 @@ CREATE TABLE `sys_ignore_apis`  (
   `method` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'POST' COMMENT '方法',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_sys_ignore_apis_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_ignore_apis
@@ -1238,7 +1361,7 @@ CREATE TABLE `sys_login_logs`  (
   `user_id` bigint UNSIGNED NULL DEFAULT NULL COMMENT '用户id',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_sys_login_logs_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_login_logs
@@ -1267,7 +1390,7 @@ CREATE TABLE `sys_operation_records`  (
   `user_id` bigint UNSIGNED NULL DEFAULT NULL COMMENT '用户id',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_sys_operation_records_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_operation_records
@@ -1279,6 +1402,7 @@ INSERT INTO `sys_operation_records` VALUES (4, '2026-07-11 19:15:01.786', '2026-
 INSERT INTO `sys_operation_records` VALUES (5, '2026-07-11 19:15:05.818', '2026-07-11 19:15:05.818', NULL, '127.0.0.1', 'POST', '/user/setUserAuthority', 200, 11500356, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '', '{\"authorityId\":888}', '{\"code\":0,\"data\":{},\"msg\":\"修改成功\"}', 1);
 INSERT INTO `sys_operation_records` VALUES (6, '2026-07-11 19:17:01.494', '2026-07-11 19:17:01.494', NULL, '127.0.0.1', 'GET', '/api/getApiGroups', 200, 2465754, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '', '{}', '{\"code\":0,\"data\":{\"apiGroupMap\":{\"api\":\"api\",\"attachmentCategory\":\"媒体库分类\",\"authority\":\"角色\",\"authorityBtn\":\"按钮权限\",\"autoCode\":\"代码生成器历史\",\"casbin\":\"casbin\",\"customer\":\"客户\",\"email\":\"email\",\"fileUploadAndDownload\":\"文件上传与下载\",\"info\":\"公告\",\"jwt\":\"jwt\",\"menu\":\"菜单\",\"simpleUploader\":\"断点续传(插件版)\",\"skills\":\"skills\",\"sysApiToken\":\"API Token\",\"sysDictionary\":\"系统字典\",\"sysDictionaryDetail\":\"系统字典详情\",\"sysError\":\"错误日志\",\"sysExportTemplate\":\"导出模板\",\"sysLoginLog\":\"登录日志\",\"sysOperationRecord\":\"操作记录\",\"sysParams\":\"参数管理\",\"sysVersion\":\"版本控制\",\"system\":\"系统服务\",\"user\":\"系统用户\"},\"groups\":[\"jwt\",\"登录日志\",\"API Token\",\"系统用户\",\"api\",\"角色\",\"casbin\",\"菜单\",\"分片上传\",\"文件上传与下载\",\"系统服务\",\"skills\",\"客户\",\"代码生成器\",\"模板配置\",\"代码生成器历史\",\"系统字典详情\",\"系统字典\",\"操作记录\",\"断点续传(插件版)\",\"email\",\"按钮权限\",\"导出模板\",\"错误日志\",\"公告\",\"参数管理\",\"媒体库分类\",\"版本控制\"]},\"msg\":\"成功\"}', 1);
 INSERT INTO `sys_operation_records` VALUES (7, '2026-07-11 19:19:45.247', '2026-07-11 19:19:45.247', NULL, '127.0.0.1', 'GET', '/api/getApiGroups', 200, 1560801, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '', '{}', '{\"code\":0,\"data\":{\"apiGroupMap\":{\"api\":\"api\",\"attachmentCategory\":\"媒体库分类\",\"authority\":\"角色\",\"authorityBtn\":\"按钮权限\",\"autoCode\":\"代码生成器历史\",\"casbin\":\"casbin\",\"customer\":\"客户\",\"email\":\"email\",\"fileUploadAndDownload\":\"文件上传与下载\",\"info\":\"公告\",\"jwt\":\"jwt\",\"menu\":\"菜单\",\"simpleUploader\":\"断点续传(插件版)\",\"skills\":\"skills\",\"sysApiToken\":\"API Token\",\"sysDictionary\":\"系统字典\",\"sysDictionaryDetail\":\"系统字典详情\",\"sysError\":\"错误日志\",\"sysExportTemplate\":\"导出模板\",\"sysLoginLog\":\"登录日志\",\"sysOperationRecord\":\"操作记录\",\"sysParams\":\"参数管理\",\"sysVersion\":\"版本控制\",\"system\":\"系统服务\",\"user\":\"系统用户\"},\"groups\":[\"jwt\",\"登录日志\",\"API Token\",\"系统用户\",\"api\",\"角色\",\"casbin\",\"菜单\",\"分片上传\",\"文件上传与下载\",\"系统服务\",\"skills\",\"客户\",\"代码生成器\",\"模板配置\",\"代码生成器历史\",\"系统字典详情\",\"系统字典\",\"操作记录\",\"断点续传(插件版)\",\"email\",\"按钮权限\",\"导出模板\",\"错误日志\",\"公告\",\"参数管理\",\"媒体库分类\",\"版本控制\"]},\"msg\":\"成功\"}', 1);
+INSERT INTO `sys_operation_records` VALUES (8, '2026-07-14 21:02:54.303', '2026-07-14 21:02:54.303', NULL, '127.0.0.1', 'POST', '/casbin/updateCasbin', 200, 88243252, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36', '', '[超出记录长度]', '{\"code\":0,\"data\":{},\"msg\":\"更新成功\"}', 1);
 
 -- ----------------------------
 -- Table structure for sys_params
@@ -1295,7 +1419,7 @@ CREATE TABLE `sys_params`  (
   `desc` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '参数说明',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_sys_params_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_params
@@ -1309,7 +1433,7 @@ CREATE TABLE `sys_user_authority`  (
   `sys_user_id` bigint UNSIGNED NOT NULL,
   `sys_authority_authority_id` bigint UNSIGNED NOT NULL COMMENT '角色ID',
   PRIMARY KEY (`sys_user_id`, `sys_authority_authority_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_user_authority
@@ -1342,7 +1466,7 @@ CREATE TABLE `sys_users`  (
   INDEX `idx_sys_users_deleted_at`(`deleted_at` ASC) USING BTREE,
   INDEX `idx_sys_users_uuid`(`uuid` ASC) USING BTREE,
   INDEX `idx_sys_users_username`(`username` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_users
@@ -1365,7 +1489,7 @@ CREATE TABLE `sys_versions`  (
   `version_data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '版本数据JSON',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_sys_versions_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_versions
@@ -1399,7 +1523,7 @@ CREATE TABLE `wvp_alarm`  (
   INDEX `idx_alarm_type`(`alarm_type` ASC) USING BTREE,
   INDEX `idx_alarm_time`(`alarm_time` ASC) USING BTREE,
   INDEX `idx_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of wvp_alarm
@@ -1436,7 +1560,7 @@ CREATE TABLE `wvp_device`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_device_id`(`device_id` ASC) USING BTREE,
   INDEX `idx_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of wvp_device
@@ -1473,7 +1597,7 @@ CREATE TABLE `wvp_device_channel`  (
   INDEX `idx_device_id`(`device_id` ASC) USING BTREE,
   INDEX `idx_parent_id`(`parent_id` ASC) USING BTREE,
   INDEX `idx_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of wvp_device_channel
@@ -1502,10 +1626,34 @@ CREATE TABLE `wvp_device_position`  (
   INDEX `idx_channel_id`(`channel_id` ASC) USING BTREE,
   INDEX `idx_report_time`(`report_time` ASC) USING BTREE,
   INDEX `idx_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of wvp_device_position
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for wvp_group
+-- ----------------------------
+DROP TABLE IF EXISTS `wvp_group`;
+CREATE TABLE `wvp_group`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `created_at` datetime(3) NULL DEFAULT NULL,
+  `updated_at` datetime(3) NULL DEFAULT NULL,
+  `deleted_at` datetime(3) NULL DEFAULT NULL,
+  `name` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `parent_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '',
+  `device_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '',
+  `region_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '',
+  `sort` int NULL DEFAULT 0,
+  `remark` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `idx_parent_id`(`parent_id` ASC) USING BTREE,
+  INDEX `idx_deleted_at`(`deleted_at` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of wvp_group
 -- ----------------------------
 
 -- ----------------------------
@@ -1542,7 +1690,7 @@ CREATE TABLE `wvp_media_server`  (
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of wvp_media_server
@@ -1576,7 +1724,7 @@ CREATE TABLE `wvp_platform`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_platform_id`(`platform_id` ASC) USING BTREE,
   INDEX `idx_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of wvp_platform
@@ -1604,7 +1752,7 @@ CREATE TABLE `wvp_platform_channel`  (
   INDEX `idx_channel_id`(`channel_id` ASC) USING BTREE,
   INDEX `idx_device_id`(`device_id` ASC) USING BTREE,
   INDEX `idx_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of wvp_platform_channel
@@ -1636,7 +1784,7 @@ CREATE TABLE `wvp_record_file`  (
   INDEX `idx_plan_id`(`plan_id` ASC) USING BTREE,
   INDEX `idx_start_time`(`start_time` ASC) USING BTREE,
   INDEX `idx_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of wvp_record_file
@@ -1668,10 +1816,104 @@ CREATE TABLE `wvp_record_plan`  (
   INDEX `idx_device_id`(`device_id` ASC) USING BTREE,
   INDEX `idx_channel_id`(`channel_id` ASC) USING BTREE,
   INDEX `idx_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of wvp_record_plan
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for wvp_region
+-- ----------------------------
+DROP TABLE IF EXISTS `wvp_region`;
+CREATE TABLE `wvp_region`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `created_at` datetime(3) NULL DEFAULT NULL,
+  `updated_at` datetime(3) NULL DEFAULT NULL,
+  `deleted_at` datetime(3) NULL DEFAULT NULL,
+  `code` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `name` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `parent_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '',
+  `level` int NULL DEFAULT 0 COMMENT '0-省,1-市,2-区县,3-街道',
+  `sort` int NULL DEFAULT 0,
+  `remark` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `idx_code`(`code` ASC) USING BTREE,
+  INDEX `idx_parent_id`(`parent_id` ASC) USING BTREE,
+  INDEX `idx_deleted_at`(`deleted_at` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of wvp_region
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for wvp_stream_proxy
+-- ----------------------------
+DROP TABLE IF EXISTS `wvp_stream_proxy`;
+CREATE TABLE `wvp_stream_proxy`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `created_at` datetime(3) NULL DEFAULT NULL,
+  `updated_at` datetime(3) NULL DEFAULT NULL,
+  `deleted_at` datetime(3) NULL DEFAULT NULL,
+  `name` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `stream_type` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT 'rtsp' COMMENT 'rtsp/rtmp/http-flv',
+  `url` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `src_url` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '',
+  `app` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT 'proxy',
+  `stream` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `media_server_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '',
+  `status` tinyint(1) NULL DEFAULT 0,
+  `enable` tinyint(1) NULL DEFAULT 1,
+  `enable_rtsp` tinyint(1) NULL DEFAULT 1,
+  `enable_rtmp` tinyint(1) NULL DEFAULT 1,
+  `enable_hls` tinyint(1) NULL DEFAULT 1,
+  `enable_flv` tinyint(1) NULL DEFAULT 1,
+  `enable_audio` tinyint(1) NULL DEFAULT 1,
+  `ffmpeg_cmd` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '',
+  `timeout_sec` int NULL DEFAULT 30,
+  `status_code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '',
+  `stream_key` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '',
+  `online` tinyint(1) NULL DEFAULT 0,
+  `device_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '',
+  `channel_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uk_stream`(`stream` ASC) USING BTREE,
+  INDEX `idx_deleted_at`(`deleted_at` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of wvp_stream_proxy
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for wvp_stream_push
+-- ----------------------------
+DROP TABLE IF EXISTS `wvp_stream_push`;
+CREATE TABLE `wvp_stream_push`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `created_at` datetime(3) NULL DEFAULT NULL,
+  `updated_at` datetime(3) NULL DEFAULT NULL,
+  `deleted_at` datetime(3) NULL DEFAULT NULL,
+  `name` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `app` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT 'push',
+  `stream` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `media_server_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '',
+  `push_type` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT 'rtmp' COMMENT 'rtmp/gb28181',
+  `push_url` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '',
+  `status` tinyint(1) NULL DEFAULT 0,
+  `enable` tinyint(1) NULL DEFAULT 1,
+  `online` tinyint(1) NULL DEFAULT 0,
+  `stream_key` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '',
+  `device_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '',
+  `channel_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uk_stream`(`stream` ASC) USING BTREE,
+  INDEX `idx_deleted_at`(`deleted_at` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of wvp_stream_push
 -- ----------------------------
 
 SET FOREIGN_KEY_CHECKS = 1;

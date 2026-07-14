@@ -6,6 +6,7 @@ import (
 	"io"
 	"net"
 	"net/http"
+	"strings"
 	"time"
 
 	"go.uber.org/zap"
@@ -118,6 +119,35 @@ func PlayVideo(deviceID, channelID, ssrc string) (*PlayResult, error) {
 		zap.Int("body_len", len(resp.Body)),
 	)
 
+	// ── Send ACK after receiving 200 OK for INVITE ──
+	// RFC 3261 §13.2.2.4: ACK for 2xx responses is sent by the UAC
+	callID := txn.Request.GetHeader("Call-ID")
+	fromHeader := txn.Request.GetHeader("From")
+	toHeader := resp.GetHeader("To")
+	cseq := txn.Request.GetHeader("CSeq")
+
+	// Extract tags
+	fromTag := extractTag(fromHeader)
+	toTag := extractTag(toHeader)
+
+	if callID != "" && fromTag != "" {
+		logger.Info("Sending ACK for INVITE",
+			zap.String("target", targetAddr),
+			zap.String("call_id", callID),
+			zap.String("from_tag", fromTag),
+			zap.String("to_tag", toTag),
+			zap.String("cseq", cseq),
+		)
+		if err := srv.SendACK(targetAddr, callID, fromTag, toTag, cseq); err != nil {
+			logger.Warn("Send ACK failed (non-fatal)", zap.Error(err))
+		}
+	} else {
+		logger.Warn("Cannot send ACK: missing Call-ID or From tag",
+			zap.String("call_id", callID),
+			zap.String("from_tag", fromTag),
+		)
+	}
+
 	baseURL := fmt.Sprintf("%s:%d", zlmIP, zlmHTTPPort)
 	stream := fmt.Sprintf("live/%s", ssrc)
 
@@ -151,6 +181,23 @@ func PlayVideo(deviceID, channelID, ssrc string) (*PlayResult, error) {
 	}, nil
 }
 
+// extractTag extracts the tag value from a SIP header like
+// "<sip:device@domain>;tag=abc123" or "tag=abc123"
+func extractTag(header string) string {
+	if idx := strings.Index(header, "tag="); idx != -1 {
+		tag := header[idx+4:]
+		// If there's a trailing semicolon or bracket, trim it
+		if semi := strings.Index(tag, ";"); semi != -1 {
+			tag = tag[:semi]
+		}
+		if gt := strings.Index(tag, ">"); gt != -1 {
+			tag = tag[:gt]
+		}
+		return strings.TrimSpace(tag)
+	}
+	return ""
+}
+
 func StopVideo(deviceID string) error {
 	logger := global.GVA_LOG.Named("play")
 	logger.Info("Stopping video", zap.String("device_id", deviceID))
@@ -171,7 +218,7 @@ func getZLMDefault() (ip string, httpPort int, secret string, err error) {
 }
 
 func openRtpServer(zlmIP string, httpPort int, secret, ssrc string) (int, error) {
-	url := fmt.Sprintf("http://%s:%d/index/api/openRtpServer?secret=%s&port=0&stream_id=%s&reuse=1",
+	url := fmt.Sprintf("http://%s:%d/index/api/openRtpServer?secret=%s&port=0&enable_tcp=1&stream_id=%s",
 		zlmIP, httpPort, secret, ssrc)
 
 	resp, err := http.Get(url)
@@ -202,7 +249,7 @@ func openRtpServer(zlmIP string, httpPort int, secret, ssrc string) (int, error)
 }
 
 func checkMediaList(zlmIP string, httpPort int, secret, streamID string) (int, error) {
-	url := fmt.Sprintf("http://%s:%d/index/api/getMediaList?secret=%s&stream=%s",
+	url := fmt.Sprintf("http://%s:%d/index/api/getMediaList?secret=%s&schema=%s",
 		zlmIP, httpPort, secret, streamID)
 
 	resp, err := http.Get(url)

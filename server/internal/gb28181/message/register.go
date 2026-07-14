@@ -109,30 +109,56 @@ func (h *RegisterHandler) VerifyDigest(req *RegisterRequest, password string) bo
 	}
 
 	ha1 := fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s:%s:%s", req.Username, req.Realm, password))))
-	ha2 := fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("REGISTER:%s", req.Domain))))
+	method := "REGISTER"
+	uri := req.Domain
+	if !strings.HasPrefix(uri, "sip:") {
+		uri = "sip:" + uri
+	}
+	ha2 := fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s:%s", method, uri))))
 	expectedResponse := fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s:%s:%s", ha1, req.Nonce, ha2))))
 
 	return req.Response == expectedResponse
 }
 
-func (h *RegisterHandler) HandleRegister(req *RegisterRequest) error {
+// HasAuthorization returns true if the request contains an Authorization header.
+func (h *RegisterHandler) HasAuthorization(msg *sip.SIPMessage) bool {
+	return msg.GetHeader("Authorization") != ""
+}
+
+// HandleRegister processes a validated register request.
+// Returns true if the device is now registered (or unregistered if expires==0).
+func (h *RegisterHandler) HandleRegister(req *RegisterRequest) (bool, error) {
+	// Handle unregistration (Expires: 0)
+	if req.Expires <= 0 {
+		device := &system.Device{}
+		result := global.GVA_DB.Where("device_id = ?", req.DeviceID).First(device)
+		if result.Error == nil {
+			device.Online = false
+			global.GVA_DB.Save(device)
+			h.logger.Info("Device unregistered",
+				zap.String("device_id", req.DeviceID),
+			)
+		}
+		return false, nil
+	}
+
 	ip, port := parseHostPort(req.RemoteAddr)
 
 	device := &system.Device{}
 	result := global.GVA_DB.Where("device_id = ?", req.DeviceID).First(device)
 	if result.Error != nil {
 		device = &system.Device{
-			DeviceID:     req.DeviceID,
-			Name:         fmt.Sprintf("Device-%s", req.DeviceID),
-			Transport:    req.Transport,
-			IP:           ip,
-			Port:         port,
-			Online:       true,
-			RegisterTime: time.Now(),
+			DeviceID:      req.DeviceID,
+			Name:          fmt.Sprintf("Device-%s", req.DeviceID),
+			Transport:     req.Transport,
+			IP:            ip,
+			Port:          port,
+			Online:        true,
+			RegisterTime:  time.Now(),
 			KeepaliveTime: time.Now(),
 		}
 		if err := global.GVA_DB.Create(device).Error; err != nil {
-			return fmt.Errorf("create device failed: %w", err)
+			return false, fmt.Errorf("create device failed: %w", err)
 		}
 	} else {
 		device.IP = ip
@@ -142,7 +168,7 @@ func (h *RegisterHandler) HandleRegister(req *RegisterRequest) error {
 		device.RegisterTime = time.Now()
 		device.KeepaliveTime = time.Now()
 		if err := global.GVA_DB.Save(device).Error; err != nil {
-			return fmt.Errorf("update device failed: %w", err)
+			return false, fmt.Errorf("update device failed: %w", err)
 		}
 	}
 
@@ -152,7 +178,18 @@ func (h *RegisterHandler) HandleRegister(req *RegisterRequest) error {
 		zap.Int("expires", req.Expires),
 	)
 
-	return nil
+	return true, nil
+}
+
+// GetDevicePassword retrieves the device password from the database.
+// Returns empty string if device not found or no password configured.
+func (h *RegisterHandler) GetDevicePassword(deviceID string) (string, error) {
+	device := &system.Device{}
+	result := global.GVA_DB.Where("device_id = ?", deviceID).First(device)
+	if result.Error != nil {
+		return "", result.Error
+	}
+	return device.Password, nil
 }
 
 func (h *RegisterHandler) GenerateNonce() string {

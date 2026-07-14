@@ -15,4 +15,9 @@ func (r *Router) InitGB28181Router(Router *gin.RouterGroup) {
 	alarmRouter.InitAlarmRouter(Router)
 	positionRouter.InitPositionRouter(Router)
 	recordRouter.InitRecordRouter(Router)
+	streamProxyRouter.InitStreamProxyRouter(Router)
+	streamPushRouter.InitStreamPushRouter(Router)
+	deviceControlRouter.InitDeviceControlRouter(Router)
+	groupRouter.InitGroupRouter(Router)
+	regionRouter.InitRegionRouter(Router)
 }

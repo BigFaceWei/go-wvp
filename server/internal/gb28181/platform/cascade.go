@@ -216,8 +216,15 @@ func (cm *CascadeManager) KeepaliveToUpperPlatforms() {
 	defer ticker.Stop()
 
 	for range ticker.C {
+		// Copy the client map under read lock so we don't hold lock during network I/O
 		cm.mu.RLock()
-		for platformID, client := range cm.sipClients {
+		clients := make(map[string]*gbsip.Client, len(cm.sipClients))
+		for id, client := range cm.sipClients {
+			clients[id] = client
+		}
+		cm.mu.RUnlock()
+
+		for platformID, client := range clients {
 			_, err := client.SendKeepalive(platformID)
 			if err != nil {
 				cm.logger.Error("send keepalive to platform failed",
@@ -226,6 +233,5 @@ func (cm *CascadeManager) KeepaliveToUpperPlatforms() {
 				)
 			}
 		}
-		cm.mu.RUnlock()
 	}
 }
