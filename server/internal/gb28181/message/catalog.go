@@ -1,8 +1,11 @@
 package message
 
 import (
+	"bytes"
 	"encoding/xml"
 	"fmt"
+	"io"
+	"strings"
 	"sync"
 	"time"
 
@@ -10,52 +13,103 @@ import (
 	"wvp-go/server/model/system"
 
 	"go.uber.org/zap"
+	"golang.org/x/text/encoding/simplifiedchinese"
 )
 
 const (
-	catalogDedupWindow = 10 * time.Second
-	catalogCleanupInterval = 60 * time.Second
+	pendingQueryTimeout = 30 * time.Second
 )
 
-type catalogDedupEntry struct {
-	processedAt time.Time
+// CatalogQueryResult is sent back to the API handler via the pending query channel.
+type CatalogQueryResult struct {
+	DeviceID string
+	Success  bool   // true when received >= SumNum
+	Received int    // actual items accumulated
+	SumNum   int    // expected total from NVR
+	Items    []CatalogItem
+	Err      error
+}
+
+type pendingCatalogQuery struct {
+	mu        sync.Mutex
+	DeviceID  string
+	SN        string
+	SumNum    int
+	Items     []CatalogItem
+	ResultCh  chan *CatalogQueryResult
+	CreatedAt time.Time
 }
 
 type CatalogHandler struct {
-	logger *zap.Logger
-	dedup  sync.Map
+	logger         *zap.Logger
+	pendingQueries sync.Map
 }
+
+// GlobalCatalogHandler is a package-level reference set by NewCatalogHandler,
+// used by API handlers to register pending queries and wait for results.
+var GlobalCatalogHandler *CatalogHandler
 
 func NewCatalogHandler(logger *zap.Logger) *CatalogHandler {
 	h := &CatalogHandler{logger: logger}
+	GlobalCatalogHandler = h
 	go h.cleanupLoop()
 	return h
 }
 
 func (h *CatalogHandler) cleanupLoop() {
-	ticker := time.NewTicker(catalogCleanupInterval)
+	ticker := time.NewTicker(30 * time.Second)
 	defer ticker.Stop()
 	for range ticker.C {
-		h.dedup.Range(func(key, value any) bool {
-			entry := value.(*catalogDedupEntry)
-			if time.Since(entry.processedAt) > catalogCleanupInterval {
-				h.dedup.Delete(key)
+		h.pendingQueries.Range(func(key, value any) bool {
+			pq := value.(*pendingCatalogQuery)
+			pq.mu.Lock()
+			stale := time.Since(pq.CreatedAt) > pendingQueryTimeout
+			pq.mu.Unlock()
+			if stale {
+				h.logger.Warn("Pending catalog query timed out, cleaning up",
+					zap.String("device_id", pq.DeviceID),
+					zap.Int("received", len(pq.Items)),
+					zap.Int("sum_num", pq.SumNum),
+				)
+				h.pendingQueries.Delete(key)
 			}
 			return true
 		})
 	}
 }
 
-func (h *CatalogHandler) isDuplicate(deviceID, sn string) bool {
-	key := deviceID + ":" + sn
-	if v, ok := h.dedup.Load(key); ok {
-		entry := v.(*catalogDedupEntry)
-		if time.Since(entry.processedAt) < catalogDedupWindow {
-			return true
-		}
+// RegisterPendingQuery registers a pending catalog query for the API handler to wait on.
+func (h *CatalogHandler) RegisterPendingQuery(deviceID, sn string) *pendingCatalogQuery {
+	pq := &pendingCatalogQuery{
+		DeviceID:  deviceID,
+		SN:        sn,
+		Items:     make([]CatalogItem, 0),
+		ResultCh:  make(chan *CatalogQueryResult, 1),
+		CreatedAt: time.Now(),
 	}
-	h.dedup.Store(key, &catalogDedupEntry{processedAt: time.Now()})
-	return false
+	h.pendingQueries.Store(deviceID, pq)
+	return pq
+}
+
+// RemovePendingQuery removes a pending query entry.
+func (h *CatalogHandler) RemovePendingQuery(deviceID string) {
+	h.pendingQueries.Delete(deviceID)
+}
+
+// GetPendingQuery returns the pending query for a device, if any.
+func (h *CatalogHandler) GetPendingQuery(deviceID string) (*pendingCatalogQuery, bool) {
+	v, ok := h.pendingQueries.Load(deviceID)
+	if !ok {
+		return nil, false
+	}
+	return v.(*pendingCatalogQuery), true
+}
+
+// Progress returns the current received count and SumNum safely (with lock).
+func (pq *pendingCatalogQuery) Progress() (received, sumNum int) {
+	pq.mu.Lock()
+	defer pq.mu.Unlock()
+	return len(pq.Items), pq.SumNum
 }
 
 type CatalogRequest struct {
@@ -113,7 +167,16 @@ func (h *CatalogHandler) ParseCatalogRequest(body []byte) (*CatalogRequest, erro
 
 func (h *CatalogHandler) ParseCatalogResponse(body []byte) (*CatalogResponse, error) {
 	resp := &CatalogResponse{}
-	if err := xml.Unmarshal(body, resp); err != nil {
+	decoder := xml.NewDecoder(bytes.NewReader(body))
+	decoder.CharsetReader = func(charset string, input io.Reader) (io.Reader, error) {
+		switch strings.ToLower(charset) {
+		case "gb2312", "gbk":
+			return simplifiedchinese.GBK.NewDecoder().Reader(input), nil
+		default:
+			return nil, fmt.Errorf("unsupported charset: %s", charset)
+		}
+	}
+	if err := decoder.Decode(resp); err != nil {
 		return nil, fmt.Errorf("parse catalog response failed: %w", err)
 	}
 
@@ -124,6 +187,9 @@ func (h *CatalogHandler) ParseCatalogResponse(body []byte) (*CatalogResponse, er
 	return resp, nil
 }
 
+// HandleCatalogResponse accumulates items into a pending query.
+// It does NOT write to the database — the API handler that initiated the query
+// is responsible for deleting old channels and batch-inserting after all items arrive.
 func (h *CatalogHandler) HandleCatalogResponse(resp *CatalogResponse) error {
 	deviceID := resp.DeviceID
 	channelCount := len(resp.DeviceList.Items)
@@ -135,64 +201,47 @@ func (h *CatalogHandler) HandleCatalogResponse(resp *CatalogResponse) error {
 		zap.Int("channel_count", channelCount),
 	)
 
-	if h.isDuplicate(deviceID, resp.SN) {
-		h.logger.Info("Duplicate catalog response skipped, 200 OK will be sent",
+	if channelCount == 0 {
+		return nil
+	}
+
+	// Look up the pending query for this device
+	pq, ok := h.GetPendingQuery(deviceID)
+	if !ok {
+		h.logger.Warn("No pending catalog query for device, ignoring response",
 			zap.String("device_id", deviceID),
-			zap.String("sn", resp.SN),
 		)
 		return nil
 	}
 
-	for _, item := range resp.DeviceList.Items {
-		var existing system.DeviceChannel
-		result := global.GVA_DB.Where("device_id = ? AND channel_id = ?", deviceID, item.DeviceID).First(&existing)
-		
-		if result.Error == nil {
-			existing.Name = item.Name
-			existing.Manufacturer = item.Manufacturer
-			existing.Model = item.Model
-			existing.Owner = item.Owner
-			existing.CivilCode = item.CivilCode
-			existing.Address = item.Address
-			existing.Parental = item.Parental
-			existing.ParentID = item.ParentID
-			existing.SafetyWay = item.SafetyWay
-			existing.RegisterWay = item.RegisterWay
-			existing.Secrecy = item.Secrecy
-			existing.Status = item.Status
-			global.GVA_DB.Save(&existing)
-		} else {
-			channel := system.DeviceChannel{
-				DeviceID:     deviceID,
-				ChannelID:    item.DeviceID,
-				Name:         item.Name,
-				Manufacturer: item.Manufacturer,
-				Model:        item.Model,
-				Owner:        item.Owner,
-				CivilCode:    item.CivilCode,
-				Address:      item.Address,
-				Parental:     item.Parental,
-				ParentID:     item.ParentID,
-				SafetyWay:    item.SafetyWay,
-				RegisterWay:  item.RegisterWay,
-				Secrecy:      item.Secrecy,
-				Status:       item.Status,
-			}
-			if err := global.GVA_DB.Create(&channel).Error; err != nil {
-				h.logger.Error("create channel failed",
-					zap.String("device_id", deviceID),
-					zap.String("channel_id", item.DeviceID),
-					zap.Error(err),
-				)
-				continue
-			}
-		}
+	pq.mu.Lock()
+	defer pq.mu.Unlock()
+
+	// Store SumNum from first response
+	if pq.SumNum == 0 {
+		pq.SumNum = resp.SumNum
 	}
 
-	h.logger.Info("Catalog response handled",
+	// Accumulate items
+	pq.Items = append(pq.Items, resp.DeviceList.Items...)
+	h.logger.Info("Catalog accumulated",
 		zap.String("device_id", deviceID),
-		zap.Int("channels", len(resp.DeviceList.Items)),
+		zap.Int("received", len(pq.Items)),
+		zap.Int("total", pq.SumNum),
 	)
+
+	// If all items received, signal the waiter
+	if pq.SumNum > 0 && len(pq.Items) >= pq.SumNum {
+		result := &CatalogQueryResult{
+			DeviceID: deviceID,
+			Success:  true,
+			Received: len(pq.Items),
+			SumNum:   pq.SumNum,
+			Items:    make([]CatalogItem, len(pq.Items)),
+		}
+		copy(result.Items, pq.Items)
+		pq.ResultCh <- result
+	}
 
 	return nil
 }

@@ -1,15 +1,7 @@
 <template>
-  <div class="device-container">
-    <el-card class="box-card">
-      <template #header>
-        <div class="card-header">
-          <span>设备管理</span>
-          <el-button type="primary" @click="handleAdd">添加设备</el-button>
-        </div>
-      </template>
-      
-      <!-- 搜索表单 -->
-      <el-form :inline="true" :model="searchForm" class="demo-form-inline">
+  <div>
+    <div class="gva-search-box">
+      <el-form :inline="true" :model="searchForm">
         <el-form-item label="设备ID">
           <el-input v-model="searchForm.device_id" placeholder="请输入设备ID" clearable />
         </el-form-item>
@@ -23,12 +15,16 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="handleSearch">搜索</el-button>
-          <el-button @click="handleReset">重置</el-button>
+          <el-button type="primary" icon="search" @click="handleSearch">查询</el-button>
+          <el-button icon="refresh" @click="handleReset">重置</el-button>
         </el-form-item>
       </el-form>
-      
-      <!-- 设备列表 -->
+    </div>
+    
+    <div class="gva-table-box">
+      <div class="gva-btn-list">
+        <el-button type="primary" icon="plus" @click="handleAdd">添加设备</el-button>
+      </div>
       <el-table :data="deviceList" style="width: 100%" v-loading="loading">
         <el-table-column prop="device_id" label="设备ID" width="180" />
         <el-table-column prop="name" label="设备名称" width="180" />
@@ -42,7 +38,8 @@
           </template>
         </el-table-column>
         <el-table-column prop="ip" label="IP地址" width="140" />
-        <el-table-column label="操作" width="350">
+        <el-table-column prop="channel_count" label="通道数" width="80" />
+        <el-table-column label="操作" width="380">
           <template #default="scope">
             <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
             <el-button size="small" type="success" @click="handleChannels(scope.row)">通道</el-button>
@@ -52,18 +49,18 @@
         </el-table-column>
       </el-table>
       
-      <!-- 分页 -->
-      <el-pagination
-        class="mt-4"
-        v-model:current-page="currentPage"
-        v-model:page-size="pageSize"
-        :page-sizes="[10, 20, 50, 100]"
-        :total="total"
-        layout="total, sizes, prev, pager, next, jumper"
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-      />
-    </el-card>
+      <div class="gva-pagination">
+        <el-pagination
+          :current-page="currentPage"
+          :page-size="pageSize"
+          :page-sizes="[10, 20, 50, 100]"
+          :total="total"
+          layout="total, sizes, prev, pager, next, jumper"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+        />
+      </div>
+    </div>
     
     <!-- 添加/编辑对话框 -->
     <el-dialog v-model="dialogVisible" :title="dialogTitle" width="500px">
@@ -231,9 +228,18 @@ const handleDelete = async (row) => {
 
 const handleCatalog = async (row) => {
   try {
-    await queryDeviceCatalog(row.device_id)
-    ElMessage.success('目录查询请求已发送')
+    const res = await queryDeviceCatalog(row.device_id)
+    const d = res.data || {}
+    if (d.success) {
+      ElMessage.success(d.message || `查询成功，共 ${d.actual} 个通道`)
+    } else {
+      ElMessage.warning(d.message || `查询不完整`)
+    }
+    fetchDevices()
   } catch (error) {
+    const errData = error?.response?.data?.data || {}
+    const errMsg = error?.response?.data?.message || '查询目录失败'
+    ElMessage.warning(errMsg)
     console.error('查询目录失败:', error)
   }
 }
@@ -252,19 +258,3 @@ onMounted(() => {
   fetchDevices()
 })
 </script>
-
-<style scoped>
-.device-container {
-  padding: 20px;
-}
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.demo-form-inline {
-  margin-bottom: 20px;
-}
-</style>

@@ -3,7 +3,10 @@ package gb28181
 import (
 	"fmt"
 	"strings"
+	"time"
+
 	"wvp-go/server/global"
+	"wvp-go/server/internal/gb28181/message"
 	"wvp-go/server/model/system"
 	"wvp-go/server/utils/response"
 
@@ -213,6 +216,67 @@ func GetDeviceChannels(c *gin.Context) {
 	response.Success(c, channels)
 }
 
+// GetChannelList 获取通道列表（分页+筛选）
+func GetChannelList(c *gin.Context) {
+	var pageInfo struct {
+		Page      int    `form:"page" binding:"required,min=1"`
+		PageSize  int    `form:"page_size" binding:"required,min=1,max=100"`
+		DeviceID  string `form:"device_id"`
+		ChannelID string `form:"channel_id"`
+		Name      string `form:"name"`
+		OnLine    string `form:"on_line"`
+	}
+
+	if err := c.ShouldBindQuery(&pageInfo); err != nil {
+		response.Fail(c, response.INVALID_PARAMS, nil)
+		return
+	}
+
+	db := global.GVA_DB.Model(&system.DeviceChannel{})
+
+	if pageInfo.DeviceID != "" {
+		db = db.Where("device_id = ?", pageInfo.DeviceID)
+	}
+	if pageInfo.ChannelID != "" {
+		db = db.Where("channel_id LIKE ?", "%"+pageInfo.ChannelID+"%")
+	}
+	if pageInfo.Name != "" {
+		db = db.Where("name LIKE ?", "%"+pageInfo.Name+"%")
+	}
+	if pageInfo.OnLine != "" {
+		online := pageInfo.OnLine == "true" || pageInfo.OnLine == "1"
+		status := "OFF"
+		if online {
+			status = "ON"
+		}
+		db = db.Where("status = ?", status)
+	}
+
+	var total int64
+	if err := db.Count(&total).Error; err != nil {
+		global.GVA_LOG.Error("count channels failed", zap.Error(err))
+		response.Fail(c, response.DB_ERROR, nil)
+		return
+	}
+
+	var channels []system.DeviceChannel
+	if err := db.Offset((pageInfo.Page-1)*pageInfo.PageSize).
+		Limit(pageInfo.PageSize).
+		Order("created_at DESC").
+		Find(&channels).Error; err != nil {
+		global.GVA_LOG.Error("query channels failed", zap.Error(err))
+		response.Fail(c, response.DB_ERROR, nil)
+		return
+	}
+
+	response.Success(c, gin.H{
+		"list":      channels,
+		"total":     total,
+		"page":      pageInfo.Page,
+		"page_size": pageInfo.PageSize,
+	})
+}
+
 func QueryDeviceCatalog(c *gin.Context) {
 	deviceID := c.Param("id")
 	if deviceID == "" {
@@ -245,17 +309,28 @@ func QueryDeviceCatalog(c *gin.Context) {
 </Query>`, deviceID)
 
 	requestURI := fmt.Sprintf("sip:%s@%s", deviceID, global.GVA_CONFIG.WVP.SIP.Domain)
- headers := map[string]string{
+	headers := map[string]string{
 		"To":           fmt.Sprintf("<sip:%s@%s>", deviceID, global.GVA_CONFIG.WVP.SIP.Domain),
 		"Content-Type": "Application/MANSCDP+xml",
 	}
 
 	var targetAddr string
+	if device.IP == "" {
+		global.GVA_LOG.Error("Device IP is empty, cannot send catalog query",
+			zap.String("device_id", deviceID),
+		)
+		response.Fail(c, response.INVALID_PARAMS, fmt.Sprintf("device IP is empty: %s", deviceID))
+		return
+	}
 	if strings.Contains(device.IP, ":") {
 		targetAddr = device.IP
 	} else {
 		targetAddr = fmt.Sprintf("%s:%d", device.IP, device.Port)
 	}
+
+	// Register pending query for synchronous wait
+	ch := message.GlobalCatalogHandler.RegisterPendingQuery(deviceID, "1")
+	defer message.GlobalCatalogHandler.RemovePendingQuery(deviceID)
 
 	_, err := global.GVA_SIP_SERVER.SendRequestTo("MESSAGE", requestURI, targetAddr, headers, []byte(xmlBody))
 	if err != nil {
@@ -264,12 +339,116 @@ func QueryDeviceCatalog(c *gin.Context) {
 		return
 	}
 
-	global.GVA_LOG.Info("Catalog query sent",
+	global.GVA_LOG.Info("Catalog query sent, waiting for response",
 		zap.String("device_id", deviceID),
 		zap.String("addr", targetAddr),
 	)
 
-	response.SuccessWithMessage(c, "目录查询请求已发送", nil)
+	// Wait for all catalog responses with 10s timeout
+	select {
+	case result := <-ch.ResultCh:
+		if result.Success && len(result.Items) >= result.SumNum {
+			// All items received: delete old channels and batch insert fresh data
+			if err := global.GVA_DB.Unscoped().Where("device_id = ?", deviceID).Delete(&system.DeviceChannel{}).Error; err != nil {
+				global.GVA_LOG.Error("delete existing channels failed",
+					zap.String("device_id", deviceID),
+					zap.Error(err),
+				)
+				response.Fail(c, response.DB_ERROR, nil)
+				return
+			}
+
+			for _, item := range result.Items {
+				channel := system.DeviceChannel{
+					DeviceID:     deviceID,
+					ChannelID:    item.DeviceID,
+					Name:         item.Name,
+					Manufacturer: item.Manufacturer,
+					Model:        item.Model,
+					Owner:        item.Owner,
+					CivilCode:    item.CivilCode,
+					Address:      item.Address,
+					Parental:     item.Parental,
+					ParentID:     item.ParentID,
+					SafetyWay:    item.SafetyWay,
+					RegisterWay:  item.RegisterWay,
+					Secrecy:      item.Secrecy,
+					Status:       item.Status,
+				}
+				if err := global.GVA_DB.Create(&channel).Error; err != nil {
+					global.GVA_LOG.Error("create channel failed",
+						zap.String("device_id", deviceID),
+						zap.String("channel_id", item.DeviceID),
+						zap.Error(err),
+					)
+				}
+			}
+
+			global.GVA_LOG.Info("Catalog query completed successfully",
+				zap.String("device_id", deviceID),
+				zap.Int("channels", len(result.Items)),
+			)
+			// Update channel count on device record
+			global.GVA_DB.Table("wvp_device").Where("device_id = ?", deviceID).Update("channel_count", len(result.Items))
+			response.Success(c, gin.H{
+				"success":  true,
+				"expected": result.SumNum,
+				"actual":   result.Received,
+				"message":  fmt.Sprintf("查询成功，应查询 %d 个，实际查询 %d 个", result.SumNum, result.Received),
+			})
+		} else {
+			// Not all items received — do NOT touch DB, return failure info
+			global.GVA_LOG.Warn("Catalog query incomplete",
+				zap.String("device_id", deviceID),
+				zap.Int("received", result.Received),
+				zap.Int("sum_num", result.SumNum),
+			)
+			response.FailWithDetail(c, response.SIP_TIMEOUT,
+				fmt.Sprintf("查询失败，应查询 %d 个，实际查询 %d 个", result.SumNum, result.Received),
+				gin.H{
+					"success":  false,
+					"expected": result.SumNum,
+					"actual":   result.Received,
+				})
+		}
+
+	case <-time.After(10 * time.Second):
+		// Timeout — check what we have so far
+		if pq, ok := message.GlobalCatalogHandler.GetPendingQuery(deviceID); ok {
+			received, sumNum := pq.Progress()
+
+			global.GVA_LOG.Warn("Catalog query timeout",
+				zap.String("device_id", deviceID),
+				zap.Int("received", received),
+				zap.Int("sum_num", sumNum),
+			)
+			if sumNum > 0 {
+				response.FailWithDetail(c, response.SIP_TIMEOUT,
+					fmt.Sprintf("查询超时，应查询 %d 个，实际查询 %d 个", sumNum, received),
+					gin.H{
+						"success":  false,
+						"expected": sumNum,
+						"actual":   received,
+					})
+			} else {
+				response.FailWithDetail(c, response.SIP_TIMEOUT,
+					"查询超时，未收到任何响应",
+					gin.H{
+						"success":  false,
+						"expected": 0,
+						"actual":   0,
+					})
+			}
+		} else {
+			response.FailWithDetail(c, response.SIP_TIMEOUT,
+				"查询超时",
+				gin.H{
+					"success":  false,
+					"expected": 0,
+					"actual":   0,
+				})
+		}
+	}
 }
 
 func GetDeviceStatus(c *gin.Context) {

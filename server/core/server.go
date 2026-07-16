@@ -89,7 +89,7 @@ func startSIPServer() {
 
 		// Handle unregistration (Expires: 0)
 		if req.Expires <= 0 {
-			registered, err := registerHandler.HandleRegister(req)
+			registered, _, err := registerHandler.HandleRegister(req)
 			if err != nil {
 				logger.Error("handle unregister failed", zap.Error(err))
 				srv.SendOK(txn) // Still respond OK so device knows we processed it
@@ -123,12 +123,14 @@ func startSIPServer() {
 			logger.Warn("Device not found in database, using default password",
 				zap.String("device_id", req.DeviceID),
 			)
-			// Use configured default password if available, otherwise fail
-			password = global.GVA_CONFIG.WVP.SIP.Password
 		}
 
 		if password == "" {
-			logger.Warn("No password configured for device, using empty password",
+			// Fall back to configured default password when:
+			//   1. Device is not in DB (err != nil), or
+			//   2. Device exists but has no password stored (auto-registered without password)
+			password = global.GVA_CONFIG.WVP.SIP.Password
+			logger.Warn("Using configured default password for device",
 				zap.String("device_id", req.DeviceID),
 			)
 		}
@@ -145,7 +147,7 @@ func startSIPServer() {
 		}
 
 		// Auth successful — complete registration
-		registered, err := registerHandler.HandleRegister(req)
+		registered, isNew, err := registerHandler.HandleRegister(req)
 		if err != nil {
 			logger.Error("handle REGISTER failed", zap.Error(err))
 			// Still send OK so device knows we received the registration
@@ -156,6 +158,17 @@ func startSIPServer() {
 			logger.Info("Device registered successfully with digest auth",
 				zap.String("device_id", req.DeviceID),
 			)
+
+			// Auto-query catalog on first registration
+			if isNew {
+				deviceID := req.DeviceID
+				logger.Info("First registration, auto-querying catalog",
+					zap.String("device_id", deviceID),
+				)
+				go func() {
+					autoQueryCatalog(logger, deviceID)
+				}()
+			}
 		}
 		srv.SendOK(txn)
 	})
@@ -191,6 +204,7 @@ func startSIPServer() {
 			srv.SendOK(txn)
 			return
 		}
+		req.SourceAddr = addr
 		if err := keepaliveHandler.HandleKeepalive(req); err != nil {
 			logger.Error("handle keepalive failed", zap.Error(err))
 		}
@@ -254,4 +268,78 @@ a=sendonly
 	)
 
 	select {}
+}
+
+// autoQueryCatalog sends a Catalog query to the device and updates its channel count.
+// Must be called from a goroutine (it blocks waiting for SIP responses).
+func autoQueryCatalog(logger *zap.Logger, deviceID string) {
+	if message.GlobalCatalogHandler == nil {
+		logger.Error("Catalog handler not available for auto query")
+		return
+	}
+
+	// Build the Catalog query XML
+	xmlBody := fmt.Sprintf(`<?xml version="1.0" encoding="GB2312"?>
+<Query>
+  <CmdType>Catalog</CmdType>
+  <SN>1</SN>
+  <DeviceID>%s</DeviceID>
+</Query>`, deviceID)
+
+	requestURI := fmt.Sprintf("sip:%s@%s", deviceID, global.GVA_CONFIG.WVP.SIP.Domain)
+	headers := map[string]string{
+		"To":           fmt.Sprintf("<sip:%s@%s>", deviceID, global.GVA_CONFIG.WVP.SIP.Domain),
+		"Content-Type": "Application/MANSCDP+xml",
+	}
+
+	// Build target address from device DB record
+	var device struct {
+		IP   string
+		Port int
+	}
+	if err := global.GVA_DB.Table("wvp_device").Select("ip, port").Where("device_id = ?", deviceID).Scan(&device).Error; err != nil {
+		logger.Error("Auto catalog query: failed to get device address", zap.String("device_id", deviceID), zap.Error(err))
+		return
+	}
+	if device.IP == "" {
+		logger.Warn("Auto catalog query: device IP is empty, skipping", zap.String("device_id", deviceID))
+		return
+	}
+	targetAddr := fmt.Sprintf("%s:%d", device.IP, device.Port)
+
+	// Register pending query
+	pq := message.GlobalCatalogHandler.RegisterPendingQuery(deviceID, "1")
+	defer message.GlobalCatalogHandler.RemovePendingQuery(deviceID)
+
+	// Send the SIP MESSAGE
+	_, err := global.GVA_SIP_SERVER.SendRequestTo("MESSAGE", requestURI, targetAddr, headers, []byte(xmlBody))
+	if err != nil {
+		logger.Error("Auto catalog query: send failed", zap.String("device_id", deviceID), zap.Error(err))
+		return
+	}
+
+	logger.Info("Auto catalog query sent", zap.String("device_id", deviceID), zap.String("addr", targetAddr))
+
+	// Wait with 10s timeout
+	select {
+	case result := <-pq.ResultCh:
+		if result.Success && len(result.Items) >= result.SumNum {
+			count := len(result.Items)
+			if err := global.GVA_DB.Table("wvp_device").Where("device_id = ?", deviceID).Update("channel_count", count).Error; err != nil {
+				logger.Error("Auto catalog query: update channel_count failed",
+					zap.String("device_id", deviceID), zap.Error(err))
+			} else {
+				logger.Info("Auto catalog query completed",
+					zap.String("device_id", deviceID), zap.Int("channels", count))
+			}
+		} else {
+			logger.Warn("Auto catalog query incomplete",
+				zap.String("device_id", deviceID),
+				zap.Int("received", result.Received),
+				zap.Int("sum_num", result.SumNum))
+		}
+	case <-time.After(10 * time.Second):
+		logger.Warn("Auto catalog query timeout",
+			zap.String("device_id", deviceID))
+	}
 }

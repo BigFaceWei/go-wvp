@@ -84,7 +84,7 @@ func (h *InviteHandler) ParseInviteResponse(body []byte) (*InviteResponse, error
 
 func (h *InviteHandler) BuildInviteSDP(req *InviteRequest) string {
 	sdp := fmt.Sprintf("v=0\r\n")
-	sdp += fmt.Sprintf("o=%s 0 0 IN IP4 %s\r\n", req.DeviceID, req.MediaIP)
+	sdp += fmt.Sprintf("o=%s %s 0 IN IP4 %s\r\n", req.ChannelID, req.SSRC, req.MediaIP)
 	sdp += fmt.Sprintf("s=%s\r\n", "Play")
 	sdp += fmt.Sprintf("c=IN IP4 %s\r\n", req.MediaIP)
 	sdp += fmt.Sprintf("t=0 0\r\n")
@@ -92,6 +92,10 @@ func (h *InviteHandler) BuildInviteSDP(req *InviteRequest) string {
 	if req.SSRC != "" {
 		sdp += fmt.Sprintf("y=%s\r\n", req.SSRC)
 	}
+
+	// GB/T 28181-2016 f= line: media format description
+	// V2/4/2 = Video, H.264, Main Profile (standard for embedded DVR/NVR)
+	sdp += fmt.Sprintf("f=V2/4/2\r\n")
 
 	for _, codec := range req.Codecs {
 		switch codec {

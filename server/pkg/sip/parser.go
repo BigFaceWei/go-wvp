@@ -130,6 +130,10 @@ func (m *SIPMessage) AddHeader(name, value string) {
 
 func (m *SIPMessage) SetBody(body []byte) {
 	m.Body = body
+	if len(body) > 0 {
+		m.SetHeader("Content-Type", "application/sdp")
+		m.SetHeader("Content-Length", fmt.Sprintf("%d", len(body)))
+	}
 }
 
 func (m *SIPMessage) String() string {

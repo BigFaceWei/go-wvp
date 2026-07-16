@@ -22,4 +22,9 @@ func (d *DeviceRouter) InitDeviceRouter(Router *gin.RouterGroup) {
 		deviceRouterGroup.POST("/:id/catalog", gb28181.QueryDeviceCatalog)
 		deviceRouterGroup.GET("/:id/status", gb28181.GetDeviceStatus)
 	}
+
+	channelRouterGroup := Router.Group("/channel")
+	{
+		channelRouterGroup.GET("/list", gb28181.GetChannelList)
+	}
 }

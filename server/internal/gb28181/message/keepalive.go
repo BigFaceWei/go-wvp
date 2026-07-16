@@ -24,6 +24,7 @@ type KeepaliveRequest struct {
 	DeviceID   string
 	Domain     string
 	RemoteAddr string
+	SourceAddr string // UDP source address from SIP transport, used as fallback
 }
 
 func (h *KeepaliveHandler) ParseKeepalive(msg *sip.SIPMessage) (*KeepaliveRequest, error) {
@@ -103,15 +104,30 @@ func (h *KeepaliveHandler) HandleKeepalive(req *KeepaliveRequest) error {
 	device.Online = true
 	device.KeepaliveTime = time.Now()
 
-	if host, portStr, err := net.SplitHostPort(req.RemoteAddr); err == nil {
-		device.IP = host
-		var port int
-		fmt.Sscanf(portStr, "%d", &port)
-		if port > 0 {
-			device.Port = port
+	// Update device IP/Port from keepalive RemoteAddr (extracted from Contact header).
+	// If Contact header is not available (many NVRs omit it in keepalive MESSAGE),
+	// fall back to the SIP message source address to recover/confirm the device IP.
+	if req.RemoteAddr != "" {
+		if host, portStr, err := net.SplitHostPort(req.RemoteAddr); err == nil {
+			device.IP = host
+			var port int
+			fmt.Sscanf(portStr, "%d", &port)
+			if port > 0 {
+				device.Port = port
+			}
+		} else {
+			device.IP = req.RemoteAddr
 		}
-	} else {
-		device.IP = req.RemoteAddr
+	} else if device.IP == "" && req.SourceAddr != "" {
+		// Recover IP from the UDP source address of the keepalive message.
+		if host, portStr, err := net.SplitHostPort(req.SourceAddr); err == nil {
+			device.IP = host
+			var port int
+			fmt.Sscanf(portStr, "%d", &port)
+			if port > 0 {
+				device.Port = port
+			}
+		}
 	}
 
 	if err := global.GVA_DB.Save(device).Error; err != nil {

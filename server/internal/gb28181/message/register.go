@@ -32,6 +32,10 @@ type RegisterRequest struct {
 	Password    string
 	Realm       string
 	Nonce       string
+	URI         string // request URI from Authorization header (used for HA2 computation)
+	Cnonce      string // client nonce, required when qop="auth"
+	NC          string // nonce count, required when qop="auth"
+	QOP         string // quality of protection ("auth" or "auth-int")
 	Response    string
 }
 
@@ -96,6 +100,14 @@ func (h *RegisterHandler) parseAuthorization(header string, req *RegisterRequest
 				req.Realm = value
 			case "nonce":
 				req.Nonce = value
+			case "uri":
+				req.URI = value
+			case "cnonce":
+				req.Cnonce = value
+			case "nc":
+				req.NC = value
+			case "qop":
+				req.QOP = value
 			case "response":
 				req.Response = value
 			}
@@ -110,12 +122,26 @@ func (h *RegisterHandler) VerifyDigest(req *RegisterRequest, password string) bo
 
 	ha1 := fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s:%s:%s", req.Username, req.Realm, password))))
 	method := "REGISTER"
-	uri := req.Domain
-	if !strings.HasPrefix(uri, "sip:") {
-		uri = "sip:" + uri
+	// Use the URI from the Authorization header as the device used to compute HA2.
+	// Per RFC 3261, this is the Request-URI of the REGISTER request.
+	// Fall back to req.Domain-based URI for backward compatibility.
+	uri := req.URI
+	if uri == "" {
+		uri = req.Domain
+		if !strings.HasPrefix(uri, "sip:") {
+			uri = "sip:" + uri
+		}
 	}
 	ha2 := fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s:%s", method, uri))))
-	expectedResponse := fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s:%s:%s", ha1, req.Nonce, ha2))))
+	// Per RFC 7616 Digest Authentication:
+	//   No qop:           response = MD5(HA1:nonce:HA2)
+	//   qop="auth"/'auth-int': response = MD5(HA1:nonce:nc:cnonce:qop:HA2)
+	var expectedResponse string
+	if req.QOP == "auth" || req.QOP == "auth-int" {
+		expectedResponse = fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s:%s:%s:%s:%s:%s", ha1, req.Nonce, req.NC, req.Cnonce, req.QOP, ha2))))
+	} else {
+		expectedResponse = fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s:%s:%s", ha1, req.Nonce, ha2))))
+	}
 
 	return req.Response == expectedResponse
 }
@@ -126,8 +152,9 @@ func (h *RegisterHandler) HasAuthorization(msg *sip.SIPMessage) bool {
 }
 
 // HandleRegister processes a validated register request.
-// Returns true if the device is now registered (or unregistered if expires==0).
-func (h *RegisterHandler) HandleRegister(req *RegisterRequest) (bool, error) {
+// Returns (registered, isNew, error).
+// isNew is true when a new device record was created (first-time registration).
+func (h *RegisterHandler) HandleRegister(req *RegisterRequest) (bool, bool, error) {
 	// Handle unregistration (Expires: 0)
 	if req.Expires <= 0 {
 		device := &system.Device{}
@@ -139,14 +166,15 @@ func (h *RegisterHandler) HandleRegister(req *RegisterRequest) (bool, error) {
 				zap.String("device_id", req.DeviceID),
 			)
 		}
-		return false, nil
+		return false, false, nil
 	}
 
 	ip, port := parseHostPort(req.RemoteAddr)
 
 	device := &system.Device{}
 	result := global.GVA_DB.Where("device_id = ?", req.DeviceID).First(device)
-	if result.Error != nil {
+	isNew := result.Error != nil
+	if isNew {
 		device = &system.Device{
 			DeviceID:      req.DeviceID,
 			Name:          fmt.Sprintf("Device-%s", req.DeviceID),
@@ -158,7 +186,7 @@ func (h *RegisterHandler) HandleRegister(req *RegisterRequest) (bool, error) {
 			KeepaliveTime: time.Now(),
 		}
 		if err := global.GVA_DB.Create(device).Error; err != nil {
-			return false, fmt.Errorf("create device failed: %w", err)
+			return false, false, fmt.Errorf("create device failed: %w", err)
 		}
 	} else {
 		device.IP = ip
@@ -168,7 +196,7 @@ func (h *RegisterHandler) HandleRegister(req *RegisterRequest) (bool, error) {
 		device.RegisterTime = time.Now()
 		device.KeepaliveTime = time.Now()
 		if err := global.GVA_DB.Save(device).Error; err != nil {
-			return false, fmt.Errorf("update device failed: %w", err)
+			return false, false, fmt.Errorf("update device failed: %w", err)
 		}
 	}
 
@@ -178,7 +206,7 @@ func (h *RegisterHandler) HandleRegister(req *RegisterRequest) (bool, error) {
 		zap.Int("expires", req.Expires),
 	)
 
-	return true, nil
+	return true, isNew, nil
 }
 
 // GetDevicePassword retrieves the device password from the database.

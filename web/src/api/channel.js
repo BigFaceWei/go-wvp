@@ -7,6 +7,14 @@ export function getDeviceChannels(deviceId) {
   })
 }
 
+export function getChannelList(params) {
+  return service({
+    url: '/channel/list',
+    method: 'get',
+    params
+  })
+}
+
 export function playVideo(data) {
   return service({
     url: '/video/play',

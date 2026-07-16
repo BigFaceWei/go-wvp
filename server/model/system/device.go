@@ -27,6 +27,7 @@ type Device struct {
 	Online        bool      `gorm:"type:tinyint(1);default:0" json:"on_line" form:"on_line"`
 	RegisterTime  time.Time `json:"register_time" form:"register_time"`
 	KeepaliveTime time.Time `json:"keepalive_time" form:"keepalive_time"`
+	ChannelCount  int       `gorm:"type:int;default:0" json:"channel_count" form:"channel_count"`
 }
 
 func (Device) TableName() string {
