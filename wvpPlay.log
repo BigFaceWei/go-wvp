@@ -1,0 +1,694 @@
+wvo-GB28181-Pro日志：
+2026-07-16 16:50:51.150  INFO 19512 --- [io-25288-exec-6] c.g.i.v.v.gb28181.play.PlayController    : [开始点播] deviceId：34020000001110000049, channelId：34020000001310049110, 
+2026-07-16 16:50:51.150  INFO 19512 --- [io-25288-exec-6] c.g.i.v.v.gb28181.play.PlayController    : [获取linkId] ：2077677328502095872
+2026-07-16 16:50:51.150  INFO 19512 --- [io-25288-exec-6] c.g.i.v.v.gb28181.play.PlayController    : 初始化链路日志：linkId: 2077677328502095872, id: 2077677328502095873
+2026-07-16 16:50:51.150  INFO 19512 --- [io-25288-exec-6] c.g.i.v.v.gb28181.play.PlayController    : [插入链路数据] ：1
+2026-07-16 16:50:51.151 DEBUG 19512 --- [io-25288-exec-6] c.g.i.v.s.d.D.queryVideoDeviceForPlay    : ==>  Preparing: SELECT device_id, transport,stream_mode,sdp_ip,local_ip,host_address,charset,ssrc_check,on_line,bind_ip,real_host,media_server_id FROM wvp_device WHERE device_id = ?
+2026-07-16 16:50:51.151 DEBUG 19512 --- [io-25288-exec-6] c.g.i.v.s.d.D.queryVideoDeviceForPlay    : ==> Parameters: 34020000001110000049(String)
+2026-07-16 16:50:51.151  INFO 19512 --- [  request-log-9] c.g.i.v.g.e.requestLog.RequestLogTask    : 收到链路日志: linkId: 2077677328502095872, id: 2077677328502095873
+2026-07-16 16:50:51.152 DEBUG 19512 --- [io-25288-exec-6] c.g.i.v.s.d.D.queryVideoDeviceForPlay    : <==      Total: 1
+2026-07-16 16:50:51.152  INFO 19512 --- [io-25288-exec-6] c.g.i.v.v.gb28181.play.PlayController    : [获取可用的zlm] ：34020000001110000049
+2026-07-16 16:50:51.157  INFO 19512 --- [io-25288-exec-6] c.g.i.v.v.gb28181.play.PlayController    : [获取MediaServer] ：34020000002020000001
+2026-07-16 16:50:51.158  INFO 19512 --- [io-25288-exec-6] c.g.i.v.v.gb28181.play.PlayController    : [异步线程：before]
+2026-07-16 16:50:51.158  INFO 19512 --- [io-25288-exec-6] c.g.i.v.v.gb28181.play.PlayController    : [异步线程：after]
+2026-07-16 16:50:51.160  INFO 19512 --- [io-25288-exec-6] c.g.i.vmp.service.impl.PlayServiceImpl   : [从redis里获取设备信息：34020000001310049110]
+2026-07-16 16:50:51.160 DEBUG 19512 --- [io-25288-exec-6] c.g.i.v.s.d.D.queryChannelOne            : ==>  Preparing: SELECT id, name, status, channel_id as channelId, has_audio as hasAudio, stream_identification as streamIdentification FROM wvp_device_channel WHERE device_id=? AND channel_id=?
+2026-07-16 16:50:51.160 DEBUG 19512 --- [io-25288-exec-6] c.g.i.v.s.d.D.queryChannelOne            : ==> Parameters: 34020000001110000049(String), 34020000001310049110(String)
+2026-07-16 16:50:51.161 DEBUG 19512 --- [io-25288-exec-6] c.g.i.v.s.d.D.queryChannelOne            : <==      Total: 1
+2026-07-16 16:50:51.162  INFO 19512 --- [io-25288-exec-6] c.g.i.vmp.service.impl.PlayServiceImpl   : [根据deviceId和ChanneId获取通道信息：34020000001310049110]
+2026-07-16 16:50:51.163  INFO 19512 --- [io-25288-exec-6] c.g.i.vmp.service.impl.PlayServiceImpl   : [获取inviteInfo：34020000001310049110]
+2026-07-16 16:50:51.165 DEBUG 19512 --- [io-25288-exec-6] c.g.iot.vmp.media.zlm.ZLMRESTfulUtils    : http请求参数：--> POST http://192.168.10.116:8898/index/api/getRtpInfo (91-byte body)
+2026-07-16 16:50:51.172 DEBUG 19512 --- [io-25288-exec-6] c.g.iot.vmp.media.zlm.ZLMRESTfulUtils    : http请求参数：<-- 200 OK http://192.168.10.116:8898/index/api/getRtpInfo (7ms, 34-byte body)
+2026-07-16 16:50:51.173  INFO 19512 --- [io-25288-exec-6] ZLMServerFactory                         : {"code":0,"exist":false}
+2026-07-16 16:50:51.174 DEBUG 19512 --- [io-25288-exec-6] c.g.iot.vmp.media.zlm.ZLMRESTfulUtils    : http请求参数：--> POST http://192.168.10.116:8898/index/api/openRtpServer (136-byte body)
+2026-07-16 16:50:51.177 DEBUG 19512 --- [io-25288-exec-6] c.g.iot.vmp.media.zlm.ZLMRESTfulUtils    : http请求参数：<-- 200 OK http://192.168.10.116:8898/index/api/openRtpServer (2ms, 33-byte body)
+2026-07-16 16:50:51.177  INFO 19512 --- [io-25288-exec-6] ZLMServerFactory                         : {"code":0,"port":30060}
+2026-07-16 16:50:51.177  INFO 19512 --- [io-25288-exec-6] c.g.i.vmp.service.impl.PlayServiceImpl   : [获取SSRCInfo：34020000001310049110]
+2026-07-16 16:50:51.177  INFO 19512 --- [io-25288-exec-6] c.g.i.vmp.service.impl.PlayServiceImpl   : 初始化链路日志：linkId: 2077677328502095872, id: 2077677328615342080
+2026-07-16 16:50:51.178  INFO 19512 --- [io-25288-exec-6] c.g.i.vmp.service.impl.PlayServiceImpl   : [插入链路数据] ：2
+2026-07-16 16:50:51.178  INFO 19512 --- [io-25288-exec-6] c.g.i.vmp.service.impl.PlayServiceImpl   : [点播开始] deviceId: 34020000001110000049, channelId: 34020000001310049110,码流类型：null, 收流端口： 30060, 码流：34020000001110000049_34020000001310049110, 收流模式：UDP, SSRC: 0200008149, SSRC校验：false
+2026-07-16 16:50:51.178  INFO 19512 --- [io-25288-exec-6] c.g.i.vmp.service.impl.PlayServiceImpl   : 初始化链路日志：linkId: 2077677328502095872, id: 2077677328619536384
+2026-07-16 16:50:51.178  INFO 19512 --- [io-25288-exec-6] c.g.i.vmp.service.impl.PlayServiceImpl   : [插入链路数据] ：3
+2026-07-16 16:50:51.179  INFO 19512 --- [ request-log-10] c.g.i.v.g.e.requestLog.RequestLogTask    : 收到链路日志: linkId: 2077677328502095872, id: 2077677328615342080
+2026-07-16 16:50:51.179  INFO 19512 --- [ request-log-11] c.g.i.v.g.e.requestLog.RequestLogTask    : 收到链路日志: linkId: 2077677328502095872, id: 2077677328619536384
+2026-07-16 16:50:51.181  INFO 19512 --- [io-25288-exec-6] c.g.i.vmp.service.impl.PlayServiceImpl   : [更新InviteInfo] ：com.genersoft.iot.vmp.service.bean.SSRCInfo@551cbeb8
+2026-07-16 16:50:51.182 DEBUG 19512 --- [io-25288-exec-6] com.genersoft.iot.vmp.conf.DynamicTask   : 任务【eea819c9-a368-4de6-913a-ef366beceac9】启动成功！！！
+2026-07-16 16:50:51.182  INFO 19512 --- [io-25288-exec-6] c.g.i.v.g.t.cmd.impl.SIPCommander        : 34020000001110000049_34020000001310049110 分配的ZLM为: 34020000002020000001 [192.168.10.116:30060]
+2026-07-16 16:50:51.188  INFO 19512 --- [io-25288-exec-6] gov.nist.javax.sip.stack.DefaultRouter   : Used request-URI for nextHop = 192.168.10.70:5060/UDP
+2026-07-16 16:50:51.189  INFO 19512 --- [io-25288-exec-6] g.n.javax.sip.stack.UDPMessageChannel    : Creating message channel 192.168.10.70/5060
+2026-07-16 16:50:51.192  INFO 19512 --- [io-25288-exec-6] g.n.javax.sip.stack.UDPMessageChannel    : sendMessage 192.168.10.70/5060
+messageSize =  804 message = INVITE sip:34020000001310049110@192.168.10.70:5060 SIP/2.0
+Call-ID: 8a7a88c52b48f3f451fc79e780cedcf8@192.168.10.188
+CSeq: 8 INVITE
+From: <sip:34020000002000000188@3402000000>;tag=c67bc5da173f4becab79a2c0ea9b8dd1
+To: <sip:34020000001310049110@192.168.10.70:5060>
+Via: SIP/2.0/UDP 192.168.10.188:25060;branch=z9hG4bK0738327334;rport
+Max-Forwards: 70
+User-Agent: NRMedia
+Contact: <sip:34020000002000000188@192.168.10.188:25060>
+Subject: 34020000001310049110:0200008149,34020000002000000188:0
+Content-Type: APPLICATION/SDP
+Content-Length: 251
+
+v=0
+o=34020000001310049110 0 0 IN IP4 192.168.10.116
+s=Play
+c=IN IP4 192.168.10.116
+t=0 0
+m=video 30060 RTP/AVP 96 97 98 99
+a=recvonly
+a=rtpmap:96 PS/90000
+a=rtpmap:98 H264/90000
+a=rtpmap:97 MPEG4/90000
+a=rtpmap:99 H265/90000
+y=0200008149
+
+2026-07-16 16:50:51.194  INFO 19512 --- [io-25288-exec-6] g.n.javax.sip.stack.UDPMessageChannel    : *******************
+
+2026-07-16 16:50:51.197  INFO 19512 --- [io-25288-exec-6] c.g.i.vmp.gb28181.conf.ServerLoggerImpl  : 发送：目标--->192.168.10.188:25060
+INVITE sip:34020000001310049110@192.168.10.70:5060 SIP/2.0
+Call-ID: 8a7a88c52b48f3f451fc79e780cedcf8@192.168.10.188
+CSeq: 8 INVITE
+From: <sip:34020000002000000188@3402000000>;tag=c67bc5da173f4becab79a2c0ea9b8dd1
+To: <sip:34020000001310049110@192.168.10.70:5060>
+Via: SIP/2.0/UDP 192.168.10.188:25060;branch=z9hG4bK0738327334;rport
+Max-Forwards: 70
+User-Agent: NRMedia
+Contact: <sip:34020000002000000188@192.168.10.188:25060>
+Subject: 34020000001310049110:0200008149,34020000002000000188:0
+Content-Type: APPLICATION/SDP
+Content-Length: 251
+
+v=0
+o=34020000001310049110 0 0 IN IP4 192.168.10.116
+s=Play
+c=IN IP4 192.168.10.116
+t=0 0
+m=video 30060 RTP/AVP 96 97 98 99
+a=recvonly
+a=rtpmap:96 PS/90000
+a=rtpmap:98 H264/90000
+a=rtpmap:97 MPEG4/90000
+a=rtpmap:99 H265/90000
+y=0200008149
+
+2026-07-16 16:50:51.198  INFO 19512 --- [io-25288-exec-6] gov.nist.javax.sip.SipProviderImpl       : done sending INVITE to hop 192.168.10.70:5060/UDP
+2026-07-16 16:50:51.202  INFO 19512 --- [hannelThread-18] g.n.javax.sip.stack.UDPMessageChannel    : UDPMessageChannel: processIncomingDataPacket : peerAddress = 192.168.10.70/5060 Length = 653
+2026-07-16 16:50:51.203  INFO 19512 --- [hannelThread-18] g.n.javax.sip.stack.UDPMessageChannel    : Setting SIPMessage peerPacketSource to: /192.168.10.70:5060
+2026-07-16 16:50:51.204  INFO 19512 --- [hannelThread-18] c.g.i.vmp.gb28181.conf.ServerLoggerImpl  : 接收：来自--->192.168.10.188:25060
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.10.188:25060;branch=z9hG4bK0738327334;rport=25060
+From: <sip:34020000002000000188@3402000000>;tag=c67bc5da173f4becab79a2c0ea9b8dd1
+To: <sip:34020000001310049110@192.168.10.70:5060>;tag=588210162
+Call-ID: 8a7a88c52b48f3f451fc79e780cedcf8@192.168.10.188
+CSeq: 8 INVITE
+Contact: <sip:34020000001310049110@192.168.10.70:5060>
+Content-Type: application/SDP
+User-Agent: Embedded Net DVR/NVR/DVS
+Content-Length: 190
+
+v=0
+o=34020000001110000049 0 0 IN IP4 192.168.10.70
+s=Play
+c=IN IP4 192.168.10.70
+t=0 0
+m=video 62036 RTP/AVP 96
+a=sendonly
+a=rtpmap:96 PS/90000
+y=0200008149
+f=v/2/5/25/2/1024a///
+
+2026-07-16 16:50:51.205  INFO 19512 --- [hannelThread-18] c.g.i.vmp.gb28181.conf.ServerLoggerImpl  : 接收：来自->192.168.10.188:25060
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.10.188:25060;branch=z9hG4bK0738327334;rport=25060
+From: <sip:34020000002000000188@3402000000>;tag=c67bc5da173f4becab79a2c0ea9b8dd1
+To: <sip:34020000001310049110@192.168.10.70:5060>;tag=588210162
+Call-ID: 8a7a88c52b48f3f451fc79e780cedcf8@192.168.10.188
+CSeq: 8 INVITE
+Contact: <sip:34020000001310049110@192.168.10.70:5060>
+Content-Type: application/SDP
+User-Agent: Embedded Net DVR/NVR/DVS
+Content-Length: 190
+
+v=0
+o=34020000001110000049 0 0 IN IP4 192.168.10.70
+s=Play
+c=IN IP4 192.168.10.70
+t=0 0
+m=video 62036 RTP/AVP 96
+a=sendonly
+a=rtpmap:96 PS/90000
+y=0200008149
+f=v/2/5/25/2/1024a///
+
+2026-07-16 16:50:51.205  INFO 19512 --- [hannelThread-18] g.n.javax.sip.stack.SIPTransactionStack  : clientTx: looking for key z9hg4bk0738327334
+2026-07-16 16:50:51.205  INFO 19512 --- [hannelThread-18] g.n.javax.sip.stack.SIPTransactionStack  : findTransaction: returning  : null
+2026-07-16 16:50:51.205  INFO 19512 --- [hannelThread-18] g.n.javax.sip.NistSipMessageFactoryImpl  : Found Transaction null for SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.10.188:25060;branch=z9hG4bK0738327334;rport=25060
+From: <sip:34020000002000000188@3402000000>;tag=c67bc5da173f4becab79a2c0ea9b8dd1
+To: <sip:34020000001310049110@192.168.10.70:5060>;tag=588210162
+Call-ID: 8a7a88c52b48f3f451fc79e780cedcf8@192.168.10.188
+CSeq: 8 INVITE
+Contact: <sip:34020000001310049110@192.168.10.70:5060>
+Content-Type: application/SDP
+User-Agent: Embedded Net DVR/NVR/DVS
+Content-Length: 190
+
+v=0
+o=34020000001110000049 0 0 IN IP4 192.168.10.70
+s=Play
+c=IN IP4 192.168.10.70
+t=0 0
+m=video 62036 RTP/AVP 96
+a=sendonly
+a=rtpmap:96 PS/90000
+y=0200008149
+f=v/2/5/25/2/1024a///
+
+2026-07-16 16:50:51.205  INFO 19512 --- [hannelThread-18] g.n.javax.sip.stack.SIPTransactionStack  : getDialog(8a7a88c52b48f3f451fc79e780cedcf8@192.168.10.188:c67bc5da173f4becab79a2c0ea9b8dd1:588210162) : returning null
+2026-07-16 16:50:51.205  INFO 19512 --- [hannelThread-18] gov.nist.javax.sip.DialogFilter          : PROCESSING INCOMING RESPONSE: SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.10.188:25060;branch=z9hG4bK0738327334;rport=25060
+From: <sip:34020000002000000188@3402000000>;tag=c67bc5da173f4becab79a2c0ea9b8dd1
+To: <sip:34020000001310049110@192.168.10.70:5060>;tag=588210162
+Call-ID: 8a7a88c52b48f3f451fc79e780cedcf8@192.168.10.188
+CSeq: 8 INVITE
+Contact: <sip:34020000001310049110@192.168.10.70:5060>
+Content-Type: application/SDP
+User-Agent: Embedded Net DVR/NVR/DVS
+Content-Length: 190
+
+
+2026-07-16 16:50:51.205  INFO 19512 --- [hannelThread-18] gov.nist.javax.sip.DialogFilter          : Transaction = null sipDialog = null
+2026-07-16 16:50:51.205  INFO 19512 --- [hannelThread-18] gov.nist.javax.sip.DialogFilter          : sending response SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.10.188:25060;branch=z9hG4bK0738327334;rport=25060
+From: <sip:34020000002000000188@3402000000>;tag=c67bc5da173f4becab79a2c0ea9b8dd1
+To: <sip:34020000001310049110@192.168.10.70:5060>;tag=588210162
+Call-ID: 8a7a88c52b48f3f451fc79e780cedcf8@192.168.10.188
+CSeq: 8 INVITE
+Contact: <sip:34020000001310049110@192.168.10.70:5060>
+Content-Type: application/SDP
+User-Agent: Embedded Net DVR/NVR/DVS
+Content-Length: 190
+
+v=0
+o=34020000001110000049 0 0 IN IP4 192.168.10.70
+s=Play
+c=IN IP4 192.168.10.70
+t=0 0
+m=video 62036 RTP/AVP 96
+a=sendonly
+a=rtpmap:96 PS/90000
+y=0200008149
+f=v/2/5/25/2/1024a///
+ to TU for processing 
+2026-07-16 16:50:51.206  INFO 19512 --- [hannelThread-18] gov.nist.javax.sip.SipProviderImpl       : handleEvent gov.nist.javax.sip.ResponseEventExt[source=gov.nist.javax.sip.SipProviderImpl@31bce6e6]currentTransaction = nullthis.sipListener = com.genersoft.iot.vmp.gb28181.transmit.SIPProcessorObserver@30811f91sipEvent.source = gov.nist.javax.sip.SipProviderImpl@31bce6e6
+2026-07-16 16:50:51.206  INFO 19512 --- [hannelThread-18] gov.nist.javax.sip.SipProviderImpl       : Dialog = null
+2026-07-16 16:50:51.206  INFO 19512 --- [hannelThread-18] gov.nist.javax.sip.EventScanner          : sipEvent = gov.nist.javax.sip.ResponseEventExt[source=gov.nist.javax.sip.SipProviderImpl@31bce6e6]source = gov.nist.javax.sip.SipProviderImpl@31bce6e6
+2026-07-16 16:50:51.206  INFO 19512 --- [hannelThread-18] gov.nist.javax.sip.EventScanner          : Calling listener com.genersoft.iot.vmp.gb28181.transmit.SIPProcessorObserver@30811f91 for SIP/2.0 200 OK
+
+2026-07-16 16:50:51.209 DEBUG 19512 --- [     response-7] .g.i.v.g.t.e.r.i.InviteResponseProcessor : 接收到消息：SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.10.188:25060;branch=z9hG4bK0738327334;rport=25060
+From: <sip:34020000002000000188@3402000000>;tag=c67bc5da173f4becab79a2c0ea9b8dd1
+To: <sip:34020000001310049110@192.168.10.70:5060>;tag=588210162
+Call-ID: 8a7a88c52b48f3f451fc79e780cedcf8@192.168.10.188
+CSeq: 8 INVITE
+Contact: <sip:34020000001310049110@192.168.10.70:5060>
+Content-Type: application/SDP
+User-Agent: Embedded Net DVR/NVR/DVS
+Content-Length: 190
+
+v=0
+o=34020000001110000049 0 0 IN IP4 192.168.10.70
+s=Play
+c=IN IP4 192.168.10.70
+t=0 0
+m=video 62036 RTP/AVP 96
+a=sendonly
+a=rtpmap:96 PS/90000
+y=0200008149
+f=v/2/5/25/2/1024a///
+
+2026-07-16 16:50:51.211  INFO 19512 --- [     response-7] .g.i.v.g.t.e.r.i.InviteResponseProcessor : [回复ack] 34020000001110000049-> 192.168.10.70:5060 
+2026-07-16 16:50:51.211  INFO 19512 --- [     response-7] g.n.javax.sip.stack.SIPTransactionStack  : getDialog(8a7a88c52b48f3f451fc79e780cedcf8@192.168.10.188:c67bc5da173f4becab79a2c0ea9b8dd1:588210162) : returning null
+2026-07-16 16:50:51.212  INFO 19512 --- [     response-7] gov.nist.javax.sip.stack.DefaultRouter   : Used request-URI for nextHop = 192.168.10.70:5060/UDP
+2026-07-16 16:50:51.213  INFO 19512 --- [     response-7] g.n.javax.sip.stack.UDPMessageChannel    : Creating message channel 192.168.10.70/5060
+2026-07-16 16:50:51.214  INFO 19512 --- [     response-7] g.n.javax.sip.stack.UDPMessageChannel    : sendMessage 192.168.10.70/5060
+messageSize =  457 message = ACK sip:34020000001110000049@192.168.10.70:5060 SIP/2.0
+Call-ID: 8a7a88c52b48f3f451fc79e780cedcf8@192.168.10.188
+CSeq: 8 ACK
+From: <sip:34020000002000000188@3402000000>;tag=c67bc5da173f4becab79a2c0ea9b8dd1
+To: <sip:34020000001310049110@192.168.10.70:5060>;tag=588210162
+Via: SIP/2.0/UDP 192.168.10.188:25060;branch=z9hG4bK2876188260
+Max-Forwards: 70
+User-Agent: NRMedia
+Contact: <sip:34020000002000000188@192.168.10.188:25060>
+Content-Length: 0
+
+
+2026-07-16 16:50:51.215  INFO 19512 --- [     response-7] g.n.javax.sip.stack.UDPMessageChannel    : *******************
+
+2026-07-16 16:50:51.215  INFO 19512 --- [     response-7] c.g.i.vmp.gb28181.conf.ServerLoggerImpl  : 发送：目标--->192.168.10.188:25060
+ACK sip:34020000001110000049@192.168.10.70:5060 SIP/2.0
+Call-ID: 8a7a88c52b48f3f451fc79e780cedcf8@192.168.10.188
+CSeq: 8 ACK
+From: <sip:34020000002000000188@3402000000>;tag=c67bc5da173f4becab79a2c0ea9b8dd1
+To: <sip:34020000001310049110@192.168.10.70:5060>;tag=588210162
+Via: SIP/2.0/UDP 192.168.10.188:25060;branch=z9hG4bK2876188260
+Max-Forwards: 70
+User-Agent: NRMedia
+Contact: <sip:34020000002000000188@192.168.10.188:25060>
+Content-Length: 0
+
+
+2026-07-16 16:50:51.215  INFO 19512 --- [     response-7] gov.nist.javax.sip.SipProviderImpl       : done sending ACK to hop 192.168.10.70:5060/UDP
+2026-07-16 16:50:51.220  INFO 19512 --- [     response-7] c.g.i.vmp.service.impl.PlayServiceImpl   : INVITE请求完成，接收到200ok返回
+2026-07-16 16:50:51.264  INFO 19512 --- [o-25288-exec-10] c.g.i.vmp.media.zlm.ZLMHttpHookListener  : [ZLM HOOK]推流鉴权：34020000002020000001->OnPublishHookParam{id='34020000001110000049_34020000001310049110', app='rtp', stream='34020000001110000049_34020000001310049110', ip='192.168.10.70', params='', port=62036, schema='rtp', vhost='__defaultVhost__'}
+2026-07-16 16:50:51.278 DEBUG 19512 --- [o-25288-exec-10] c.g.i.v.s.d.D.queryChannelOne            : ==>  Preparing: SELECT id, name, status, channel_id as channelId, has_audio as hasAudio, stream_identification as streamIdentification FROM wvp_device_channel WHERE device_id=? AND channel_id=?
+2026-07-16 16:50:51.278 DEBUG 19512 --- [o-25288-exec-10] c.g.i.v.s.d.D.queryChannelOne            : ==> Parameters: 34020000001110000049(String), 34020000001310049110(String)
+2026-07-16 16:50:51.280 DEBUG 19512 --- [o-25288-exec-10] c.g.i.v.s.d.D.queryChannelOne            : <==      Total: 1
+2026-07-16 16:50:51.282  INFO 19512 --- [o-25288-exec-10] c.g.i.vmp.media.zlm.ZLMHttpHookListener  : [ZLM HOOK]推流鉴权 响应：34020000002020000001->OnPublishHookParam{id='34020000001110000049_34020000001310049110', app='rtp', stream='34020000001110000049_34020000001310049110', ip='192.168.10.70', params='', port=62036, schema='rtp', vhost='__defaultVhost__'}->>>>HookResultForOnPublish{enable_audio=false, enable_mp4=false, mp4_max_second=0, mp4_save_path='null', stream_replace='null', modify_stamp='null'}
+2026-07-16 16:50:52.019 DEBUG 19512 --- [led-task-pool-8] c.g.i.v.s.d.S.selectForEnable            : ==>  Preparing: SELECT st.*, pgs.gb_id, pgs.name, pgs.longitude, pgs.latitude, 'proxy' as streamType FROM wvp_stream_proxy st LEFT join wvp_gb_stream pgs on st.app = pgs.app AND st.stream = pgs.stream WHERE st.enable=? order by st.create_time desc
+2026-07-16 16:50:52.020 DEBUG 19512 --- [led-task-pool-8] c.g.i.v.s.d.S.selectForEnable            : ==> Parameters: true(Boolean)
+2026-07-16 16:50:52.021 DEBUG 19512 --- [led-task-pool-8] c.g.i.v.s.d.S.selectForEnable            : <==      Total: 0
+2026-07-16 16:50:52.141  INFO 19512 --- [ed-task-pool-15] c.g.i.v.g.session.CatalogDataCatch       : CatalogDataCatch timerTask start
+2026-07-16 16:50:52.142  INFO 19512 --- [led-task-pool-7] .e.r.i.m.n.c.CatalogNotifyMessageHandler : [待处理Notify-目录Notify消息数量]: 0
+2026-07-16 16:50:52.141  INFO 19512 --- [led-task-pool-6] c.g.i.v.g.e.requestLog.RequestLogTask    : taskQueue: [com.genersoft.iot.vmp.storager.dao.dto.RequestLog@22c2f70f, com.genersoft.iot.vmp.storager.dao.dto.RequestLog@446bf0a5, com.genersoft.iot.vmp.storager.dao.dto.RequestLog@45b59d15]
+2026-07-16 16:50:52.142  INFO 19512 --- [ed-task-pool-12] .NotifyRequestForMobilePositionProcessor : [待处理Notify-移动位置订阅消息数量]: 0
+2026-07-16 16:50:52.142  INFO 19512 --- [led-task-pool-3] t.e.r.i.NotifyRequestForCatalogProcessor : [待处理Notify-目录订阅消息数量]: 0
+2026-07-16 16:50:52.142  INFO 19512 --- [led-task-pool-6] c.g.i.v.g.e.requestLog.RequestLogTask    : 批量插入链路日志
+2026-07-16 16:50:52.149  INFO 19512 --- [led-task-pool-6] c.g.i.v.s.impl.RequestLogServiceImpl     : 批量插入链路日志，linkId: 2077677328502095872, step: 0, logDesc: com.genersoft.iot.vmp.vmanager.gb28181.play.PlayController row:117
+2026-07-16 16:50:52.152  INFO 19512 --- [led-task-pool-6] c.g.i.v.s.impl.RequestLogServiceImpl     : 批量插入链路日志，linkId: 2077677328502095872, step: 1, logDesc: com.genersoft.iot.vmp.service.impl.PlayServiceImpl line:308
+2026-07-16 16:50:52.153  INFO 19512 --- [led-task-pool-6] c.g.i.v.s.impl.RequestLogServiceImpl     : 批量插入链路日志，linkId: 2077677328502095872, step: 2, logDesc: com.genersoft.iot.vmp.service.impl.PlayServiceImpl line:465
+2026-07-16 16:50:52.155 DEBUG 19512 --- [led-task-pool-6] c.g.i.v.s.dao.RequestLogMapper.batchAdd  : ==>  Preparing: INSERT into wvp_request_log (id, linkId, requestType, msg, step, pass, createTime, curTimes,logDesc)values (?, ?, ?, ?, ?, ?, ?,?,?) , (?, ?, ?, ?, ?, ?, ?,?,?) , (?, ?, ?, ?, ?, ?, ?,?,?)
+2026-07-16 16:50:52.156 DEBUG 19512 --- [led-task-pool-6] c.g.i.v.s.dao.RequestLogMapper.batchAdd  : ==> Parameters: 2077677328502095873(Long), 2077677328502095872(String), 点播(String), 中心管理服务(String), 0(Integer), true(Boolean), 2026-07-16 16:50:51.15(Timestamp), 1784191852151(Long), com.genersoft.iot.vmp.vmanager.gb28181.play.PlayController row:117(String), 2077677328615342080(Long), 2077677328502095872(String), 点播(String), 设备管理服务(String), 1(Integer), true(Boolean), 2026-07-16 16:50:51.177(Timestamp), 1784191852152(Long), com.genersoft.iot.vmp.service.impl.PlayServiceImpl line:308(String), 2077677328619536384(Long), 2077677328502095872(String), 点播(String), 国标信令服务(String), 2(Integer), true(Boolean), 2026-07-16 16:50:51.178(Timestamp), 1784191852155(Long), com.genersoft.iot.vmp.service.impl.PlayServiceImpl line:465(String)
+2026-07-16 16:50:52.158 DEBUG 19512 --- [led-task-pool-6] c.g.i.v.s.dao.RequestLogMapper.batchAdd  : <==    Updates: 3
+2026-07-16 16:50:52.755  INFO 19512 --- [io-25288-exec-5] c.g.i.vmp.media.zlm.ZLMHttpHookListener  : [ZLM HOOK] 流注册, 34020000002020000001->rtsp->rtp/34020000001110000049_34020000001310049110
+2026-07-16 16:50:52.755  INFO 19512 --- [        wvp-148] c.g.i.vmp.service.impl.PlayServiceImpl   : 收到订阅消息： com.genersoft.iot.vmp.media.event.hook.HookData@2575f4b7
+2026-07-16 16:50:52.756  INFO 19512 --- [        wvp-149] c.g.i.v.m.s.impl.MediaServerServiceImpl  : 流变化：注册 app->rtp, stream->34020000001110000049_34020000001310049110
+2026-07-16 16:50:52.758 DEBUG 19512 --- [        wvp-148] c.g.i.v.s.d.D.queryChannelOne            : ==>  Preparing: SELECT id, name, status, channel_id as channelId, has_audio as hasAudio, stream_identification as streamIdentification FROM wvp_device_channel WHERE device_id=? AND channel_id=?
+2026-07-16 16:50:52.758 DEBUG 19512 --- [        wvp-152] c.g.i.v.s.d.StreamProxyMapper.selectOne  : ==>  Preparing: SELECT st.*, pgs.gb_id, pgs.name, pgs.longitude, pgs.latitude FROM wvp_stream_proxy st LEFT join wvp_gb_stream pgs on st.app = pgs.app AND st.stream = pgs.stream WHERE st.app=? AND st.stream=? order by st.create_time desc
+2026-07-16 16:50:52.758 DEBUG 19512 --- [        wvp-148] c.g.i.v.s.d.D.queryChannelOne            : ==> Parameters: 34020000001110000049(String), 34020000001310049110(String)
+2026-07-16 16:50:52.758 DEBUG 19512 --- [        wvp-152] c.g.i.v.s.d.StreamProxyMapper.selectOne  : ==> Parameters: rtp(String), 34020000001110000049_34020000001310049110(String)
+2026-07-16 16:50:52.759 DEBUG 19512 --- [        wvp-148] c.g.i.v.s.d.D.queryChannelOne            : <==      Total: 1
+2026-07-16 16:50:52.759 DEBUG 19512 --- [        wvp-148] c.g.i.v.s.d.D.startPlay                  : ==>  Preparing: UPDATE wvp_device_channel SET stream_id=? WHERE device_id=? AND channel_id=?
+2026-07-16 16:50:52.759 DEBUG 19512 --- [        wvp-148] c.g.i.v.s.d.D.startPlay                  : ==> Parameters: 34020000001110000049_34020000001310049110(String), 34020000001110000049(String), 34020000001310049110(String)
+2026-07-16 16:50:52.760 DEBUG 19512 --- [        wvp-152] c.g.i.v.s.d.StreamProxyMapper.selectOne  : <==      Total: 0
+2026-07-16 16:50:52.778 DEBUG 19512 --- [        wvp-148] c.g.i.v.s.d.D.startPlay                  : <==    Updates: 1
+2026-07-16 16:50:52.783  INFO 19512 --- [        wvp-148] c.g.i.v.v.gb28181.play.PlayController    : 初始化链路日志：linkId: 2077677328502095872, id: 2077677335351394304
+2026-07-16 16:50:52.785  INFO 19512 --- [ request-log-12] c.g.i.v.g.e.requestLog.RequestLogTask    : 收到链路日志: linkId: 2077677328502095872, id: 2077677335351394304
+2026-07-16 16:50:52.785  INFO 19512 --- [        wvp-148] c.g.i.vmp.service.impl.PlayServiceImpl   : [点播成功] deviceId: 34020000001110000049, channelId:34020000001310049110, 码流类型：null
+2026-07-16 16:50:52.785  INFO 19512 --- [        wvp-148] c.g.i.vmp.service.impl.PlayServiceImpl   : [请求截图]: 34020000001110000049_34020000001310049110.jpg
+2026-07-16 16:50:52.785  INFO 19512 --- [        wvp-148] c.g.iot.vmp.media.zlm.ZLMRESTfulUtils    : Request{method=GET, url=http://192.168.10.116:8898/index/api/getSnap?secret=77ThLXoX1vkebDytuUGP57RZeS7St3cH&expire_sec=1&url=rtsp%3A%2F%2F127.0.0.1%3A554%2Frtp%2F34020000001110000049_34020000001310049110&timeout_sec=15}
+2026-07-16 16:50:52.785 DEBUG 19512 --- [        wvp-148] c.g.iot.vmp.media.zlm.ZLMRESTfulUtils    : http请求参数：--> GET http://192.168.10.116:8898/index/api/getSnap?secret=77ThLXoX1vkebDytuUGP57RZeS7St3cH&expire_sec=1&url=rtsp%3A%2F%2F127.0.0.1%3A554%2Frtp%2F34020000001110000049_34020000001310049110&timeout_sec=15
+2026-07-16 16:50:52.868  INFO 19512 --- [io-25288-exec-3] c.g.i.vmp.media.zlm.ZLMHttpHookListener  : [ZLM HOOK] 播放鉴权成功：34020000002020000001->OnPlayHookParam{id='24-336', app='rtp', stream='34020000001110000049_34020000001310049110', ip='127.0.0.1', params='', port=35414, schema='rtsp', vhost='__defaultVhost__'}
+2026-07-16 16:50:52.913  INFO 19512 --- [io-25288-exec-9] c.g.i.vmp.media.zlm.ZLMHttpHookListener  : [ZLM HOOK] 播放鉴权成功：34020000002020000001->OnPlayHookParam{id='25-337', app='rtp', stream='34020000001110000049_34020000001310049110', ip='192.168.10.188', params='', port=60557, schema='rtmp', vhost='__defaultVhost__'}
+2026-07-16 16:50:53.013 DEBUG 19512 --- [led-task-pool-9] c.g.i.v.s.d.S.selectForEnable            : ==>  Preparing: SELECT st.*, pgs.gb_id, pgs.name, pgs.longitude, pgs.latitude, 'proxy' as streamType FROM wvp_stream_proxy st LEFT join wvp_gb_stream pgs on st.app = pgs.app AND st.stream = pgs.stream WHERE st.enable=? order by st.create_time desc
+2026-07-16 16:50:53.013 DEBUG 19512 --- [led-task-pool-9] c.g.i.v.s.d.S.selectForEnable            : ==> Parameters: true(Boolean)
+2026-07-16 16:50:53.018 DEBUG 19512 --- [led-task-pool-9] c.g.i.v.s.d.S.selectForEnable            : <==      Total: 0
+2026-07-16 16:50:54.011 DEBUG 19512 --- [led-task-pool-2] c.g.i.v.s.d.S.selectForEnable            : ==>  Preparing: SELECT st.*, pgs.gb_id, pgs.name, pgs.longitude, pgs.latitude, 'proxy' as streamType FROM wvp_stream_proxy st LEFT join wvp_gb_stream pgs on st.app = pgs.app AND st.stream = pgs.stream WHERE st.enable=? order by st.create_time desc
+2026-07-16 16:50:54.012 DEBUG 19512 --- [led-task-pool-2] c.g.i.v.s.d.S.selectForEnable            : ==> Parameters: true(Boolean)
+2026-07-16 16:50:54.012 DEBUG 19512 --- [led-task-pool-2] c.g.i.v.s.d.S.selectForEnable            : <==      Total: 0
+2026-07-16 16:50:54.037 DEBUG 19512 --- [        wvp-148] c.g.iot.vmp.media.zlm.ZLMRESTfulUtils    : http请求参数：<-- 200 OK http://192.168.10.116:8898/index/api/getSnap?secret=77ThLXoX1vkebDytuUGP57RZeS7St3cH&expire_sec=1&url=rtsp%3A%2F%2F127.0.0.1%3A554%2Frtp%2F34020000001110000049_34020000001310049110&timeout_sec=15 (1251ms, 60417-byte body)
+2026-07-16 16:50:54.167 DEBUG 19512 --- [io-25288-exec-5] c.g.i.v.s.d.U.getUserByUsername          : ==>  Preparing: select u.*, r.id as role_id, r.name as role_name, r.authority as role_authority , r.create_time as role_create_time , r.update_time as role_update_time from wvp_user u, wvp_user_role r WHERE u.role_id=r.id and u.username=?
+2026-07-16 16:50:54.167 DEBUG 19512 --- [io-25288-exec-5] c.g.i.v.s.d.U.getUserByUsername          : ==> Parameters: admin(String)
+2026-07-16 16:50:54.169 DEBUG 19512 --- [io-25288-exec-5] c.g.i.v.s.d.U.getUserByUsername          : <==      Total: 1
+2026-07-16 16:50:54.194 DEBUG 19512 --- [io-25288-exec-5] c.g.i.v.s.d.D.queryChannels_COUNT        : ==>  Preparing: SELECT count(0) FROM wvp_device_channel dc WHERE dc.device_id = ?
+2026-07-16 16:50:54.194 DEBUG 19512 --- [io-25288-exec-5] c.g.i.v.s.d.D.queryChannels_COUNT        : ==> Parameters: 34020000001110000049(String)
+2026-07-16 16:50:54.201 DEBUG 19512 --- [io-25288-exec-5] c.g.i.v.s.d.D.queryChannels_COUNT        : <==      Total: 1
+2026-07-16 16:50:54.202 DEBUG 19512 --- [io-25288-exec-5] c.g.i.v.s.d.D.queryChannels              : ==>  Preparing: SELECT dc.id, dc.channel_id, COALESCE(dc.custom_name, dc.name) AS name, dc.manufacture, dc.model, dc.owner, dc.civil_code, dc.block, dc.address, dc.parent_id, dc.safety_way, dc.register_way, dc.cert_num, dc.certifiable, dc.err_code, dc.end_time, dc.secrecy, dc.ip_address, dc.port, dc.password, COALESCE(dc.custom_ptz_type, dc.ptz_type) AS ptz_type, dc.status, dc.longitude, dc.latitude, dc.custom_longitude, dc.custom_latitude, dc.stream_id, dc.device_id, dc.parental, dc.has_audio, dc.create_time, dc.update_time, dc.sub_count, dc.longitude_gcj02, dc.latitude_gcj02, dc.longitude_wgs84, dc.latitude_wgs84, dc.business_group_id, dc.stream_identification, dc.gps_time from wvp_device_channel dc WHERE dc.device_id = ? ORDER BY dc.channel_id LIMIT ?
+2026-07-16 16:50:54.202 DEBUG 19512 --- [io-25288-exec-5] c.g.i.v.s.d.D.queryChannels              : ==> Parameters: 34020000001110000049(String), 15(Integer)
+2026-07-16 16:50:54.204 DEBUG 19512 --- [io-25288-exec-5] c.g.i.v.s.d.D.queryChannels              : <==      Total: 9
+2026-07-16 16:50:55.011 DEBUG 19512 --- [led-task-pool-7] c.g.i.v.s.d.S.selectForEnable            : ==>  Preparing: SELECT st.*, pgs.gb_id, pgs.name, pgs.longitude, pgs.latitude, 'proxy' as streamType FROM wvp_stream_proxy st LEFT join wvp_gb_stream pgs on st.app = pgs.app AND st.stream = pgs.stream WHERE st.enable=? order by st.create_time desc
+2026-07-16 16:50:55.011 DEBUG 19512 --- [led-task-pool-7] c.g.i.v.s.d.S.selectForEnable            : ==> Parameters: true(Boolean)
+2026-07-16 16:50:55.013 DEBUG 19512 --- [led-task-pool-7] c.g.i.v.s.d.S.selectForEnable            : <==      Total: 0
+2026-07-16 16:50:55.166 DEBUG 19512 --- [io-25288-exec-2] c.g.i.v.s.d.U.getUserByUsername          : ==>  Preparing: select u.*, r.id as role_id, r.name as role_name, r.authority as role_authority , r.create_time as role_create_time , r.update_time as role_update_time from wvp_user u, wvp_user_role r WHERE u.role_id=r.id and u.username=?
+2026-07-16 16:50:55.166 DEBUG 19512 --- [io-25288-exec-2] c.g.i.v.s.d.U.getUserByUsername          : ==> Parameters: admin(String)
+2026-07-16 16:50:55.168 DEBUG 19512 --- [io-25288-exec-2] c.g.i.v.s.d.U.getUserByUsername          : <==      Total: 1
+2026-07-16 16:50:55.178 DEBUG 19512 --- [io-25288-exec-2] c.g.i.v.s.d.D.getDevicesList_COUNT       : ==>  Preparing: SELECT count(0) FROM wvp_device de WHERE bind_ip = ?
+2026-07-16 16:50:55.178 DEBUG 19512 --- [io-25288-exec-2] c.g.i.v.s.d.D.getDevicesList_COUNT       : ==> Parameters: 192.168.10.188:25288(String)
+2026-07-16 16:50:55.185 DEBUG 19512 --- [io-25288-exec-2] c.g.i.v.s.d.D.getDevicesList_COUNT       : <==      Total: 1
+2026-07-16 16:50:55.185 DEBUG 19512 --- [io-25288-exec-2] c.g.i.v.s.d.DeviceMapper.getDevicesList  : ==>  Preparing: SELECT device_id, coalesce(custom_name, name) as name, password, manufacturer, model, firmware, transport,stream_mode,ip,sdp_ip,local_ip,port,host_address,expires,register_time,keepalive_time,create_time,update_time,charset,subscribe_cycle_for_catalog,subscribe_cycle_for_mobile_position,mobile_position_submission_interval,subscribe_cycle_for_alarm,ssrc_check,as_message_channel,geo_coord_sys,on_line,real_host,media_server_id,(SELECT count(0) FROM wvp_device_channel WHERE device_id=de.device_id) as channel_count FROM wvp_device de WHERE bind_ip=? order by create_time desc LIMIT ?
+2026-07-16 16:50:55.185 DEBUG 19512 --- [io-25288-exec-2] c.g.i.v.s.d.DeviceMapper.getDevicesList  : ==> Parameters: 192.168.10.188:25288(String), 15(Integer)
+2026-07-16 16:50:55.187 DEBUG 19512 --- [io-25288-exec-2] c.g.i.v.s.d.DeviceMapper.getDevicesList  : <==      Total: 1
+2026-07-16 16:50:56.009 DEBUG 19512 --- [ed-task-pool-13] c.g.i.v.s.d.S.selectForEnable            : ==>  Preparing: SELECT st.*, pgs.gb_id, pgs.name, pgs.longitude, pgs.latitude, 'proxy' as streamType FROM wvp_stream_proxy st LEFT join wvp_gb_stream pgs on st.app = pgs.app AND st.stream = pgs.stream WHERE st.enable=? order by st.create_time desc
+2026-07-16 16:50:56.011 DEBUG 19512 --- [ed-task-pool-13] c.g.i.v.s.d.S.selectForEnable            : ==> Parameters: true(Boolean)
+2026-07-16 16:50:56.012 DEBUG 19512 --- [ed-task-pool-13] c.g.i.v.s.d.S.selectForEnable            : <==      Total: 0
+2026-07-16 16:50:57.020 DEBUG 19512 --- [led-task-pool-1] c.g.i.v.s.d.S.selectForEnable            : ==>  Preparing: SELECT st.*, pgs.gb_id, pgs.name, pgs.longitude, pgs.latitude, 'proxy' as streamType FROM wvp_stream_proxy st LEFT join wvp_gb_stream pgs on st.app = pgs.app AND st.stream = pgs.stream WHERE st.enable=? order by st.create_time desc
+2026-07-16 16:50:57.020 DEBUG 19512 --- [led-task-pool-1] c.g.i.v.s.d.S.selectForEnable            : ==> Parameters: true(Boolean)
+2026-07-16 16:50:57.022 DEBUG 19512 --- [led-task-pool-1] c.g.i.v.s.d.S.selectForEnable            : <==      Total: 0
+2026-07-16 16:50:57.138  INFO 19512 --- [led-task-pool-6] c.g.i.v.g.session.CatalogDataCatch       : CatalogDataCatch timerTask start
+2026-07-16 16:50:57.138  INFO 19512 --- [led-task-pool-9] c.g.i.v.g.e.requestLog.RequestLogTask    : taskQueue: [com.genersoft.iot.vmp.storager.dao.dto.RequestLog@52ffbfd5]
+2026-07-16 16:50:57.140  INFO 19512 --- [led-task-pool-9] c.g.i.v.g.e.requestLog.RequestLogTask    : 批量插入链路日志
+2026-07-16 16:50:57.148  INFO 19512 --- [led-task-pool-9] c.g.i.v.s.impl.RequestLogServiceImpl     : 批量插入链路日志，linkId: 2077677328502095872, step: 3, logDesc: com.genersoft.iot.vmp.vmanager.gb28181.play.PlayController row:158
+2026-07-16 16:50:57.149 DEBUG 19512 --- [led-task-pool-9] c.g.i.v.s.dao.RequestLogMapper.batchAdd  : ==>  Preparing: INSERT into wvp_request_log (id, linkId, requestType, msg, step, pass, createTime, curTimes,logDesc)values (?, ?, ?, ?, ?, ?, ?,?,?)
+2026-07-16 16:50:57.150 DEBUG 19512 --- [led-task-pool-9] c.g.i.v.s.dao.RequestLogMapper.batchAdd  : ==> Parameters: 2077677335351394304(Long), 2077677328502095872(String), 点播(String), 音视频服务(String), 3(Integer), true(Boolean), 2026-07-16 16:50:52.783(Timestamp), 1784191857149(Long), com.genersoft.iot.vmp.vmanager.gb28181.play.PlayController row:158(String)
+2026-07-16 16:50:57.151 DEBUG 19512 --- [led-task-pool-9] c.g.i.v.s.dao.RequestLogMapper.batchAdd  : <==    Updates: 1
+2026-07-16 16:50:58.015 DEBUG 19512 --- [ed-task-pool-13] c.g.i.v.s.d.S.selectForEnable            : ==>  Preparing: SELECT st.*, pgs.gb_id, pgs.name, pgs.longitude, pgs.latitude, 'proxy' as streamType FROM wvp_stream_proxy st LEFT join wvp_gb_stream pgs on st.app = pgs.app AND st.stream = pgs.stream WHERE st.enable=? order by st.create_time desc
+2026-07-16 16:50:58.015 DEBUG 19512 --- [ed-task-pool-13] c.g.i.v.s.d.S.selectForEnable            : ==> Parameters: true(Boolean)
+2026-07-16 16:50:58.017 DEBUG 19512 --- [ed-task-pool-13] c.g.i.v.s.d.S.selectForEnable            : <==      Total: 0
+2026-07-16 16:50:59.011 DEBUG 19512 --- [ed-task-pool-15] c.g.i.v.s.d.S.selectForEnable            : ==>  Preparing: SELECT st.*, pgs.gb_id, pgs.name, pgs.longitude, pgs.latitude, 'proxy' as streamType FROM wvp_stream_proxy st LEFT join wvp_gb_stream pgs on st.app = pgs.app AND st.stream = pgs.stream WHERE st.enable=? order by st.create_time desc
+2026-07-16 16:50:59.011 DEBUG 19512 --- [ed-task-pool-15] c.g.i.v.s.d.S.selectForEnable            : ==> Parameters: true(Boolean)
+2026-07-16 16:50:59.013 DEBUG 19512 --- [ed-task-pool-15] c.g.i.v.s.d.S.selectForEnable            : <==      Total: 0
+2026-07-16 16:51:01.029  INFO 19512 --- [        wvp-154] c.g.i.v.m.z.ZLMMediaServerStatusManger   : [ZLM-HOOK事件-心跳] ID：34020000002020000001
+2026-07-16 16:51:01.030 DEBUG 19512 --- [        wvp-154] com.genersoft.iot.vmp.conf.DynamicTask   : 任务【zlm-keepalive-34020000002020000001】启动成功！！！
+2026-07-16 16:51:01.203 DEBUG 19512 --- [io-25288-exec-3] c.g.i.v.s.d.U.getUserByUsername          : ==>  Preparing: select u.*, r.id as role_id, r.name as role_name, r.authority as role_authority , r.create_time as role_create_time , r.update_time as role_update_time from wvp_user u, wvp_user_role r WHERE u.role_id=r.id and u.username=?
+2026-07-16 16:51:01.203 DEBUG 19512 --- [io-25288-exec-3] c.g.i.v.s.d.U.getUserByUsername          : ==> Parameters: admin(String)
+2026-07-16 16:51:01.205 DEBUG 19512 --- [io-25288-exec-3] c.g.i.v.s.d.U.getUserByUsername          : <==      Total: 1
+2026-07-16 16:51:01.206 DEBUG 19512 --- [io-25288-exec-3] c.g.i.v.v.gb28181.play.PlayController    : 设备预览/回放停止API调用，streamId：34020000001110000049_34020000001310049110
+2026-07-16 16:51:01.208 DEBUG 19512 --- [io-25288-exec-3] c.g.i.v.s.d.D.queryVideoDeviceForPlay    : ==>  Preparing: SELECT device_id, transport,stream_mode,sdp_ip,local_ip,host_address,charset,ssrc_check,on_line,bind_ip,real_host,media_server_id FROM wvp_device WHERE device_id = ?
+2026-07-16 16:51:01.208 DEBUG 19512 --- [io-25288-exec-3] c.g.i.v.s.d.D.queryVideoDeviceForPlay    : ==> Parameters: 34020000001110000049(String)
+2026-07-16 16:51:01.210 DEBUG 19512 --- [io-25288-exec-3] c.g.i.v.s.d.D.queryVideoDeviceForPlay    : <==      Total: 1
+2026-07-16 16:51:01.214  INFO 19512 --- [io-25288-exec-3] c.g.i.vmp.service.impl.PlayServiceImpl   : [停止点播] 34020000001110000049/34020000001310049110
+2026-07-16 16:51:01.217  INFO 19512 --- [io-25288-exec-3] c.g.i.v.g.t.cmd.impl.SIPCommander        : [发送BYE] 设备： device: 34020000001110000049, channel: 34020000001310049110, callId: 8a7a88c52b48f3f451fc79e780cedcf8@192.168.10.188
+2026-07-16 16:51:01.218  INFO 19512 --- [io-25288-exec-3] c.g.iot.vmp.gb28181.session.SSRCFactory  : 释放ssrc:34020000002020000001-0200008149
+2026-07-16 16:51:01.222 DEBUG 19512 --- [io-25288-exec-3] c.g.iot.vmp.media.zlm.ZLMRESTfulUtils    : http请求参数：--> POST http://192.168.10.116:8898/index/api/closeRtpServer (91-byte body)
+2026-07-16 16:51:01.226 DEBUG 19512 --- [io-25288-exec-3] c.g.iot.vmp.media.zlm.ZLMRESTfulUtils    : http请求参数：<-- 200 OK http://192.168.10.116:8898/index/api/closeRtpServer (3ms, 28-byte body)
+2026-07-16 16:51:01.228  INFO 19512 --- [io-25288-exec-3] ZLMServerFactory                         : 关闭RTP Server {"code":0,"hit":1}
+2026-07-16 16:51:01.228 DEBUG 19512 --- [io-25288-exec-3] c.g.iot.vmp.media.zlm.ZLMRESTfulUtils    : http请求参数：--> POST http://192.168.10.116:8898/index/api/close_streams (127-byte body)
+2026-07-16 16:51:01.230  INFO 19512 --- [io-25288-exec-7] c.g.i.vmp.media.zlm.ZLMHttpHookListener  : [ZLM HOOK] 流注销, 34020000002020000001->rtsp->rtp/34020000001110000049_34020000001310049110
+2026-07-16 16:51:01.232 DEBUG 19512 --- [io-25288-exec-3] c.g.iot.vmp.media.zlm.ZLMRESTfulUtils    : http请求参数：<-- 200 OK http://192.168.10.116:8898/index/api/close_streams (2ms, 55-byte body)
+2026-07-16 16:51:01.234  INFO 19512 --- [        wvp-156] c.g.i.v.m.s.impl.MediaServerServiceImpl  : 流变化：注销, app->rtp, stream->34020000001110000049_34020000001310049110
+2026-07-16 16:51:01.237 DEBUG 19512 --- [        wvp-160] c.g.i.v.s.d.StreamProxyMapper.selectOne  : ==>  Preparing: SELECT st.*, pgs.gb_id, pgs.name, pgs.longitude, pgs.latitude FROM wvp_stream_proxy st LEFT join wvp_gb_stream pgs on st.app = pgs.app AND st.stream = pgs.stream WHERE st.app=? AND st.stream=? order by st.create_time desc
+2026-07-16 16:51:01.237 DEBUG 19512 --- [        wvp-160] c.g.i.v.s.d.StreamProxyMapper.selectOne  : ==> Parameters: rtp(String), 34020000001110000049_34020000001310049110(String)
+2026-07-16 16:51:01.240 DEBUG 19512 --- [        wvp-160] c.g.i.v.s.d.StreamProxyMapper.selectOne  : <==      Total: 0
+2026-07-16 16:51:01.247  INFO 19512 --- [io-25288-exec-3] gov.nist.javax.sip.stack.DefaultRouter   : Used request-URI for nextHop = 192.168.10.70:5060/UDP
+2026-07-16 16:51:01.248  INFO 19512 --- [        wvp-161] c.g.i.v.s.impl.RedisCatchStorageImpl     : [redis 流变化事件] 发送 WVP_MSG_STREAM_CHANGE_RTP: {"serverId":"wvp-cluster-node-188","app":"rtp","stream":"34020000001110000049_34020000001310049110","register":false,"mediaServerId":"34020000002020000001"}
+2026-07-16 16:51:01.248  INFO 19512 --- [io-25288-exec-3] g.n.javax.sip.stack.UDPMessageChannel    : Creating message channel 192.168.10.70/5060
+2026-07-16 16:51:01.250  INFO 19512 --- [io-25288-exec-3] g.n.javax.sip.stack.UDPMessageChannel    : sendMessage 192.168.10.70/5060
+messageSize =  457 message = BYE sip:34020000001310049110@192.168.10.70:5060 SIP/2.0
+Call-ID: 8a7a88c52b48f3f451fc79e780cedcf8@192.168.10.188
+CSeq: 9 BYE
+From: <sip:34020000002000000188@3402000000>;tag=c67bc5da173f4becab79a2c0ea9b8dd1
+To: <sip:34020000001310049110@192.168.10.70:5060>;tag=588210162
+Via: SIP/2.0/UDP 192.168.10.188:25060;branch=z9hG4bK7400505839
+Max-Forwards: 70
+User-Agent: NRMedia
+Contact: <sip:34020000002000000188@192.168.10.188:25060>
+Content-Length: 0
+
+
+2026-07-16 16:51:01.251  INFO 19512 --- [io-25288-exec-3] g.n.javax.sip.stack.UDPMessageChannel    : *******************
+
+2026-07-16 16:51:01.251 DEBUG 19512 --- [        wvp-161] c.g.i.v.s.dao.GbStreamMapper.selectOne   : ==>  Preparing: SELECT * FROM wvp_gb_stream WHERE app=? AND stream=?
+2026-07-16 16:51:01.252 DEBUG 19512 --- [        wvp-161] c.g.i.v.s.dao.GbStreamMapper.selectOne   : ==> Parameters: rtp(String), 34020000001110000049_34020000001310049110(String)
+2026-07-16 16:51:01.253 DEBUG 19512 --- [        wvp-157] c.g.i.v.s.d.D.stopPlay                   : ==>  Preparing: UPDATE wvp_device_channel SET stream_id=null WHERE device_id=? AND channel_id=?
+2026-07-16 16:51:01.253  INFO 19512 --- [io-25288-exec-3] c.g.i.vmp.gb28181.conf.ServerLoggerImpl  : 发送：目标--->192.168.10.188:25060
+BYE sip:34020000001310049110@192.168.10.70:5060 SIP/2.0
+Call-ID: 8a7a88c52b48f3f451fc79e780cedcf8@192.168.10.188
+CSeq: 9 BYE
+From: <sip:34020000002000000188@3402000000>;tag=c67bc5da173f4becab79a2c0ea9b8dd1
+To: <sip:34020000001310049110@192.168.10.70:5060>;tag=588210162
+Via: SIP/2.0/UDP 192.168.10.188:25060;branch=z9hG4bK7400505839
+Max-Forwards: 70
+User-Agent: NRMedia
+Contact: <sip:34020000002000000188@192.168.10.188:25060>
+Content-Length: 0
+
+
+2026-07-16 16:51:01.255 DEBUG 19512 --- [        wvp-157] c.g.i.v.s.d.D.stopPlay                   : ==> Parameters: 34020000001110000049(String), 34020000001310049110(String)
+2026-07-16 16:51:01.255  INFO 19512 --- [ChannelThread-4] g.n.javax.sip.stack.UDPMessageChannel    : UDPMessageChannel: processIncomingDataPacket : peerAddress = 192.168.10.70/5060 Length = 357
+2026-07-16 16:51:01.256 DEBUG 19512 --- [        wvp-161] c.g.i.v.s.dao.GbStreamMapper.selectOne   : <==      Total: 0
+2026-07-16 16:51:01.256  INFO 19512 --- [io-25288-exec-3] gov.nist.javax.sip.SipProviderImpl       : done sending BYE to hop 192.168.10.70:5060/UDP
+2026-07-16 16:51:01.256 DEBUG 19512 --- [        wvp-161] c.g.i.v.s.dao.StreamPushMapper.del       : ==>  Preparing: DELETE FROM wvp_stream_push WHERE app=? AND stream=?
+2026-07-16 16:51:01.256  INFO 19512 --- [io-25288-exec-3] c.g.i.v.s.impl.InviteStreamServiceImpl   : 移除点播的状态信息
+2026-07-16 16:51:01.256  INFO 19512 --- [ChannelThread-4] g.n.javax.sip.stack.UDPMessageChannel    : Setting SIPMessage peerPacketSource to: /192.168.10.70:5060
+2026-07-16 16:51:01.256 DEBUG 19512 --- [        wvp-161] c.g.i.v.s.dao.StreamPushMapper.del       : ==> Parameters: rtp(String), 34020000001110000049_34020000001310049110(String)
+2026-07-16 16:51:01.256  INFO 19512 --- [ChannelThread-4] c.g.i.vmp.gb28181.conf.ServerLoggerImpl  : 接收：来自--->192.168.10.188:25060
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.10.188:25060;branch=z9hG4bK7400505839
+From: <sip:34020000002000000188@3402000000>;tag=c67bc5da173f4becab79a2c0ea9b8dd1
+To: <sip:34020000001310049110@192.168.10.70:5060>;tag=588210162
+Call-ID: 8a7a88c52b48f3f451fc79e780cedcf8@192.168.10.188
+CSeq: 9 BYE
+User-Agent: Embedded Net DVR/NVR/DVS
+Content-Length: 0
+
+
+2026-07-16 16:51:01.257  INFO 19512 --- [ChannelThread-4] c.g.i.vmp.gb28181.conf.ServerLoggerImpl  : 接收：来自->192.168.10.188:25060
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.10.188:25060;branch=z9hG4bK7400505839
+From: <sip:34020000002000000188@3402000000>;tag=c67bc5da173f4becab79a2c0ea9b8dd1
+To: <sip:34020000001310049110@192.168.10.70:5060>;tag=588210162
+Call-ID: 8a7a88c52b48f3f451fc79e780cedcf8@192.168.10.188
+CSeq: 9 BYE
+User-Agent: Embedded Net DVR/NVR/DVS
+Content-Length: 0
+
+
+2026-07-16 16:51:01.257  INFO 19512 --- [ChannelThread-4] g.n.javax.sip.stack.SIPTransactionStack  : clientTx: looking for key z9hg4bk7400505839
+2026-07-16 16:51:01.260  INFO 19512 --- [ChannelThread-4] g.n.javax.sip.stack.SIPTransactionStack  : findTransaction: returning  : null
+2026-07-16 16:51:01.261  INFO 19512 --- [ChannelThread-4] g.n.javax.sip.NistSipMessageFactoryImpl  : Found Transaction null for SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.10.188:25060;branch=z9hG4bK7400505839
+From: <sip:34020000002000000188@3402000000>;tag=c67bc5da173f4becab79a2c0ea9b8dd1
+To: <sip:34020000001310049110@192.168.10.70:5060>;tag=588210162
+Call-ID: 8a7a88c52b48f3f451fc79e780cedcf8@192.168.10.188
+CSeq: 9 BYE
+User-Agent: Embedded Net DVR/NVR/DVS
+Content-Length: 0
+
+
+2026-07-16 16:51:01.261  INFO 19512 --- [ChannelThread-4] g.n.javax.sip.stack.SIPTransactionStack  : getDialog(8a7a88c52b48f3f451fc79e780cedcf8@192.168.10.188:c67bc5da173f4becab79a2c0ea9b8dd1:588210162) : returning null
+2026-07-16 16:51:01.261  INFO 19512 --- [ChannelThread-4] gov.nist.javax.sip.DialogFilter          : PROCESSING INCOMING RESPONSE: SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.10.188:25060;branch=z9hG4bK7400505839
+From: <sip:34020000002000000188@3402000000>;tag=c67bc5da173f4becab79a2c0ea9b8dd1
+To: <sip:34020000001310049110@192.168.10.70:5060>;tag=588210162
+Call-ID: 8a7a88c52b48f3f451fc79e780cedcf8@192.168.10.188
+CSeq: 9 BYE
+User-Agent: Embedded Net DVR/NVR/DVS
+Content-Length: 0
+
+
+2026-07-16 16:51:01.261 DEBUG 19512 --- [        wvp-161] c.g.i.v.s.dao.StreamPushMapper.del       : <==    Updates: 0
+2026-07-16 16:51:01.262  INFO 19512 --- [ChannelThread-4] gov.nist.javax.sip.DialogFilter          : Transaction = null sipDialog = null
+2026-07-16 16:51:01.271 DEBUG 19512 --- [        wvp-157] c.g.i.v.s.d.D.stopPlay                   : <==    Updates: 1
+2026-07-16 16:51:01.274  INFO 19512 --- [ChannelThread-4] gov.nist.javax.sip.DialogFilter          : sending response SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.10.188:25060;branch=z9hG4bK7400505839
+From: <sip:34020000002000000188@3402000000>;tag=c67bc5da173f4becab79a2c0ea9b8dd1
+To: <sip:34020000001310049110@192.168.10.70:5060>;tag=588210162
+Call-ID: 8a7a88c52b48f3f451fc79e780cedcf8@192.168.10.188
+CSeq: 9 BYE
+User-Agent: Embedded Net DVR/NVR/DVS
+Content-Length: 0
+
+ to TU for processing 
+2026-07-16 16:51:01.275 DEBUG 19512 --- [io-25288-exec-3] c.g.i.v.s.d.D.stopPlay                   : ==>  Preparing: UPDATE wvp_device_channel SET stream_id=null WHERE device_id=? AND channel_id=?
+2026-07-16 16:51:01.275  INFO 19512 --- [ChannelThread-4] gov.nist.javax.sip.SipProviderImpl       : handleEvent gov.nist.javax.sip.ResponseEventExt[source=gov.nist.javax.sip.SipProviderImpl@31bce6e6]currentTransaction = nullthis.sipListener = com.genersoft.iot.vmp.gb28181.transmit.SIPProcessorObserver@30811f91sipEvent.source = gov.nist.javax.sip.SipProviderImpl@31bce6e6
+2026-07-16 16:51:01.275  INFO 19512 --- [ChannelThread-4] gov.nist.javax.sip.SipProviderImpl       : Dialog = null
+2026-07-16 16:51:01.275 DEBUG 19512 --- [io-25288-exec-3] c.g.i.v.s.d.D.stopPlay                   : ==> Parameters: 34020000001110000049(String), 34020000001310049110(String)
+2026-07-16 16:51:01.275  INFO 19512 --- [ChannelThread-4] gov.nist.javax.sip.EventScanner          : sipEvent = gov.nist.javax.sip.ResponseEventExt[source=gov.nist.javax.sip.SipProviderImpl@31bce6e6]source = gov.nist.javax.sip.SipProviderImpl@31bce6e6
+2026-07-16 16:51:01.275  INFO 19512 --- [ChannelThread-4] gov.nist.javax.sip.EventScanner          : Calling listener com.genersoft.iot.vmp.gb28181.transmit.SIPProcessorObserver@30811f91 for SIP/2.0 200 OK
+
+2026-07-16 16:51:01.277 DEBUG 19512 --- [io-25288-exec-3] c.g.i.v.s.d.D.stopPlay                   : <==    Updates: 1
+2026-07-16 16:51:01.277 DEBUG 19512 --- [io-25288-exec-3] c.g.i.v.s.d.D.stopPlay                   : ==>  Preparing: UPDATE wvp_device_channel SET stream_id=null WHERE device_id=? AND channel_id=?
+2026-07-16 16:51:01.277 DEBUG 19512 --- [io-25288-exec-3] c.g.i.v.s.d.D.stopPlay                   : ==> Parameters: 34020000001110000049(String), 34020000001310049110(String)
+2026-07-16 16:51:01.281 DEBUG 19512 --- [io-25288-exec-3] c.g.i.v.s.d.D.stopPlay                   : <==    Updates: 1
+2026-07-16 16:51:01.283 DEBUG 19512 --- [io-25288-exec-3] c.g.iot.vmp.media.zlm.ZLMRESTfulUtils    : http请求参数：--> POST http://192.168.10.116:8898/index/api/closeRtpServer (91-byte body)
+2026-07-16 16:51:01.288 DEBUG 19512 --- [io-25288-exec-3] c.g.iot.vmp.media.zlm.ZLMRESTfulUtils    : http请求参数：<-- 200 OK http://192.168.10.116:8898/index/api/closeRtpServer (4ms, 28-byte body)
+2026-07-16 16:51:01.288  INFO 19512 --- [io-25288-exec-3] ZLMServerFactory                         : 关闭RTP Server {"code":0,"hit":0}
+2026-07-16 16:51:01.288 DEBUG 19512 --- [io-25288-exec-3] c.g.iot.vmp.media.zlm.ZLMRESTfulUtils    : http请求参数：--> POST http://192.168.10.116:8898/index/api/close_streams (127-byte body)
+2026-07-16 16:51:01.290 DEBUG 19512 --- [io-25288-exec-3] c.g.iot.vmp.media.zlm.ZLMRESTfulUtils    : http请求参数：<-- 200 OK http://192.168.10.116:8898/index/api/close_streams (2ms, 55-byte body)
+
+
+zlmediakit日志：
+zlmediakit  | 2026-07-16 16:51:02.344 D [MediaServer] [1-event poller 14] WebApi.cpp:304 http api debug | 
+zlmediakit  | # request:
+zlmediakit  | POST /index/api/getRtpInfo
+zlmediakit  | # header:
+zlmediakit  | Accept-Encoding : gzip
+zlmediakit  | Connection : Keep-Alive
+zlmediakit  | Content-Length : 91
+zlmediakit  | Content-Type : application/x-www-form-urlencoded
+zlmediakit  | Host : 192.168.10.116:8898
+zlmediakit  | User-Agent : okhttp/4.10.0
+zlmediakit  | # content:
+zlmediakit  | secret=77ThLXoX1vkebDytuUGP57RZeS7St3cH&stream_id=34020000001110000049_34020000001310049110
+zlmediakit  | # response:
+zlmediakit  | {
+zlmediakit  |   "code" : 0,
+zlmediakit  |   "exist" : false
+zlmediakit  | }
+zlmediakit  | 
+zlmediakit  | 
+zlmediakit  | 2026-07-16 16:51:02.349 I [MediaServer] [1-event poller 14] Rtsp.cpp:481 getPortPair | got port from pool:30060-30061
+zlmediakit  | 2026-07-16 16:51:02.349 D [MediaServer] [1-event poller 14] WebApi.cpp:304 http api debug | 
+zlmediakit  | # request:
+zlmediakit  | POST /index/api/openRtpServer
+zlmediakit  | # header:
+zlmediakit  | Accept-Encoding : gzip
+zlmediakit  | Connection : Keep-Alive
+zlmediakit  | Content-Length : 136
+zlmediakit  | Content-Type : application/x-www-form-urlencoded
+zlmediakit  | Host : 192.168.10.116:8898
+zlmediakit  | User-Agent : okhttp/4.10.0
+zlmediakit  | # content:
+zlmediakit  | secret=77ThLXoX1vkebDytuUGP57RZeS7St3cH&re_use_port=0&stream_id=34020000001110000049_34020000001310049110&port=0&only_audio=0&tcp_mode=0
+zlmediakit  | # response:
+zlmediakit  | {
+zlmediakit  |   "code" : 0,
+zlmediakit  |   "port" : 30060
+zlmediakit  | }
+zlmediakit  | 
+zlmediakit  | 
+zlmediakit  | 2026-07-16 16:51:02.430 T [MediaServer] [1-event poller 14] TcpClient.cpp:84 startConnect | mediakit::HttpRequester-260 start connect 192.168.10.188:25288
+zlmediakit  | 2026-07-16 16:51:02.431 T [MediaServer] [1-event poller 14] TcpClient.cpp:94 onSockConnect | mediakit::HttpRequester-260 connect result: 0(success)
+zlmediakit  | 2026-07-16 16:51:02.456 I [MediaServer] [1-event poller 14] RtpProcess.cpp:293 operator() | 34020000001110000049_34020000001310049110(192.168.10.70:62036) 允许RTP推流，ssrc: 0BEBE1D5
+zlmediakit  | 2026-07-16 16:51:02.456 T [MediaServer] [1-event poller 14] TcpClient.cpp:29 ~TcpClient | ~mediakit::HttpRequester-260
+zlmediakit  | 2026-07-16 16:51:02.490 I [MediaServer] [1-event poller 14] GB28181Process.cpp:198 onRtpDecode | 34020000001110000049_34020000001310049110 judged to be PS
+zlmediakit  | 2026-07-16 16:51:03.813 I [MediaServer] [1-event poller 14] Decoder.cpp:159 onTrack | Got track: H264
+zlmediakit  | 2026-07-16 16:51:03.813 I [MediaServer] [1-event poller 14] MediaSink.cpp:32 addTrack | Audio disabled, audio track ignored
+zlmediakit  | 2026-07-16 16:51:03.813 I [MediaServer] [1-event poller 14] Decoder.cpp:159 onTrack | Got track: PCMA
+zlmediakit  | 2026-07-16 16:51:03.813 I [MediaServer] [1-event poller 14] Decoder.cpp:106 onStream | Add track finished
+zlmediakit  | 2026-07-16 16:51:03.920 D [MediaServer] [1-event poller 14] MediaSink.cpp:198 emitAllTrackReady | All track ready use 107ms
+zlmediakit  | 2026-07-16 16:51:03.920 T [MediaServer] [1-event poller 14] TcpClient.cpp:84 startConnect | mediakit::HttpRequester-261 start connect 192.168.10.188:25288
+zlmediakit  | 2026-07-16 16:51:03.920 I [MediaServer] [1-event poller 14] MediaSource.cpp:508 emitEvent | 媒体注册:fmp4://__defaultVhost__/rtp/34020000001110000049_34020000001310049110
+zlmediakit  | 2026-07-16 16:51:03.921 I [MediaServer] [1-event poller 14] MultiMediaSourceMuxer.cpp:803 onAllTrackReady | stream: rtp://__defaultVhost__/rtp/34020000001110000049_34020000001310049110 , codec info: H264[1280/720/0] 
+zlmediakit  | 2026-07-16 16:51:03.921 T [MediaServer] [1-event poller 14] TcpClient.cpp:84 startConnect | mediakit::HttpRequester-262 start connect 192.168.10.188:25288
+zlmediakit  | 2026-07-16 16:51:03.921 I [MediaServer] [1-event poller 14] MediaSource.cpp:508 emitEvent | 媒体注册:rtmp://__defaultVhost__/rtp/34020000001110000049_34020000001310049110
+zlmediakit  | 2026-07-16 16:51:03.921 T [MediaServer] [1-event poller 14] TcpClient.cpp:84 startConnect | mediakit::HttpRequester-263 start connect 192.168.10.188:25288
+zlmediakit  | 2026-07-16 16:51:03.921 I [MediaServer] [1-event poller 14] MediaSource.cpp:508 emitEvent | 媒体注册:ts://__defaultVhost__/rtp/34020000001110000049_34020000001310049110
+zlmediakit  | 2026-07-16 16:51:03.921 T [MediaServer] [1-event poller 14] TcpClient.cpp:84 startConnect | mediakit::HttpRequester-264 start connect 192.168.10.188:25288
+zlmediakit  | 2026-07-16 16:51:03.921 I [MediaServer] [1-event poller 14] MediaSource.cpp:508 emitEvent | 媒体注册:rtsp://__defaultVhost__/rtp/34020000001110000049_34020000001310049110
+zlmediakit  | 2026-07-16 16:51:03.922 T [MediaServer] [1-event poller 14] TcpClient.cpp:94 onSockConnect | mediakit::HttpRequester-261 connect result: 0(success)
+zlmediakit  | 2026-07-16 16:51:03.922 T [MediaServer] [1-event poller 14] TcpClient.cpp:94 onSockConnect | mediakit::HttpRequester-262 connect result: 0(success)
+zlmediakit  | 2026-07-16 16:51:03.923 T [MediaServer] [1-event poller 14] TcpClient.cpp:94 onSockConnect | mediakit::HttpRequester-263 connect result: 0(success)
+zlmediakit  | 2026-07-16 16:51:03.923 T [MediaServer] [1-event poller 14] TcpClient.cpp:94 onSockConnect | mediakit::HttpRequester-264 connect result: 0(success)
+zlmediakit  | 2026-07-16 16:51:03.928 T [MediaServer] [1-event poller 14] TcpClient.cpp:29 ~TcpClient | ~mediakit::HttpRequester-261
+zlmediakit  | 2026-07-16 16:51:03.928 T [MediaServer] [1-event poller 14] TcpClient.cpp:29 ~TcpClient | ~mediakit::HttpRequester-262
+zlmediakit  | 2026-07-16 16:51:03.928 T [MediaServer] [1-event poller 14] TcpClient.cpp:29 ~TcpClient | ~mediakit::HttpRequester-263
+zlmediakit  | 2026-07-16 16:51:03.929 T [MediaServer] [1-event poller 14] TcpClient.cpp:29 ~TcpClient | ~mediakit::HttpRequester-264
+zlmediakit  | 2026-07-16 16:51:03.963 I [MediaServer] [1-work poller 3] Process.cpp:192 run | start child process 83, log file:/opt/media/bin/ffmpeg/ffmpeg.log.83
+zlmediakit  | 2026-07-16 16:51:04.038 T [MediaServer] [1-event poller 16] TcpServer.h:72 operator() | 24-336(127.0.0.1:35414) mediakit::RtspSession
+zlmediakit  | 2026-07-16 16:51:04.039 T [MediaServer] [1-event poller 16] TcpClient.cpp:84 startConnect | mediakit::HttpRequester-265 start connect 192.168.10.188:25288
+zlmediakit  | 2026-07-16 16:51:04.040 T [MediaServer] [1-event poller 16] TcpClient.cpp:94 onSockConnect | mediakit::HttpRequester-265 connect result: 0(success)
+zlmediakit  | 2026-07-16 16:51:04.042 T [MediaServer] [1-event poller 16] TcpClient.cpp:29 ~TcpClient | ~mediakit::HttpRequester-265
+zlmediakit  | 2026-07-16 16:51:04.044 I [MediaServer] [1-event poller 16] RtspSession.cpp:823 handleReq_Play | 24-336(127.0.0.1:35414) rtsp seekTo(ms):0
+zlmediakit  | 2026-07-16 16:51:04.044 I [MediaServer] [1-event poller 16] RtspSession.cpp:853 handleReq_Play | 24-336(127.0.0.1:35414) 指定播放track:0
+zlmediakit  | 2026-07-16 16:51:04.083 T [MediaServer] [1-event poller 17] TcpServer.h:72 operator() | 25-337(192.168.10.188:60557) mediakit::HttpSession
+zlmediakit  | 2026-07-16 16:51:04.084 T [MediaServer] [1-event poller 17] TcpClient.cpp:84 startConnect | mediakit::HttpRequester-266 start connect 192.168.10.188:25288
+zlmediakit  | 2026-07-16 16:51:04.084 T [MediaServer] [1-event poller 17] TcpClient.cpp:94 onSockConnect | mediakit::HttpRequester-266 connect result: 0(success)
+zlmediakit  | 2026-07-16 16:51:04.087 T [MediaServer] [1-event poller 17] TcpClient.cpp:29 ~TcpClient | ~mediakit::HttpRequester-266
+zlmediakit  | 2026-07-16 16:51:05.192 T [MediaServer] [1-event poller 16] TcpServer.cpp:210 operator() | 24-336(127.0.0.1:35414) mediakit::RtspSession on err: 4(connection reset by peer)
+zlmediakit  | 2026-07-16 16:51:05.192 W [MediaServer] [1-event poller 16] RtspSession.cpp:62 onError | 24-336(127.0.0.1:35414) RTSP播放器(__defaultVhost__/rtp/34020000001110000049_34020000001310049110)断开:connection reset by peer,耗时(s):1
+zlmediakit  | 2026-07-16 16:51:05.192 T [MediaServer] [1-event poller 16] TcpServer.h:66 operator() | 24-336(127.0.0.1:35414) ~mediakit::RtspSession
+zlmediakit  | 2026-07-16 16:51:05.203 I [MediaServer] [1-work poller 3] Process.cpp:255 s_wait | process terminated, pid=83, exit code=0
+zlmediakit  | 2026-07-16 16:51:05.203 D [MediaServer] [1-work poller 3] WebApi.cpp:304 http api debug | 
+zlmediakit  | # request:
+zlmediakit  | GET /index/api/getSnap?secret=77ThLXoX1vkebDytuUGP57RZeS7St3cH&expire_sec=1&url=rtsp%3A%2F%2F127.0.0.1%3A554%2Frtp%2F34020000001110000049_34020000001310049110&timeout_sec=15
+zlmediakit  | # header:
+zlmediakit  | Accept-Encoding : gzip
+zlmediakit  | Connection : Keep-Alive
+zlmediakit  | Host : 192.168.10.116:8898
+zlmediakit  | User-Agent : okhttp/4.10.0
+zlmediakit  | # content:
+zlmediakit  | 
+zlmediakit  | # response size:60417
+zlmediakit  | 
+zlmediakit  | 2026-07-16 16:51:05.203 W [MediaServer] [1-work poller 3] Process.cpp:319 s_kill | kill process 83 failed:no such process
+zlmediakit  | 2026-07-16 16:51:05.971 T [MediaServer] [1-event poller 14] TcpClient.cpp:84 startConnect | mediakit::HttpRequester-267 start connect 192.168.10.188:25288
+zlmediakit  | 2026-07-16 16:51:05.971 I [MediaServer] [1-event poller 14] MediaSource.cpp:508 emitEvent | 媒体注册:hls://__defaultVhost__/rtp/34020000001110000049_34020000001310049110
+zlmediakit  | 2026-07-16 16:51:05.973 T [MediaServer] [1-event poller 14] TcpClient.cpp:94 onSockConnect | mediakit::HttpRequester-267 connect result: 0(success)
+zlmediakit  | 2026-07-16 16:51:05.983 T [MediaServer] [1-event poller 14] TcpClient.cpp:29 ~TcpClient | ~mediakit::HttpRequester-267
+zlmediakit  | 2026-07-16 16:51:11.296 T [MediaServer] [1-event poller 17] TcpServer.cpp:210 operator() | 25-337(192.168.10.188:60557) mediakit::HttpSession on err: 6(recv close request from client)
+zlmediakit  | 2026-07-16 16:51:11.296 W [MediaServer] [1-event poller 17] HttpSession.cpp:192 onError | 25-337(192.168.10.188:60557) FLV/TS/FMP4播放器(__defaultVhost__/rtp/34020000001110000049_34020000001310049110)断开:6(recv close request from client),耗时(s):7
+zlmediakit  | 2026-07-16 16:51:11.296 T [MediaServer] [1-event poller 17] TcpServer.h:66 operator() | 25-337(192.168.10.188:60557) ~mediakit::HttpSession
+zlmediakit  | 2026-07-16 16:51:12.195 T [MediaServer] [1-event poller 16] TcpClient.cpp:84 startConnect | mediakit::HttpRequester-268 start connect 192.168.10.188:25288
+zlmediakit  | 2026-07-16 16:51:12.196 T [MediaServer] [1-event poller 16] TcpClient.cpp:94 onSockConnect | mediakit::HttpRequester-268 connect result: 0(success)
+zlmediakit  | 2026-07-16 16:51:12.201 T [MediaServer] [1-event poller 16] TcpClient.cpp:29 ~TcpClient | ~mediakit::HttpRequester-268
+zlmediakit  | 2026-07-16 16:51:12.397 W [MediaServer] [1-event poller 14] RtpProcess.cpp:66 ~RtpProcess | 34020000001110000049_34020000001310049110(192.168.10.70:62036) RTP推流器(__defaultVhost__/rtp/34020000001110000049_34020000001310049110)断开,耗时(s):10
+zlmediakit  | 2026-07-16 16:51:12.397 T [MediaServer] [1-event poller 14] TcpClient.cpp:84 startConnect | mediakit::HttpRequester-269 start connect 192.168.10.188:25288
+zlmediakit  | 2026-07-16 16:51:12.398 I [MediaServer] [1-event poller 14] MediaSource.cpp:508 emitEvent | 媒体注销:hls://__defaultVhost__/rtp/34020000001110000049_34020000001310049110
+zlmediakit  | 2026-07-16 16:51:12.398 T [MediaServer] [1-event poller 14] TcpClient.cpp:84 startConnect | mediakit::HttpRequester-270 start connect 192.168.10.188:25288
+zlmediakit  | 2026-07-16 16:51:12.398 I [MediaServer] [1-event poller 14] MediaSource.cpp:508 emitEvent | 媒体注销:ts://__defaultVhost__/rtp/34020000001110000049_34020000001310049110
+zlmediakit  | 2026-07-16 16:51:12.398 T [MediaServer] [1-event poller 14] TcpClient.cpp:84 startConnect | mediakit::HttpRequester-271 start connect 192.168.10.188:25288
+zlmediakit  | 2026-07-16 16:51:12.398 I [MediaServer] [1-event poller 14] MediaSource.cpp:508 emitEvent | 媒体注销:rtsp://__defaultVhost__/rtp/34020000001110000049_34020000001310049110
+zlmediakit  | 2026-07-16 16:51:12.398 T [MediaServer] [1-event poller 14] TcpClient.cpp:84 startConnect | mediakit::HttpRequester-272 start connect 192.168.10.188:25288
+zlmediakit  | 2026-07-16 16:51:12.398 I [MediaServer] [1-event poller 14] MediaSource.cpp:508 emitEvent | 媒体注销:rtmp://__defaultVhost__/rtp/34020000001110000049_34020000001310049110
+zlmediakit  | 2026-07-16 16:51:12.398 T [MediaServer] [1-event poller 14] TcpClient.cpp:84 startConnect | mediakit::HttpRequester-273 start connect 192.168.10.188:25288
+zlmediakit  | 2026-07-16 16:51:12.398 I [MediaServer] [1-event poller 14] MediaSource.cpp:508 emitEvent | 媒体注销:fmp4://__defaultVhost__/rtp/34020000001110000049_34020000001310049110
+zlmediakit  | 2026-07-16 16:51:12.398 I [MediaServer] [1-event poller 14] Rtsp.cpp:490 operator() | return port to pool:30060-30061
+zlmediakit  | 2026-07-16 16:51:12.399 D [MediaServer] [1-event poller 14] WebApi.cpp:304 http api debug | 
+zlmediakit  | # request:
+zlmediakit  | POST /index/api/closeRtpServer
+zlmediakit  | # header:
+zlmediakit  | Accept-Encoding : gzip
+zlmediakit  | Connection : Keep-Alive
+zlmediakit  | Content-Length : 91
+zlmediakit  | Content-Type : application/x-www-form-urlencoded
+zlmediakit  | Host : 192.168.10.116:8898
+zlmediakit  | User-Agent : okhttp/4.10.0
+zlmediakit  | # content:
+zlmediakit  | secret=77ThLXoX1vkebDytuUGP57RZeS7St3cH&stream_id=34020000001110000049_34020000001310049110
+zlmediakit  | # response:
+zlmediakit  | {
+zlmediakit  |   "code" : 0,
+zlmediakit  |   "hit" : 1
+zlmediakit  | }
+zlmediakit  | 
+zlmediakit  | 
+zlmediakit  | 2026-07-16 16:51:12.399 T [MediaServer] [1-event poller 14] TcpClient.cpp:94 onSockConnect | mediakit::HttpRequester-269 connect result: 0(success)
+zlmediakit  | 2026-07-16 16:51:12.399 T [MediaServer] [1-event poller 14] TcpClient.cpp:94 onSockConnect | mediakit::HttpRequester-270 connect result: 0(success)
+zlmediakit  | 2026-07-16 16:51:12.399 T [MediaServer] [1-event poller 14] TcpClient.cpp:94 onSockConnect | mediakit::HttpRequester-271 connect result: 0(success)
+zlmediakit  | 2026-07-16 16:51:12.399 T [MediaServer] [1-event poller 14] TcpClient.cpp:94 onSockConnect | mediakit::HttpRequester-272 connect result: 0(success)
+zlmediakit  | 2026-07-16 16:51:12.399 T [MediaServer] [1-event poller 14] TcpClient.cpp:94 onSockConnect | mediakit::HttpRequester-273 connect result: 0(success)
+zlmediakit  | 2026-07-16 16:51:12.404 D [MediaServer] [1-event poller 14] WebApi.cpp:304 http api debug | 
+zlmediakit  | # request:
+zlmediakit  | POST /index/api/close_streams
+zlmediakit  | # header:
+zlmediakit  | Accept-Encoding : gzip
+zlmediakit  | Connection : Keep-Alive
+zlmediakit  | Content-Length : 127
+zlmediakit  | Content-Type : application/x-www-form-urlencoded
+zlmediakit  | Host : 192.168.10.116:8898
+zlmediakit  | User-Agent : okhttp/4.10.0
+zlmediakit  | # content:
+zlmediakit  | secret=77ThLXoX1vkebDytuUGP57RZeS7St3cH&app=rtp&vhost=__defaultVhost__&stream=34020000001110000049_34020000001310049110&force=1
+zlmediakit  | # response:
+zlmediakit  | {
+zlmediakit  |   "code" : 0,
+zlmediakit  |   "count_closed" : 0,
+zlmediakit  |   "count_hit" : 0
+zlmediakit  | }
+zlmediakit  | 
+zlmediakit  | 
+zlmediakit  | 2026-07-16 16:51:12.404 T [MediaServer] [1-event poller 14] TcpClient.cpp:29 ~TcpClient | ~mediakit::HttpRequester-270
+zlmediakit  | 2026-07-16 16:51:12.404 T [MediaServer] [1-event poller 14] TcpClient.cpp:29 ~TcpClient | ~mediakit::HttpRequester-273
+zlmediakit  | 2026-07-16 16:51:12.404 T [MediaServer] [1-event poller 14] TcpClient.cpp:29 ~TcpClient | ~mediakit::HttpRequester-272
+zlmediakit  | 2026-07-16 16:51:12.405 T [MediaServer] [1-event poller 14] TcpClient.cpp:29 ~TcpClient | ~mediakit::HttpRequester-269
+zlmediakit  | 2026-07-16 16:51:12.411 T [MediaServer] [1-event poller 14] TcpClient.cpp:29 ~TcpClient | ~mediakit::HttpRequester-271
+zlmediakit  | 2026-07-16 16:51:12.460 D [MediaServer] [1-event poller 14] WebApi.cpp:304 http api debug | 
+zlmediakit  | # request:
+zlmediakit  | POST /index/api/closeRtpServer
+zlmediakit  | # header:
+zlmediakit  | Accept-Encoding : gzip
+zlmediakit  | Connection : Keep-Alive
+zlmediakit  | Content-Length : 91
+zlmediakit  | Content-Type : application/x-www-form-urlencoded
+zlmediakit  | Host : 192.168.10.116:8898
+zlmediakit  | User-Agent : okhttp/4.10.0
+zlmediakit  | # content:
+zlmediakit  | secret=77ThLXoX1vkebDytuUGP57RZeS7St3cH&stream_id=34020000001110000049_34020000001310049110
+zlmediakit  | # response:
+zlmediakit  | {
+zlmediakit  |   "code" : 0,
+zlmediakit  |   "hit" : 0
+zlmediakit  | }
+zlmediakit  | 
+zlmediakit  | 
+zlmediakit  | 2026-07-16 16:51:12.462 D [MediaServer] [1-event poller 14] WebApi.cpp:304 http api debug | 
+zlmediakit  | # request:
+zlmediakit  | POST /index/api/close_streams
+zlmediakit  | # header:
+zlmediakit  | Accept-Encoding : gzip
+zlmediakit  | Connection : Keep-Alive
+zlmediakit  | Content-Length : 127
+zlmediakit  | Content-Type : application/x-www-form-urlencoded
+zlmediakit  | Host : 192.168.10.116:8898
+zlmediakit  | User-Agent : okhttp/4.10.0
+zlmediakit  | # content:
+zlmediakit  | secret=77ThLXoX1vkebDytuUGP57RZeS7St3cH&app=rtp&vhost=__defaultVhost__&stream=34020000001110000049_34020000001310049110&force=1
+zlmediakit  | # response:
+zlmediakit  | {
+zlmediakit  |   "code" : 0,
+zlmediakit  |   "count_closed" : 0,
+zlmediakit  |   "count_hit" : 0
+zlmediakit  | 

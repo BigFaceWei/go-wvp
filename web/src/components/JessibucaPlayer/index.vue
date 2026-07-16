@@ -20,6 +20,10 @@ const props = defineProps({
   urls: {
     type: Object,
     default: () => ({})
+  },
+  hasAudio: {
+    type: Boolean,
+    default: true
   }
 })
 
@@ -86,20 +90,49 @@ async function createPlayer() {
     return
   }
 
+  // Configuration matching wvp-GB28181-pro's jessibuca.vue for reliable playback
   player = new JessibucaClass({
     container: containerRef.value,
-    videoBuffer: 0.2,
+    videoBuffer: 0,                    // Minimum latency
     decoder: '/jessibuca/decoder.js',
-    hasAudio: true,
     isResize: true,
-    isFlv: true,
+    isFlv: false,                      // Auto-detect format (not forced FLV)
     isHls: false,
-    loadingText: '加载中...',
-    hasControl: true,
-    controlAutoHide: true
+    useMSE: false,                     // Use WASM rendering, not MSE
+    useWCS: false,                     // Use WASM rendering, not WebCodecs
+    forceNoOffscreen: true,            // Keep rendering when tab in background
+    isNotMute: true,                   // Unmute audio by default
+    timeout: 10,                       // Connection timeout (seconds)
+    loadingTimeout: 10,                // Loading timeout
+    loadingTimeoutReplay: true,        // Auto-retry on loading timeout
+    loadingTimeoutReplayTimes: 3,
+    heartTimeout: 5,                   // Heartbeat check interval
+    heartTimeoutReplay: true,          // Auto-reconnect on heartbeat loss
+    heartTimeoutReplayTimes: 3,
+    wasmDecodeErrorReplay: true,       // Retry on WASM decode errors
+    keepScreenOn: true,                // Prevent screen sleep during playback
+    loadingText: '请稍等, 视频加载中...',
+    controlAutoHide: false,            // Keep controls visible
+    debug: false,
+    hotKey: true,
+    showBandwidth: false,
+    operateBtns: {
+      fullscreen: false,
+      screenshot: false,
+      play: false,
+      audio: false,
+      recorder: false
+    },
+    supportDblclickFullscreen: false,
+    useWebFullSreen: true,
+    hiddenAutoPause: false,
+    isFullResize: false,
+    openWebglAlignment: false,
+    wcsUseVideoRendcer: true,
+    hasAudio: props.hasAudio
   })
 
-  player.on('playing', () => {
+  player.on('play', () => {
     playing.value = true
     errorMsg.value = ''
   })
@@ -109,17 +142,15 @@ async function createPlayer() {
   })
 
   player.on('error', (err) => {
-    playing.value = false
-    errorMsg.value = '播放错误'
     console.error('Jessibuca error:', err)
   })
 
-  player.on('loading', () => {
-    errorMsg.value = '加载中'
+  player.on('timeout', () => {
+    console.warn('Jessibuca timeout, reconnecting...')
   })
 
-  player.on('load', () => {
-    errorMsg.value = ''
+  player.on('loadingTimeout', () => {
+    console.warn('Jessibuca loading timeout, retrying...')
   })
 }
 

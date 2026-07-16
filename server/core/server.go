@@ -9,6 +9,7 @@ import (
 	gbsip "wvp-go/server/internal/gb28181/sip"
 	"wvp-go/server/initialize"
 	"wvp-go/server/internal/gb28181/message"
+	"wvp-go/server/internal/media/zlm"
 	mcpTool "wvp-go/server/mcp"
 	"wvp-go/server/service/system"
 	"go.uber.org/zap"
@@ -51,6 +52,13 @@ func RunServer() {
 `, global.Version, address, mcpBaseURL,
 		global.GVA_CONFIG.WVP.SIP.ListenIP,
 		global.GVA_CONFIG.WVP.SIP.ListenPort)
+
+	// Start ZLM config sync in background BEFORE initServer,
+	// because initServer blocks on shutdown signal and never returns.
+	go func() {
+		time.Sleep(2 * time.Second) // wait for HTTP server to start listening
+		zlm.InitZLMHooks()
+	}()
 
 	initServer(address, Router, 10*time.Minute, 10*time.Minute)
 }

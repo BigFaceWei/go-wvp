@@ -45,7 +45,14 @@ func StopVideo(c *gin.Context) {
 		return
 	}
 
-	if err := service.StopVideo(deviceID); err != nil {
+	// Accept channel_id from query or JSON body
+	var req struct {
+		ChannelID string `json:"channel_id" form:"channel_id"`
+	}
+	_ = c.ShouldBindJSON(&req)
+	_ = c.ShouldBindQuery(&req)
+
+	if err := service.StopVideo(deviceID, req.ChannelID); err != nil {
 		response.Fail(c, response.DEVICE_NOT_FOUND, fmt.Sprintf("stop failed: %v", err))
 		return
 	}

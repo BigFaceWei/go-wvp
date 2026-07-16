@@ -85,8 +85,8 @@ func (h *InviteHandler) ParseInviteResponse(body []byte) (*InviteResponse, error
 func (h *InviteHandler) BuildInviteSDP(req *InviteRequest) string {
 	// SDP construction matching wvp-GB28181-pro's SIPCommander.playStreamCmd()
 	sdp := fmt.Sprintf("v=0\r\n")
-	// o= uses deviceID (not channelID), with session ID and version set to 0
-	sdp += fmt.Sprintf("o=%s 0 0 IN IP4 %s\r\n", req.DeviceID, req.MediaIP)
+	// o= uses channelID with session ID and version set to 0 (matching Java wvp log)
+	sdp += fmt.Sprintf("o=%s 0 0 IN IP4 %s\r\n", req.ChannelID, req.MediaIP)
 	sdp += fmt.Sprintf("s=%s\r\n", "Play")
 	sdp += fmt.Sprintf("c=IN IP4 %s\r\n", req.MediaIP)
 	sdp += fmt.Sprintf("t=0 0\r\n")

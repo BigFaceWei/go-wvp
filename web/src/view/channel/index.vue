@@ -67,7 +67,7 @@
     </div>
 
     <el-dialog v-model="playDialogVisible" title="视频点播" width="1000px" destroy-on-close @closed="handleDialogClosed">
-      <JessibucaPlayer ref="playerRef" :urls="playUrls" />
+      <JessibucaPlayer ref="playerRef" :urls="playUrls" :has-audio="currentChannelHasAudio" />
       <template #footer>
         <el-button @click="handleStop">停止播放</el-button>
         <el-button @click="playDialogVisible = false">关闭</el-button>
@@ -103,6 +103,7 @@ const searchForm = reactive({
 const playDialogVisible = ref(false)
 const playUrls = ref({})
 const currentDeviceId = ref('')
+const currentChannelHasAudio = ref(true)
 const playerRef = ref(null)
 
 const fetchChannels = async () => {
@@ -148,6 +149,8 @@ const handlePlay = async (row) => {
     })
     playUrls.value = res.data || {}
     currentDeviceId.value = deviceId.value
+    currentChannelId.value = row.channel_id
+    currentChannelHasAudio.value = row.has_audio || false
     playDialogVisible.value = true
     ElMessage.success('点播请求已发送')
   } catch (error) {
@@ -155,12 +158,14 @@ const handlePlay = async (row) => {
   }
 }
 
+const currentChannelId = ref('')
+
 const handleStop = async () => {
   try {
     if (playerRef.value) {
       playerRef.value.stop()
     }
-    await stopVideo(currentDeviceId.value)
+    await stopVideo(currentDeviceId.value, currentChannelId.value)
     playDialogVisible.value = false
     playUrls.value = {}
     ElMessage.success('已停止播放')

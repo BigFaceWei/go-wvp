@@ -103,6 +103,10 @@ func Routers() *gin.Engine {
 	// 注册业务路由
 	initBizRouter(PrivateGroup, PublicGroup)
 
+	// ZLMediaKit hook endpoints — ZLM calls these to notify WVP of stream events.
+	// These must be accessible without auth prefix (matching Java wvp's /index/hook/...)
+	initZLMHookRoutes(Router)
+
 	global.GVA_ROUTERS = Router.Routes()
 
 	global.GVA_LOG.Info("router register success")

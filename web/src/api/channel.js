@@ -23,9 +23,10 @@ export function playVideo(data) {
   })
 }
 
-export function stopVideo(deviceId) {
+export function stopVideo(deviceId, channelId) {
   return service({
-    url: `/video/${deviceId}/stop`,
-    method: 'post'
+    url: `/video/stop/${deviceId}`,
+    method: 'post',
+    data: { channel_id: channelId }
   })
 }

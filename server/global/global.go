@@ -39,6 +39,8 @@ var (
 	GVA_ACTIVE_DBNAME       *string
 	GVA_MCP_SERVER          *server.MCPServer
 	GVA_SIP_SERVER          *gbsip.Server
+	GVA_ZLM_HANDLER         interface{} // ZLM hook handler (type: *zlm.HookHandler)
+	GVA_ZLM_CLIENT          interface{} // ZLM API client (type: *zlm.Client)
 	BlackCache              local_cache.Cache
 	lock                    sync.RWMutex
 )

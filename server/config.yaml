@@ -263,10 +263,10 @@ wvp:
         sip_log: true
     zlmediakit:
         servers:
-          - id: "your_server_id"
-            ip: "192.168.12.130"
-            http_port: 18080
-            secret: "5gUHHs6raRKFyN3juxGgWXuiAoge2WuF"
+          - id: 34020000002020000001
+            ip: 192.168.10.116
+            http_port: 8898
+            secret: 77ThLXoX1vkebDytuUGP57RZeS7St3cH
             default: true
         stream:
             app: "live"
