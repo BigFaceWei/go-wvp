@@ -291,11 +291,13 @@ func parseAddr(addr string) (string, int) {
 	return addr, 0
 }
 
-func (s *Server) SendInvite(deviceID, targetAddr, sdp, subject string) (*Transaction, error) {
-	requestURI := fmt.Sprintf("sip:%s@%s", deviceID, s.config.Domain)
+func (s *Server) SendInvite(channelID, targetAddr, sdp, subject string) (*Transaction, error) {
+	// Request-URI and To header must use the device's IP:Port, not the SIP domain.
+	// This matches wvp-GB28181-pro's createInviteRequest which uses device.getHostAddress().
+	requestURI := fmt.Sprintf("sip:%s@%s", channelID, targetAddr)
 	contact := fmt.Sprintf("<sip:%s@%s:%d>", s.config.ServerID, s.config.ListenIP, s.config.ListenPort)
 	headers := map[string]string{
-		"To":      fmt.Sprintf("<sip:%s@%s>", deviceID, s.config.Domain),
+		"To":      fmt.Sprintf("<sip:%s@%s>", channelID, targetAddr),
 		"Contact": contact,
 	}
 	if subject != "" {

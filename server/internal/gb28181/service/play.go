@@ -93,7 +93,8 @@ func PlayVideo(deviceID, channelID, ssrc string) (*PlayResult, error) {
 		zap.String("ssrc", ssrc),
 	)
 
-	subject := fmt.Sprintf("%s:%s,%s", channelID, ssrc, global.GVA_CONFIG.WVP.SIP.ServerID)
+	// Format matches wvp-GB28181-pro: {channelId}:{ssrc},{sipId}:0
+	subject := fmt.Sprintf("%s:%s,%s:0", channelID, ssrc, global.GVA_CONFIG.WVP.SIP.ServerID)
 	txn, err := srv.SendInvite(channelID, targetAddr, sdp, subject)
 	if err != nil {
 		return nil, fmt.Errorf("send INVITE failed: %w", err)

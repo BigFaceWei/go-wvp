@@ -83,40 +83,30 @@ func (h *InviteHandler) ParseInviteResponse(body []byte) (*InviteResponse, error
 }
 
 func (h *InviteHandler) BuildInviteSDP(req *InviteRequest) string {
+	// SDP construction matching wvp-GB28181-pro's SIPCommander.playStreamCmd()
 	sdp := fmt.Sprintf("v=0\r\n")
-	sdp += fmt.Sprintf("o=%s %s 0 IN IP4 %s\r\n", req.ChannelID, req.SSRC, req.MediaIP)
+	// o= uses deviceID (not channelID), with session ID and version set to 0
+	sdp += fmt.Sprintf("o=%s 0 0 IN IP4 %s\r\n", req.DeviceID, req.MediaIP)
 	sdp += fmt.Sprintf("s=%s\r\n", "Play")
 	sdp += fmt.Sprintf("c=IN IP4 %s\r\n", req.MediaIP)
 	sdp += fmt.Sprintf("t=0 0\r\n")
+
+	// Build m= line with multiple codec payload types (matching Java wvp)
+	// Standard mode: 96=PS, 97=MPEG4, 98=H264, 99=H265
+	codecList := "96 97 98 99"
+	sdp += fmt.Sprintf("m=video %d RTP/AVP %s\r\n", req.MediaPort, codecList)
+	sdp += fmt.Sprintf("a=recvonly\r\n")
+	sdp += fmt.Sprintf("a=rtpmap:96 PS/90000\r\n")
+	sdp += fmt.Sprintf("a=rtpmap:98 H264/90000\r\n")
+	sdp += fmt.Sprintf("a=rtpmap:97 MPEG4/90000\r\n")
+	sdp += fmt.Sprintf("a=rtpmap:99 H265/90000\r\n")
 
 	if req.SSRC != "" {
 		sdp += fmt.Sprintf("y=%s\r\n", req.SSRC)
 	}
 
-	// GB/T 28181-2016 f= line: media format description
-	// V2/4/2 = Video, H.264, Main Profile (standard for embedded DVR/NVR)
-	sdp += fmt.Sprintf("f=V2/4/2\r\n")
-
-	for _, codec := range req.Codecs {
-		switch codec {
-		case "PS":
-			sdp += fmt.Sprintf("m=video %d RTP/AVP 96\r\n", req.MediaPort)
-			sdp += fmt.Sprintf("a=rtpmap:96 PS/90000\r\n")
-		case "H264":
-			sdp += fmt.Sprintf("m=video %d RTP/AVP 96\r\n", req.MediaPort)
-			sdp += fmt.Sprintf("a=rtpmap:96 H264/90000\r\n")
-		case "AAC":
-			sdp += fmt.Sprintf("m=audio %d RTP/AVP 97\r\n", req.MediaPort+2)
-			sdp += fmt.Sprintf("a=rtpmap:97 MPEG4-GENERIC/8000/1\r\n")
-		}
-	}
-
-	if len(req.Codecs) == 0 {
-		sdp += fmt.Sprintf("m=video %d RTP/AVP 96\r\n", req.MediaPort)
-		sdp += fmt.Sprintf("a=rtpmap:96 PS/90000\r\n")
-	}
-
-	sdp += fmt.Sprintf("a=recvonly\r\n")
+	// f= field intentionally omitted — wvp-GB28181-pro comments it out with:
+	// "未发现支持此特性的设备" (no devices found that support this feature)
 
 	return sdp
 }
