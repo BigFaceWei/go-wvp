@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"strings"
 	"sync"
+	"time"
 
 	"go.uber.org/zap"
 )
@@ -20,6 +21,12 @@ type StopStreamFunc func(deviceID, channelID string) error
 // on_stream_none_reader hooks with full cleanup (BYE + closeRtpServer + close_streams).
 // The service package imports zlm, so assignment avoids circular imports.
 var OnStreamNoneReaderCallback StopStreamFunc
+
+// Stream registration wait mechanism
+var (
+	streamWaiters     = make(map[string]chan struct{})
+	streamWaitersMu   sync.RWMutex
+)
 
 type HookHandler struct {
 	client   *Client
@@ -130,16 +137,21 @@ func (h *HookHandler) DefaultPublishHookHandler(params map[string]interface{}) e
 
 func (h *HookHandler) DefaultStreamChangedHandler(params map[string]interface{}) error {
 	register := getBool(params, "regist")
+	stream := getStr(params, "stream")
+	app := getStr(params, "app")
+	schema := getStr(params, "schema")
+
 	if register {
 		h.logger.Info("Stream registered",
-			zap.String("schema", getStr(params, "schema")),
-			zap.String("app", getStr(params, "app")),
-			zap.String("stream", getStr(params, "stream")),
+			zap.String("schema", schema),
+			zap.String("app", app),
+			zap.String("stream", stream),
 		)
+		NotifyStreamRegistered(stream)
 	} else {
 		h.logger.Info("Stream unregistered",
-			zap.String("app", getStr(params, "app")),
-			zap.String("stream", getStr(params, "stream")),
+			zap.String("app", app),
+			zap.String("stream", stream),
 		)
 	}
 	return nil
@@ -224,6 +236,63 @@ func (h *HookHandler) DefaultServerKeepaliveHandler(params map[string]interface{
 func (h *HookHandler) DefaultServerStartedHandler(params map[string]interface{}) error {
 	h.logger.Info("on_server_started hook — ZLM server started")
 	return nil
+}
+
+// RegisterStreamWaiter registers a waiter for a stream to be registered.
+// Returns a channel that will be closed when the stream is registered, or nil if already registered.
+func RegisterStreamWaiter(streamID string) <-chan struct{} {
+	streamWaitersMu.Lock()
+	defer streamWaitersMu.Unlock()
+
+	if _, exists := streamWaiters[streamID]; exists {
+		return nil
+	}
+
+	ch := make(chan struct{})
+	streamWaiters[streamID] = ch
+	return ch
+}
+
+// UnregisterStreamWaiter removes a waiter for a stream.
+func UnregisterStreamWaiter(streamID string) {
+	streamWaitersMu.Lock()
+	defer streamWaitersMu.Unlock()
+
+	if ch, exists := streamWaiters[streamID]; exists {
+		close(ch)
+		delete(streamWaiters, streamID)
+	}
+}
+
+// NotifyStreamRegistered notifies all waiters that a stream has been registered.
+func NotifyStreamRegistered(streamID string) {
+	streamWaitersMu.RLock()
+	ch, exists := streamWaiters[streamID]
+	streamWaitersMu.RUnlock()
+
+	if exists {
+		close(ch)
+		streamWaitersMu.Lock()
+		delete(streamWaiters, streamID)
+		streamWaitersMu.Unlock()
+	}
+}
+
+// WaitForStreamRegistered waits for a stream to be registered in ZLMediaKit.
+// Returns nil if the stream is registered within the timeout, or an error if timeout.
+func WaitForStreamRegistered(streamID string, timeout time.Duration) error {
+	ch := RegisterStreamWaiter(streamID)
+	if ch == nil {
+		return nil
+	}
+
+	select {
+	case <-ch:
+		return nil
+	case <-time.After(timeout):
+		UnregisterStreamWaiter(streamID)
+		return fmt.Errorf("stream registration timeout: %s", streamID)
+	}
 }
 
 // RegisterDefaultHandlers registers all ZLMediaKit hook handlers.

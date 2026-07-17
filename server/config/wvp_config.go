@@ -139,4 +139,7 @@ type UserSettingsConfig struct {
 	
 	// 流按需拉取
 	StreamOnDemand bool `mapstructure:"stream_on_demand" json:"stream_on_demand" yaml:"stream_on_demand"`
+	
+	// 流注册等待超时时间（毫秒），默认8000ms
+	StreamWaitTimeout int `mapstructure:"stream_wait_timeout" json:"stream_wait_timeout" yaml:"stream_wait_timeout"`
 }

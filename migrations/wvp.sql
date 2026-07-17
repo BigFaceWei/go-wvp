@@ -11,7 +11,7 @@
  Target Server Version : 80020 (8.0.20)
  File Encoding         : 65001
 
- Date: 14/07/2026 21:03:33
+ Date: 17/07/2026 17:07:33
 */
 
 SET NAMES utf8mb4;
@@ -32,283 +32,284 @@ CREATE TABLE `casbin_rule`  (
   `v5` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `idx_casbin_rule`(`ptype` ASC, `v0` ASC, `v1` ASC, `v2` ASC, `v3` ASC, `v4` ASC, `v5` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 690 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 963 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of casbin_rule
 -- ----------------------------
-INSERT INTO `casbin_rule` VALUES (438, 'p', '888', '/alarm/:id', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (440, 'p', '888', '/alarm/:id', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (439, 'p', '888', '/alarm/:id/handle', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (442, 'p', '888', '/alarm/list', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (441, 'p', '888', '/alarm/statistics', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (670, 'p', '888', '/api/createApi', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (669, 'p', '888', '/api/deleteApi', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (664, 'p', '888', '/api/deleteApisByIds', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (661, 'p', '888', '/api/enterSyncApi', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (666, 'p', '888', '/api/getAllApis', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (665, 'p', '888', '/api/getApiById', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (662, 'p', '888', '/api/getApiGroups', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (667, 'p', '888', '/api/getApiList', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (659, 'p', '888', '/api/getApiRoles', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (660, 'p', '888', '/api/ignoreApi', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (658, 'p', '888', '/api/setApiRoles', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (663, 'p', '888', '/api/syncApi', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (668, 'p', '888', '/api/updateApi', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (509, 'p', '888', '/attachmentCategory/addCategory', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (508, 'p', '888', '/attachmentCategory/deleteCategory', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (510, 'p', '888', '/attachmentCategory/getCategoryList', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (657, 'p', '888', '/authority/copyAuthority', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (656, 'p', '888', '/authority/createAuthority', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (655, 'p', '888', '/authority/deleteAuthority', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (653, 'p', '888', '/authority/getAuthorityList', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (651, 'p', '888', '/authority/getUsersByAuthority', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (652, 'p', '888', '/authority/setDataAuthority', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (650, 'p', '888', '/authority/setRoleUsers', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (654, 'p', '888', '/authority/updateAuthority', 'PUT', '', '', '');
-INSERT INTO `casbin_rule` VALUES (541, 'p', '888', '/authorityBtn/canRemoveAuthorityBtn', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (542, 'p', '888', '/authorityBtn/getAuthorityBtn', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (543, 'p', '888', '/authorityBtn/setAuthorityBtn', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (570, 'p', '888', '/autoCode/addFunc', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (578, 'p', '888', '/autoCode/createPackage', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (597, 'p', '888', '/autoCode/createTemp', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (580, 'p', '888', '/autoCode/deleteAIWorkflowSession', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (575, 'p', '888', '/autoCode/delPackage', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (571, 'p', '888', '/autoCode/delSysHistory', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (579, 'p', '888', '/autoCode/dumpAIWorkflowMarkdown', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (581, 'p', '888', '/autoCode/getAIWorkflowSessionDetail', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (582, 'p', '888', '/autoCode/getAIWorkflowSessionList', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (595, 'p', '888', '/autoCode/getColumn', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (599, 'p', '888', '/autoCode/getDB', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (574, 'p', '888', '/autoCode/getMeta', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (576, 'p', '888', '/autoCode/getPackage', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (591, 'p', '888', '/autoCode/getPluginList', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (572, 'p', '888', '/autoCode/getSysHistory', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (598, 'p', '888', '/autoCode/getTables', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (577, 'p', '888', '/autoCode/getTemplates', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (594, 'p', '888', '/autoCode/installPlugin', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (590, 'p', '888', '/autoCode/mcp', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (584, 'p', '888', '/autoCode/mcpList', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (586, 'p', '888', '/autoCode/mcpRoutes', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (588, 'p', '888', '/autoCode/mcpStart', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (589, 'p', '888', '/autoCode/mcpStatus', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (587, 'p', '888', '/autoCode/mcpStop', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (585, 'p', '888', '/autoCode/mcpTest', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (596, 'p', '888', '/autoCode/preview', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (593, 'p', '888', '/autoCode/pubPlug', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (592, 'p', '888', '/autoCode/removePlugin', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (573, 'p', '888', '/autoCode/rollback', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (583, 'p', '888', '/autoCode/saveAIWorkflowSession', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (648, 'p', '888', '/casbin/getPolicyPathByAuthorityId', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (649, 'p', '888', '/casbin/updateCasbin', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (602, 'p', '888', '/customer/customer', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (601, 'p', '888', '/customer/customer', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (603, 'p', '888', '/customer/customer', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (604, 'p', '888', '/customer/customer', 'PUT', '', '', '');
-INSERT INTO `casbin_rule` VALUES (600, 'p', '888', '/customer/customerList', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (462, 'p', '888', '/device', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (460, 'p', '888', '/device/:id', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (463, 'p', '888', '/device/:id', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (461, 'p', '888', '/device/:id', 'PUT', '', '', '');
-INSERT INTO `casbin_rule` VALUES (458, 'p', '888', '/device/:id/catalog', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (459, 'p', '888', '/device/:id/channels', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (457, 'p', '888', '/device/:id/status', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (419, 'p', '888', '/device/broadcast/:deviceId', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (418, 'p', '888', '/device/broadcast/:deviceId/audio', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (428, 'p', '888', '/device/control/:deviceId/dragzoom/in', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (427, 'p', '888', '/device/control/:deviceId/dragzoom/out', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (431, 'p', '888', '/device/control/:deviceId/guard', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (430, 'p', '888', '/device/control/:deviceId/home', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (429, 'p', '888', '/device/control/:deviceId/iframe', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (432, 'p', '888', '/device/control/:deviceId/record', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (433, 'p', '888', '/device/control/:deviceId/teleboot', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (423, 'p', '888', '/device/cruise/:deviceId/start', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (422, 'p', '888', '/device/cruise/:deviceId/stop', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (464, 'p', '888', '/device/list', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (425, 'p', '888', '/device/preset/:deviceId/goto', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (424, 'p', '888', '/device/preset/:deviceId/remove', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (426, 'p', '888', '/device/preset/:deviceId/set', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (421, 'p', '888', '/device/scan/:deviceId/start', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (420, 'p', '888', '/device/scan/:deviceId/stop', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (545, 'p', '888', '/email/emailTest', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (544, 'p', '888', '/email/sendEmail', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (635, 'p', '888', '/fileUploadAndDownload/breakpointContinue', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (634, 'p', '888', '/fileUploadAndDownload/breakpointContinueFinish', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (631, 'p', '888', '/fileUploadAndDownload/deleteFile', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (630, 'p', '888', '/fileUploadAndDownload/editFileName', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (636, 'p', '888', '/fileUploadAndDownload/findFile', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (629, 'p', '888', '/fileUploadAndDownload/getFileList', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (628, 'p', '888', '/fileUploadAndDownload/importURL', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (633, 'p', '888', '/fileUploadAndDownload/removeChunk', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (632, 'p', '888', '/fileUploadAndDownload/upload', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (498, 'p', '888', '/group', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (496, 'p', '888', '/group/:id', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (497, 'p', '888', '/group/:id', 'PUT', '', '', '');
-INSERT INTO `casbin_rule` VALUES (499, 'p', '888', '/group/list', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (500, 'p', '888', '/group/tree', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (523, 'p', '888', '/info/createInfo', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (522, 'p', '888', '/info/deleteInfo', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (521, 'p', '888', '/info/deleteInfoByIds', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (519, 'p', '888', '/info/findInfo', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (518, 'p', '888', '/info/getInfoList', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (520, 'p', '888', '/info/updateInfo', 'PUT', '', '', '');
-INSERT INTO `casbin_rule` VALUES (689, 'p', '888', '/jwt/jsonInBlacklist', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (647, 'p', '888', '/menu/addBaseMenu', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (639, 'p', '888', '/menu/addMenuAuthority', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (645, 'p', '888', '/menu/deleteBaseMenu', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (643, 'p', '888', '/menu/getBaseMenuById', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (641, 'p', '888', '/menu/getBaseMenuTree', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (646, 'p', '888', '/menu/getMenu', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (640, 'p', '888', '/menu/getMenuAuthority', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (642, 'p', '888', '/menu/getMenuList', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (638, 'p', '888', '/menu/getMenuRoles', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (637, 'p', '888', '/menu/setMenuRoles', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (644, 'p', '888', '/menu/updateBaseMenu', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (449, 'p', '888', '/platform', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (447, 'p', '888', '/platform/:id', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (450, 'p', '888', '/platform/:id', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (448, 'p', '888', '/platform/:id', 'PUT', '', '', '');
-INSERT INTO `casbin_rule` VALUES (446, 'p', '888', '/platform/:id/channels', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (444, 'p', '888', '/platform/:id/start', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (443, 'p', '888', '/platform/:id/stop', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (445, 'p', '888', '/platform/:id/sync', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (452, 'p', '888', '/platform/list', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (451, 'p', '888', '/platform/online', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (434, 'p', '888', '/position/:id', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (436, 'p', '888', '/position/:id', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (435, 'p', '888', '/position/:id/track', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (437, 'p', '888', '/position/list', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (468, 'p', '888', '/record/file/download/:id', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (469, 'p', '888', '/record/file/list', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (467, 'p', '888', '/record/file/preview/:id', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (474, 'p', '888', '/record/plan', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (472, 'p', '888', '/record/plan/:id', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (475, 'p', '888', '/record/plan/:id', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (473, 'p', '888', '/record/plan/:id', 'PUT', '', '', '');
-INSERT INTO `casbin_rule` VALUES (471, 'p', '888', '/record/plan/:id/start', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (470, 'p', '888', '/record/plan/:id/stop', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (476, 'p', '888', '/record/plan/list', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (466, 'p', '888', '/record/playback', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (465, 'p', '888', '/record/playback/stop/:id', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (493, 'p', '888', '/region', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (491, 'p', '888', '/region/:code', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (492, 'p', '888', '/region/:code', 'PUT', '', '', '');
-INSERT INTO `casbin_rule` VALUES (494, 'p', '888', '/region/list', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (495, 'p', '888', '/region/tree', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (547, 'p', '888', '/simpleUploader/checkFileMd5', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (546, 'p', '888', '/simpleUploader/mergeFileMd5', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (548, 'p', '888', '/simpleUploader/upload', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (613, 'p', '888', '/skills/createReference', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (616, 'p', '888', '/skills/createResource', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (619, 'p', '888', '/skills/createScript', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (610, 'p', '888', '/skills/createTemplate', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (620, 'p', '888', '/skills/deleteSkill', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (607, 'p', '888', '/skills/getGlobalConstraint', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (612, 'p', '888', '/skills/getReference', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (615, 'p', '888', '/skills/getResource', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (618, 'p', '888', '/skills/getScript', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (622, 'p', '888', '/skills/getSkillDetail', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (623, 'p', '888', '/skills/getSkillList', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (609, 'p', '888', '/skills/getTemplate', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (624, 'p', '888', '/skills/getTools', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (605, 'p', '888', '/skills/packageSkill', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (606, 'p', '888', '/skills/saveGlobalConstraint', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (611, 'p', '888', '/skills/saveReference', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (614, 'p', '888', '/skills/saveResource', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (617, 'p', '888', '/skills/saveScript', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (621, 'p', '888', '/skills/saveSkill', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (608, 'p', '888', '/skills/saveTemplate', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (488, 'p', '888', '/stream/proxy', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (486, 'p', '888', '/stream/proxy/:id', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (489, 'p', '888', '/stream/proxy/:id', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (487, 'p', '888', '/stream/proxy/:id', 'PUT', '', '', '');
-INSERT INTO `casbin_rule` VALUES (485, 'p', '888', '/stream/proxy/:id/start', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (484, 'p', '888', '/stream/proxy/:id/stop', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (490, 'p', '888', '/stream/proxy/list', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (481, 'p', '888', '/stream/push', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (479, 'p', '888', '/stream/push/:id', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (482, 'p', '888', '/stream/push/:id', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (480, 'p', '888', '/stream/push/:id', 'PUT', '', '', '');
-INSERT INTO `casbin_rule` VALUES (478, 'p', '888', '/stream/push/:id/start', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (477, 'p', '888', '/stream/push/:id/stop', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (483, 'p', '888', '/stream/push/list', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (684, 'p', '888', '/sysApiToken/createApiToken', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (682, 'p', '888', '/sysApiToken/deleteApiToken', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (683, 'p', '888', '/sysApiToken/getApiTokenList', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (560, 'p', '888', '/sysDictionary/createSysDictionary', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (559, 'p', '888', '/sysDictionary/deleteSysDictionary', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (554, 'p', '888', '/sysDictionary/exportSysDictionary', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (557, 'p', '888', '/sysDictionary/findSysDictionary', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (556, 'p', '888', '/sysDictionary/getSysDictionaryList', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (555, 'p', '888', '/sysDictionary/importSysDictionary', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (558, 'p', '888', '/sysDictionary/updateSysDictionary', 'PUT', '', '', '');
-INSERT INTO `casbin_rule` VALUES (568, 'p', '888', '/sysDictionaryDetail/createSysDictionaryDetail', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (567, 'p', '888', '/sysDictionaryDetail/deleteSysDictionaryDetail', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (566, 'p', '888', '/sysDictionaryDetail/findSysDictionaryDetail', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (562, 'p', '888', '/sysDictionaryDetail/getDictionaryDetailsByParent', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (561, 'p', '888', '/sysDictionaryDetail/getDictionaryPath', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (564, 'p', '888', '/sysDictionaryDetail/getDictionaryTreeList', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (563, 'p', '888', '/sysDictionaryDetail/getDictionaryTreeListByType', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (565, 'p', '888', '/sysDictionaryDetail/getSysDictionaryDetailList', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (569, 'p', '888', '/sysDictionaryDetail/updateSysDictionaryDetail', 'PUT', '', '', '');
-INSERT INTO `casbin_rule` VALUES (530, 'p', '888', '/sysError/createSysError', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (529, 'p', '888', '/sysError/deleteSysError', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (528, 'p', '888', '/sysError/deleteSysErrorByIds', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (526, 'p', '888', '/sysError/findSysError', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (525, 'p', '888', '/sysError/getSysErrorList', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (524, 'p', '888', '/sysError/getSysErrorSolution', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (527, 'p', '888', '/sysError/updateSysError', 'PUT', '', '', '');
-INSERT INTO `casbin_rule` VALUES (540, 'p', '888', '/sysExportTemplate/createSysExportTemplate', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (539, 'p', '888', '/sysExportTemplate/deleteSysExportTemplate', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (538, 'p', '888', '/sysExportTemplate/deleteSysExportTemplateByIds', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (534, 'p', '888', '/sysExportTemplate/exportExcel', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (533, 'p', '888', '/sysExportTemplate/exportTemplate', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (536, 'p', '888', '/sysExportTemplate/findSysExportTemplate', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (535, 'p', '888', '/sysExportTemplate/getSysExportTemplateList', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (531, 'p', '888', '/sysExportTemplate/importExcel', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (532, 'p', '888', '/sysExportTemplate/previewSQL', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (537, 'p', '888', '/sysExportTemplate/updateSysExportTemplate', 'PUT', '', '', '');
-INSERT INTO `casbin_rule` VALUES (688, 'p', '888', '/sysLoginLog/deleteLoginLog', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (687, 'p', '888', '/sysLoginLog/deleteLoginLogByIds', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (686, 'p', '888', '/sysLoginLog/findLoginLog', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (685, 'p', '888', '/sysLoginLog/getLoginLogList', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (553, 'p', '888', '/sysOperationRecord/createSysOperationRecord', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (550, 'p', '888', '/sysOperationRecord/deleteSysOperationRecord', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (549, 'p', '888', '/sysOperationRecord/deleteSysOperationRecordByIds', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (552, 'p', '888', '/sysOperationRecord/findSysOperationRecord', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (551, 'p', '888', '/sysOperationRecord/getSysOperationRecordList', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (517, 'p', '888', '/sysParams/createSysParams', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (516, 'p', '888', '/sysParams/deleteSysParams', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (515, 'p', '888', '/sysParams/deleteSysParamsByIds', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (513, 'p', '888', '/sysParams/findSysParams', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (511, 'p', '888', '/sysParams/getSysParam', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (512, 'p', '888', '/sysParams/getSysParamsList', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (514, 'p', '888', '/sysParams/updateSysParams', 'PUT', '', '', '');
-INSERT INTO `casbin_rule` VALUES (627, 'p', '888', '/system/getServerInfo', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (626, 'p', '888', '/system/getSystemConfig', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (625, 'p', '888', '/system/setSystemConfig', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (502, 'p', '888', '/sysVersion/deleteSysVersion', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (501, 'p', '888', '/sysVersion/deleteSysVersionByIds', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (505, 'p', '888', '/sysVersion/downloadVersionJson', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (504, 'p', '888', '/sysVersion/exportVersion', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (507, 'p', '888', '/sysVersion/findSysVersion', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (506, 'p', '888', '/sysVersion/getSysVersionList', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (503, 'p', '888', '/sysVersion/importVersion', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (680, 'p', '888', '/user/admin_register', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (674, 'p', '888', '/user/changePassword', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (681, 'p', '888', '/user/deleteUser', 'DELETE', '', '', '');
-INSERT INTO `casbin_rule` VALUES (676, 'p', '888', '/user/getUserInfo', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (679, 'p', '888', '/user/getUserList', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (672, 'p', '888', '/user/resetPassword', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (677, 'p', '888', '/user/setSelfInfo', 'PUT', '', '', '');
-INSERT INTO `casbin_rule` VALUES (671, 'p', '888', '/user/setSelfSetting', 'PUT', '', '', '');
-INSERT INTO `casbin_rule` VALUES (675, 'p', '888', '/user/setUserAuthorities', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (673, 'p', '888', '/user/setUserAuthority', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (678, 'p', '888', '/user/setUserInfo', 'PUT', '', '', '');
-INSERT INTO `casbin_rule` VALUES (456, 'p', '888', '/video/play', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (454, 'p', '888', '/video/ptz/:id', 'POST', '', '', '');
-INSERT INTO `casbin_rule` VALUES (453, 'p', '888', '/video/status/:id', 'GET', '', '', '');
-INSERT INTO `casbin_rule` VALUES (455, 'p', '888', '/video/stop/:id', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (719, 'p', '888', '/alarm/:id', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (721, 'p', '888', '/alarm/:id', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (720, 'p', '888', '/alarm/:id/handle', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (723, 'p', '888', '/alarm/list', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (722, 'p', '888', '/alarm/statistics', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (943, 'p', '888', '/api/createApi', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (942, 'p', '888', '/api/deleteApi', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (937, 'p', '888', '/api/deleteApisByIds', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (934, 'p', '888', '/api/enterSyncApi', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (939, 'p', '888', '/api/getAllApis', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (938, 'p', '888', '/api/getApiById', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (935, 'p', '888', '/api/getApiGroups', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (940, 'p', '888', '/api/getApiList', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (932, 'p', '888', '/api/getApiRoles', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (933, 'p', '888', '/api/ignoreApi', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (931, 'p', '888', '/api/setApiRoles', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (936, 'p', '888', '/api/syncApi', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (941, 'p', '888', '/api/updateApi', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (782, 'p', '888', '/attachmentCategory/addCategory', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (781, 'p', '888', '/attachmentCategory/deleteCategory', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (783, 'p', '888', '/attachmentCategory/getCategoryList', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (930, 'p', '888', '/authority/copyAuthority', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (929, 'p', '888', '/authority/createAuthority', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (928, 'p', '888', '/authority/deleteAuthority', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (926, 'p', '888', '/authority/getAuthorityList', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (924, 'p', '888', '/authority/getUsersByAuthority', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (925, 'p', '888', '/authority/setDataAuthority', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (923, 'p', '888', '/authority/setRoleUsers', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (927, 'p', '888', '/authority/updateAuthority', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (814, 'p', '888', '/authorityBtn/canRemoveAuthorityBtn', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (815, 'p', '888', '/authorityBtn/getAuthorityBtn', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (816, 'p', '888', '/authorityBtn/setAuthorityBtn', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (843, 'p', '888', '/autoCode/addFunc', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (851, 'p', '888', '/autoCode/createPackage', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (870, 'p', '888', '/autoCode/createTemp', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (853, 'p', '888', '/autoCode/deleteAIWorkflowSession', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (848, 'p', '888', '/autoCode/delPackage', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (844, 'p', '888', '/autoCode/delSysHistory', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (852, 'p', '888', '/autoCode/dumpAIWorkflowMarkdown', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (854, 'p', '888', '/autoCode/getAIWorkflowSessionDetail', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (855, 'p', '888', '/autoCode/getAIWorkflowSessionList', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (868, 'p', '888', '/autoCode/getColumn', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (872, 'p', '888', '/autoCode/getDB', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (847, 'p', '888', '/autoCode/getMeta', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (849, 'p', '888', '/autoCode/getPackage', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (864, 'p', '888', '/autoCode/getPluginList', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (845, 'p', '888', '/autoCode/getSysHistory', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (871, 'p', '888', '/autoCode/getTables', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (850, 'p', '888', '/autoCode/getTemplates', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (867, 'p', '888', '/autoCode/installPlugin', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (863, 'p', '888', '/autoCode/mcp', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (857, 'p', '888', '/autoCode/mcpList', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (859, 'p', '888', '/autoCode/mcpRoutes', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (861, 'p', '888', '/autoCode/mcpStart', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (862, 'p', '888', '/autoCode/mcpStatus', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (860, 'p', '888', '/autoCode/mcpStop', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (858, 'p', '888', '/autoCode/mcpTest', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (869, 'p', '888', '/autoCode/preview', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (866, 'p', '888', '/autoCode/pubPlug', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (865, 'p', '888', '/autoCode/removePlugin', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (846, 'p', '888', '/autoCode/rollback', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (856, 'p', '888', '/autoCode/saveAIWorkflowSession', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (921, 'p', '888', '/casbin/getPolicyPathByAuthorityId', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (922, 'p', '888', '/casbin/updateCasbin', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (690, 'p', '888', '/channel/list', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (875, 'p', '888', '/customer/customer', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (874, 'p', '888', '/customer/customer', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (876, 'p', '888', '/customer/customer', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (877, 'p', '888', '/customer/customer', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (873, 'p', '888', '/customer/customerList', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (696, 'p', '888', '/device', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (694, 'p', '888', '/device/:id', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (697, 'p', '888', '/device/:id', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (695, 'p', '888', '/device/:id', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (692, 'p', '888', '/device/:id/catalog', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (693, 'p', '888', '/device/:id/channels', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (691, 'p', '888', '/device/:id/status', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (700, 'p', '888', '/device/broadcast/:deviceId', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (699, 'p', '888', '/device/broadcast/:deviceId/audio', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (709, 'p', '888', '/device/control/:deviceId/dragzoom/in', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (708, 'p', '888', '/device/control/:deviceId/dragzoom/out', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (712, 'p', '888', '/device/control/:deviceId/guard', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (711, 'p', '888', '/device/control/:deviceId/home', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (710, 'p', '888', '/device/control/:deviceId/iframe', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (713, 'p', '888', '/device/control/:deviceId/record', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (714, 'p', '888', '/device/control/:deviceId/teleboot', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (704, 'p', '888', '/device/cruise/:deviceId/start', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (703, 'p', '888', '/device/cruise/:deviceId/stop', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (698, 'p', '888', '/device/list', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (706, 'p', '888', '/device/preset/:deviceId/goto', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (705, 'p', '888', '/device/preset/:deviceId/remove', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (707, 'p', '888', '/device/preset/:deviceId/set', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (702, 'p', '888', '/device/scan/:deviceId/start', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (701, 'p', '888', '/device/scan/:deviceId/stop', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (818, 'p', '888', '/email/emailTest', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (817, 'p', '888', '/email/sendEmail', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (908, 'p', '888', '/fileUploadAndDownload/breakpointContinue', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (907, 'p', '888', '/fileUploadAndDownload/breakpointContinueFinish', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (904, 'p', '888', '/fileUploadAndDownload/deleteFile', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (903, 'p', '888', '/fileUploadAndDownload/editFileName', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (909, 'p', '888', '/fileUploadAndDownload/findFile', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (902, 'p', '888', '/fileUploadAndDownload/getFileList', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (901, 'p', '888', '/fileUploadAndDownload/importURL', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (906, 'p', '888', '/fileUploadAndDownload/removeChunk', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (905, 'p', '888', '/fileUploadAndDownload/upload', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (771, 'p', '888', '/group', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (769, 'p', '888', '/group/:id', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (770, 'p', '888', '/group/:id', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (772, 'p', '888', '/group/list', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (773, 'p', '888', '/group/tree', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (796, 'p', '888', '/info/createInfo', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (795, 'p', '888', '/info/deleteInfo', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (794, 'p', '888', '/info/deleteInfoByIds', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (792, 'p', '888', '/info/findInfo', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (791, 'p', '888', '/info/getInfoList', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (793, 'p', '888', '/info/updateInfo', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (962, 'p', '888', '/jwt/jsonInBlacklist', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (920, 'p', '888', '/menu/addBaseMenu', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (912, 'p', '888', '/menu/addMenuAuthority', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (918, 'p', '888', '/menu/deleteBaseMenu', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (916, 'p', '888', '/menu/getBaseMenuById', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (914, 'p', '888', '/menu/getBaseMenuTree', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (919, 'p', '888', '/menu/getMenu', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (913, 'p', '888', '/menu/getMenuAuthority', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (915, 'p', '888', '/menu/getMenuList', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (911, 'p', '888', '/menu/getMenuRoles', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (910, 'p', '888', '/menu/setMenuRoles', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (917, 'p', '888', '/menu/updateBaseMenu', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (730, 'p', '888', '/platform', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (728, 'p', '888', '/platform/:id', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (731, 'p', '888', '/platform/:id', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (729, 'p', '888', '/platform/:id', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (727, 'p', '888', '/platform/:id/channels', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (725, 'p', '888', '/platform/:id/start', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (724, 'p', '888', '/platform/:id/stop', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (726, 'p', '888', '/platform/:id/sync', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (733, 'p', '888', '/platform/list', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (732, 'p', '888', '/platform/online', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (715, 'p', '888', '/position/:id', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (717, 'p', '888', '/position/:id', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (716, 'p', '888', '/position/:id/track', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (718, 'p', '888', '/position/list', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (741, 'p', '888', '/record/file/download/:id', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (742, 'p', '888', '/record/file/list', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (740, 'p', '888', '/record/file/preview/:id', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (747, 'p', '888', '/record/plan', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (745, 'p', '888', '/record/plan/:id', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (748, 'p', '888', '/record/plan/:id', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (746, 'p', '888', '/record/plan/:id', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (744, 'p', '888', '/record/plan/:id/start', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (743, 'p', '888', '/record/plan/:id/stop', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (749, 'p', '888', '/record/plan/list', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (739, 'p', '888', '/record/playback', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (738, 'p', '888', '/record/playback/stop/:id', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (766, 'p', '888', '/region', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (764, 'p', '888', '/region/:code', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (765, 'p', '888', '/region/:code', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (767, 'p', '888', '/region/list', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (768, 'p', '888', '/region/tree', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (820, 'p', '888', '/simpleUploader/checkFileMd5', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (819, 'p', '888', '/simpleUploader/mergeFileMd5', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (821, 'p', '888', '/simpleUploader/upload', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (886, 'p', '888', '/skills/createReference', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (889, 'p', '888', '/skills/createResource', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (892, 'p', '888', '/skills/createScript', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (883, 'p', '888', '/skills/createTemplate', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (893, 'p', '888', '/skills/deleteSkill', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (880, 'p', '888', '/skills/getGlobalConstraint', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (885, 'p', '888', '/skills/getReference', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (888, 'p', '888', '/skills/getResource', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (891, 'p', '888', '/skills/getScript', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (895, 'p', '888', '/skills/getSkillDetail', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (896, 'p', '888', '/skills/getSkillList', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (882, 'p', '888', '/skills/getTemplate', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (897, 'p', '888', '/skills/getTools', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (878, 'p', '888', '/skills/packageSkill', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (879, 'p', '888', '/skills/saveGlobalConstraint', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (884, 'p', '888', '/skills/saveReference', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (887, 'p', '888', '/skills/saveResource', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (890, 'p', '888', '/skills/saveScript', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (894, 'p', '888', '/skills/saveSkill', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (881, 'p', '888', '/skills/saveTemplate', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (761, 'p', '888', '/stream/proxy', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (759, 'p', '888', '/stream/proxy/:id', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (762, 'p', '888', '/stream/proxy/:id', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (760, 'p', '888', '/stream/proxy/:id', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (758, 'p', '888', '/stream/proxy/:id/start', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (757, 'p', '888', '/stream/proxy/:id/stop', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (763, 'p', '888', '/stream/proxy/list', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (754, 'p', '888', '/stream/push', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (752, 'p', '888', '/stream/push/:id', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (755, 'p', '888', '/stream/push/:id', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (753, 'p', '888', '/stream/push/:id', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (751, 'p', '888', '/stream/push/:id/start', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (750, 'p', '888', '/stream/push/:id/stop', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (756, 'p', '888', '/stream/push/list', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (957, 'p', '888', '/sysApiToken/createApiToken', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (955, 'p', '888', '/sysApiToken/deleteApiToken', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (956, 'p', '888', '/sysApiToken/getApiTokenList', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (833, 'p', '888', '/sysDictionary/createSysDictionary', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (832, 'p', '888', '/sysDictionary/deleteSysDictionary', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (827, 'p', '888', '/sysDictionary/exportSysDictionary', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (830, 'p', '888', '/sysDictionary/findSysDictionary', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (829, 'p', '888', '/sysDictionary/getSysDictionaryList', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (828, 'p', '888', '/sysDictionary/importSysDictionary', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (831, 'p', '888', '/sysDictionary/updateSysDictionary', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (841, 'p', '888', '/sysDictionaryDetail/createSysDictionaryDetail', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (840, 'p', '888', '/sysDictionaryDetail/deleteSysDictionaryDetail', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (839, 'p', '888', '/sysDictionaryDetail/findSysDictionaryDetail', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (835, 'p', '888', '/sysDictionaryDetail/getDictionaryDetailsByParent', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (834, 'p', '888', '/sysDictionaryDetail/getDictionaryPath', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (837, 'p', '888', '/sysDictionaryDetail/getDictionaryTreeList', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (836, 'p', '888', '/sysDictionaryDetail/getDictionaryTreeListByType', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (838, 'p', '888', '/sysDictionaryDetail/getSysDictionaryDetailList', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (842, 'p', '888', '/sysDictionaryDetail/updateSysDictionaryDetail', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (803, 'p', '888', '/sysError/createSysError', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (802, 'p', '888', '/sysError/deleteSysError', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (801, 'p', '888', '/sysError/deleteSysErrorByIds', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (799, 'p', '888', '/sysError/findSysError', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (798, 'p', '888', '/sysError/getSysErrorList', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (797, 'p', '888', '/sysError/getSysErrorSolution', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (800, 'p', '888', '/sysError/updateSysError', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (813, 'p', '888', '/sysExportTemplate/createSysExportTemplate', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (812, 'p', '888', '/sysExportTemplate/deleteSysExportTemplate', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (811, 'p', '888', '/sysExportTemplate/deleteSysExportTemplateByIds', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (807, 'p', '888', '/sysExportTemplate/exportExcel', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (806, 'p', '888', '/sysExportTemplate/exportTemplate', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (809, 'p', '888', '/sysExportTemplate/findSysExportTemplate', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (808, 'p', '888', '/sysExportTemplate/getSysExportTemplateList', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (804, 'p', '888', '/sysExportTemplate/importExcel', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (805, 'p', '888', '/sysExportTemplate/previewSQL', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (810, 'p', '888', '/sysExportTemplate/updateSysExportTemplate', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (961, 'p', '888', '/sysLoginLog/deleteLoginLog', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (960, 'p', '888', '/sysLoginLog/deleteLoginLogByIds', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (959, 'p', '888', '/sysLoginLog/findLoginLog', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (958, 'p', '888', '/sysLoginLog/getLoginLogList', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (826, 'p', '888', '/sysOperationRecord/createSysOperationRecord', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (823, 'p', '888', '/sysOperationRecord/deleteSysOperationRecord', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (822, 'p', '888', '/sysOperationRecord/deleteSysOperationRecordByIds', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (825, 'p', '888', '/sysOperationRecord/findSysOperationRecord', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (824, 'p', '888', '/sysOperationRecord/getSysOperationRecordList', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (790, 'p', '888', '/sysParams/createSysParams', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (789, 'p', '888', '/sysParams/deleteSysParams', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (788, 'p', '888', '/sysParams/deleteSysParamsByIds', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (786, 'p', '888', '/sysParams/findSysParams', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (784, 'p', '888', '/sysParams/getSysParam', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (785, 'p', '888', '/sysParams/getSysParamsList', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (787, 'p', '888', '/sysParams/updateSysParams', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (900, 'p', '888', '/system/getServerInfo', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (899, 'p', '888', '/system/getSystemConfig', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (898, 'p', '888', '/system/setSystemConfig', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (775, 'p', '888', '/sysVersion/deleteSysVersion', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (774, 'p', '888', '/sysVersion/deleteSysVersionByIds', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (778, 'p', '888', '/sysVersion/downloadVersionJson', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (777, 'p', '888', '/sysVersion/exportVersion', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (780, 'p', '888', '/sysVersion/findSysVersion', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (779, 'p', '888', '/sysVersion/getSysVersionList', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (776, 'p', '888', '/sysVersion/importVersion', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (953, 'p', '888', '/user/admin_register', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (947, 'p', '888', '/user/changePassword', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (954, 'p', '888', '/user/deleteUser', 'DELETE', '', '', '');
+INSERT INTO `casbin_rule` VALUES (949, 'p', '888', '/user/getUserInfo', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (952, 'p', '888', '/user/getUserList', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (945, 'p', '888', '/user/resetPassword', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (950, 'p', '888', '/user/setSelfInfo', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (944, 'p', '888', '/user/setSelfSetting', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (948, 'p', '888', '/user/setUserAuthorities', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (946, 'p', '888', '/user/setUserAuthority', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (951, 'p', '888', '/user/setUserInfo', 'PUT', '', '', '');
+INSERT INTO `casbin_rule` VALUES (737, 'p', '888', '/video/play', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (735, 'p', '888', '/video/ptz/:id', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES (734, 'p', '888', '/video/status/:id', 'GET', '', '', '');
+INSERT INTO `casbin_rule` VALUES (736, 'p', '888', '/video/stop/:id', 'POST', '', '', '');
 INSERT INTO `casbin_rule` VALUES (193, 'p', '8881', '/api/createApi', 'POST', '', '', '');
 INSERT INTO `casbin_rule` VALUES (196, 'p', '8881', '/api/deleteApi', 'POST', '', '', '');
 INSERT INTO `casbin_rule` VALUES (198, 'p', '8881', '/api/getAllApis', 'POST', '', '', '');
@@ -477,7 +478,7 @@ CREATE TABLE `sys_ai_workflow_sessions`  (
   INDEX `idx_sys_ai_workflow_sessions_deleted_at`(`deleted_at` ASC) USING BTREE,
   INDEX `idx_sys_ai_workflow_sessions_user_id`(`user_id` ASC) USING BTREE,
   INDEX `idx_sys_ai_workflow_sessions_tab`(`tab` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_ai_workflow_sessions
@@ -500,7 +501,7 @@ CREATE TABLE `sys_api_tokens`  (
   `remark` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_sys_api_tokens_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_api_tokens
@@ -521,7 +522,7 @@ CREATE TABLE `sys_apis`  (
   `method` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'POST' COMMENT '方法',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_sys_apis_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 273 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 274 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_apis
@@ -798,6 +799,7 @@ INSERT INTO `sys_apis` VALUES (269, '2026-07-11 18:24:19.557', '2026-07-11 18:24
 INSERT INTO `sys_apis` VALUES (270, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/device/scan/:deviceId/stop', '停止扫描', '设备控制', 'POST');
 INSERT INTO `sys_apis` VALUES (271, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/device/broadcast/:deviceId', '语音广播', '设备控制', 'POST');
 INSERT INTO `sys_apis` VALUES (272, '2026-07-11 18:24:19.557', '2026-07-11 18:24:19.557', NULL, '/device/broadcast/:deviceId/audio', '音频广播/对讲', '设备控制', 'POST');
+INSERT INTO `sys_apis` VALUES (273, '2026-07-15 10:43:17.981', '2026-07-15 10:43:17.981', NULL, '/channel/list', '分页查询通道', '设备管理', 'GET');
 
 -- ----------------------------
 -- Table structure for sys_authorities
@@ -968,7 +970,7 @@ CREATE TABLE `sys_auto_code_packages`  (
   `module` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_sys_auto_code_packages_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_auto_code_packages
@@ -1212,7 +1214,7 @@ CREATE TABLE `sys_error`  (
   `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '未处理' COMMENT '处理状态',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_sys_error_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 73 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_error
@@ -1241,6 +1243,54 @@ INSERT INTO `sys_error` VALUES (21, '2026-07-11 19:20:33.815', '2026-07-11 19:20
 INSERT INTO `sys_error` VALUES (22, '2026-07-11 19:24:04.878', '2026-07-11 19:24:04.878', NULL, '后端', 'count devices failed | 错误: Error 1054 (42S22): Unknown column \'online\' in \'where clause\' \n 源文件:/home/wyd/gb28181/wvp-go/server/api/v1/gb28181/device.go:51 \n 调用栈：wvp-go/server/api/v1/gb28181.GetDeviceList\n	/home/wyd/gb28181/wvp-go/server/api/v1/gb28181/device.go:51\ngithub.com/gin-gonic/gin.(*Context).Next\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185\nwvp-go/server/initialize.Routers.CasbinHandler.func4\n	/home/wyd/gb28181/wvp-go/server/middleware/casbin_rbac.go:30\ngithub.com/gin-gonic/gin.(*Context).Next\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185\nwvp-go/server/initialize.Routers.JWTAuth.func3\n	/home/wyd/gb28181/wvp-go/server/middleware/jwt.go:69\ngithub.com/gin-gonic/gin.(*Context).Next\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185\ngithub.com/gin-gonic/gin.LoggerWithConfig.func1\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/logger.go:249\ngithub.com/gin-gonic/gin.(*Context).Next\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185\nwvp-go/server/initialize.Routers.GinRecovery.func2\n	/home/wyd/gb28181/wvp-go/server/middleware/error.go:78\ngithub.com/gin-gonic/gin.(*Context).Next\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185\ngithub.com/gin-gonic/gin.(*Engine).handleHTTPRequest\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/gin.go:633\ngithub.com/gin-gonic/gin.(*Engine).ServeHTTP\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/gin.go:589\nnet/http.serverHandler.ServeHTTP\n	/usr/local/go/src/net/http/server.go:3301\nnet/http.(*conn).serve\n	/usr/local/go/src/net/http/server.go:2102 \n 最终调用方法:/home/wyd/gb28181/wvp-go/server/api/v1/gb28181/device.go:51 (GetDeviceList lines 23-72)\n----- 产生日志的方法代码如下 -----\nfunc GetDeviceList(c *gin.Context) {\n	var pageInfo struct {\n		Page     int    `form:\"page\" binding:\"required,min=1\"`\n		PageSize int    `form:\"page_size\" binding:\"required,min=1,max=100\"`\n		DeviceID string `form:\"device_id\"`\n		Name     string `form:\"name\"`\n		Online   *bool  `form:\"online\"`\n	}\n\n	if err := c.ShouldBindQuery(&pageInfo); err != nil {\n		response.Fail(c, response.INVALID_PARAMS, nil)\n		return\n	}\n\n	db := global.GVA_DB.Model(&system.Device{})\n\n	if pageInfo.DeviceID != \"\" {\n		db = db.Where(\"device_id LIKE ?\", \"%\"+pageInfo.DeviceID+\"%\")\n	}\n	if pageInfo.Name != \"\" {\n		db = db.Where(\"name LIKE ?\", \"%\"+pageInfo.Name+\"%\")\n	}\n	if pageInfo.Online != nil {\n		db = db.Where(\"online = ?\", *pageInfo.Online)\n	}\n\n	var total int64\n	if err := db.Count(&total).Error; err != nil {\n		global.GVA_LOG.Error(\"count devices failed\", zap.Error(err))\n		response.Fail(c, response.DB_ERROR, nil)\n		return\n	}\n\n	var devices []system.Device\n	if err := db.Offset((pageInfo.Page - 1) * pageInfo.PageSize).\n		Limit(pageInfo.PageSize).\n		Order(\"created_at DESC\").\n		Find(&devices).Error; err != nil {\n		global.GVA_LOG.Error(\"query devices failed\", zap.Error(err))\n		response.Fail(c, response.DB_ERROR, nil)\n		return\n	}\n\n	response.Success(c, gin.H{\n		\"list\":      devices,\n		\"total\":     total,\n		\"page\":      pageInfo.Page,\n		\"page_size\": pageInfo.PageSize,\n	})\n}', 'error', NULL, '未处理');
 INSERT INTO `sys_error` VALUES (23, '2026-07-11 19:26:00.690', '2026-07-11 19:26:00.690', NULL, '后端', 'count devices failed | 错误: Error 1054 (42S22): Unknown column \'wvp_device.deleted_at\' in \'where clause\' \n 源文件:/home/wyd/gb28181/wvp-go/server/api/v1/gb28181/device.go:51 \n 调用栈：wvp-go/server/api/v1/gb28181.GetDeviceList\n	/home/wyd/gb28181/wvp-go/server/api/v1/gb28181/device.go:51\ngithub.com/gin-gonic/gin.(*Context).Next\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185\nwvp-go/server/initialize.Routers.CasbinHandler.func4\n	/home/wyd/gb28181/wvp-go/server/middleware/casbin_rbac.go:30\ngithub.com/gin-gonic/gin.(*Context).Next\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185\nwvp-go/server/initialize.Routers.JWTAuth.func3\n	/home/wyd/gb28181/wvp-go/server/middleware/jwt.go:69\ngithub.com/gin-gonic/gin.(*Context).Next\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185\ngithub.com/gin-gonic/gin.LoggerWithConfig.func1\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/logger.go:249\ngithub.com/gin-gonic/gin.(*Context).Next\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185\nwvp-go/server/initialize.Routers.GinRecovery.func2\n	/home/wyd/gb28181/wvp-go/server/middleware/error.go:78\ngithub.com/gin-gonic/gin.(*Context).Next\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185\ngithub.com/gin-gonic/gin.(*Engine).handleHTTPRequest\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/gin.go:633\ngithub.com/gin-gonic/gin.(*Engine).ServeHTTP\n	/home/wyd/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/gin.go:589\nnet/http.serverHandler.ServeHTTP\n	/usr/local/go/src/net/http/server.go:3301\nnet/http.(*conn).serve\n	/usr/local/go/src/net/http/server.go:2102 \n 最终调用方法:/home/wyd/gb28181/wvp-go/server/api/v1/gb28181/device.go:51 (GetDeviceList lines 23-72)\n----- 产生日志的方法代码如下 -----\nfunc GetDeviceList(c *gin.Context) {\n	var pageInfo struct {\n		Page     int    `form:\"page\" binding:\"required,min=1\"`\n		PageSize int    `form:\"page_size\" binding:\"required,min=1,max=100\"`\n		DeviceID string `form:\"device_id\"`\n		Name     string `form:\"name\"`\n		Online   *bool  `form:\"online\"`\n	}\n\n	if err := c.ShouldBindQuery(&pageInfo); err != nil {\n		response.Fail(c, response.INVALID_PARAMS, nil)\n		return\n	}\n\n	db := global.GVA_DB.Model(&system.Device{})\n\n	if pageInfo.DeviceID != \"\" {\n		db = db.Where(\"device_id LIKE ?\", \"%\"+pageInfo.DeviceID+\"%\")\n	}\n	if pageInfo.Name != \"\" {\n		db = db.Where(\"name LIKE ?\", \"%\"+pageInfo.Name+\"%\")\n	}\n	if pageInfo.Online != nil {\n		db = db.Where(\"online = ?\", *pageInfo.Online)\n	}\n\n	var total int64\n	if err := db.Count(&total).Error; err != nil {\n		global.GVA_LOG.Error(\"count devices failed\", zap.Error(err))\n		response.Fail(c, response.DB_ERROR, nil)\n		return\n	}\n\n	var devices []system.Device\n	if err := db.Offset((pageInfo.Page - 1) * pageInfo.PageSize).\n		Limit(pageInfo.PageSize).\n		Order(\"created_at DESC\").\n		Find(&devices).Error; err != nil {\n		global.GVA_LOG.Error(\"query devices failed\", zap.Error(err))\n		response.Fail(c, response.DB_ERROR, nil)\n		return\n	}\n\n	response.Success(c, gin.H{\n		\"list\":      devices,\n		\"total\":     total,\n		\"page\":      pageInfo.Page,\n		\"page_size\": pageInfo.PageSize,\n	})\n}', 'error', NULL, '未处理');
 INSERT INTO `sys_error` VALUES (24, '2026-07-14 21:03:00.153', '2026-07-14 21:03:00.153', NULL, '前端', '错误信息: AxiosError: Request failed with status code 403\nStack: 调用栈: AxiosError: Request failed with status code 403\n    at settle (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1494:14)\n    at XMLHttpRequest.onloadend (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1801:4)\n    at Axios$1.request (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:2296:37)\n    at async loadCommits (http://localhost:8080/src/view/dashboard/components/table.vue:38:22)', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (25, '2026-07-15 09:30:45.463', '2026-07-15 09:30:45.463', NULL, '后端', 'parse catalog response failed | 错误: parse catalog response failed: xml: encoding \"gb2312\" declared but Decoder.CharsetReader is nil \n 源文件:/home/wei/code/go-wvp/server/core/server.go:179 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:179\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (26, '2026-07-15 09:30:45.463', '2026-07-15 09:30:45.463', NULL, '后端', 'parse catalog response failed | 错误: parse catalog response failed: xml: encoding \"gb2312\" declared but Decoder.CharsetReader is nil \n 源文件:/home/wei/code/go-wvp/server/core/server.go:179 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:179\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (27, '2026-07-15 09:30:45.464', '2026-07-15 09:30:45.464', NULL, '后端', 'parse catalog response failed | 错误: parse catalog response failed: xml: encoding \"gb2312\" declared but Decoder.CharsetReader is nil \n 源文件:/home/wei/code/go-wvp/server/core/server.go:179 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:179\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (28, '2026-07-15 09:30:45.464', '2026-07-15 09:30:45.464', NULL, '后端', 'parse catalog response failed | 错误: parse catalog response failed: xml: encoding \"gb2312\" declared but Decoder.CharsetReader is nil \n 源文件:/home/wei/code/go-wvp/server/core/server.go:179 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:179\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (29, '2026-07-15 09:30:45.465', '2026-07-15 09:30:45.465', NULL, '后端', 'parse catalog response failed | 错误: parse catalog response failed: xml: encoding \"gb2312\" declared but Decoder.CharsetReader is nil \n 源文件:/home/wei/code/go-wvp/server/core/server.go:179 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:179\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (30, '2026-07-15 09:30:45.465', '2026-07-15 09:30:45.465', NULL, '后端', 'parse catalog response failed | 错误: parse catalog response failed: xml: encoding \"gb2312\" declared but Decoder.CharsetReader is nil \n 源文件:/home/wei/code/go-wvp/server/core/server.go:179 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:179\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (31, '2026-07-15 09:30:45.465', '2026-07-15 09:30:45.465', NULL, '后端', 'parse catalog response failed | 错误: parse catalog response failed: xml: encoding \"gb2312\" declared but Decoder.CharsetReader is nil \n 源文件:/home/wei/code/go-wvp/server/core/server.go:179 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:179\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (32, '2026-07-15 09:30:45.465', '2026-07-15 09:30:45.465', NULL, '后端', 'parse catalog response failed | 错误: parse catalog response failed: xml: encoding \"gb2312\" declared but Decoder.CharsetReader is nil \n 源文件:/home/wei/code/go-wvp/server/core/server.go:179 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:179\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (33, '2026-07-15 09:30:45.465', '2026-07-15 09:30:45.465', NULL, '后端', 'parse catalog response failed | 错误: parse catalog response failed: xml: encoding \"gb2312\" declared but Decoder.CharsetReader is nil \n 源文件:/home/wei/code/go-wvp/server/core/server.go:179 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:179\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (34, '2026-07-15 09:31:13.572', '2026-07-15 09:31:13.572', NULL, '后端', 'parse catalog response failed | 错误: parse catalog response failed: xml: encoding \"gb2312\" declared but Decoder.CharsetReader is nil \n 源文件:/home/wei/code/go-wvp/server/core/server.go:179 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:179\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (35, '2026-07-15 09:31:13.572', '2026-07-15 09:31:13.572', NULL, '后端', 'parse catalog response failed | 错误: parse catalog response failed: xml: encoding \"gb2312\" declared but Decoder.CharsetReader is nil \n 源文件:/home/wei/code/go-wvp/server/core/server.go:179 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:179\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (36, '2026-07-15 09:31:13.573', '2026-07-15 09:31:13.573', NULL, '后端', 'parse catalog response failed | 错误: parse catalog response failed: xml: encoding \"gb2312\" declared but Decoder.CharsetReader is nil \n 源文件:/home/wei/code/go-wvp/server/core/server.go:179 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:179\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (37, '2026-07-15 09:31:13.573', '2026-07-15 09:31:13.573', NULL, '后端', 'parse catalog response failed | 错误: parse catalog response failed: xml: encoding \"gb2312\" declared but Decoder.CharsetReader is nil \n 源文件:/home/wei/code/go-wvp/server/core/server.go:179 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:179\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (38, '2026-07-15 09:31:13.573', '2026-07-15 09:31:13.573', NULL, '后端', 'parse catalog response failed | 错误: parse catalog response failed: xml: encoding \"gb2312\" declared but Decoder.CharsetReader is nil \n 源文件:/home/wei/code/go-wvp/server/core/server.go:179 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:179\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (39, '2026-07-15 09:31:13.573', '2026-07-15 09:31:13.573', NULL, '后端', 'parse catalog response failed | 错误: parse catalog response failed: xml: encoding \"gb2312\" declared but Decoder.CharsetReader is nil \n 源文件:/home/wei/code/go-wvp/server/core/server.go:179 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:179\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (40, '2026-07-15 09:31:13.574', '2026-07-15 09:31:13.574', NULL, '后端', 'parse catalog response failed | 错误: parse catalog response failed: xml: encoding \"gb2312\" declared but Decoder.CharsetReader is nil \n 源文件:/home/wei/code/go-wvp/server/core/server.go:179 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:179\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (41, '2026-07-15 09:31:13.574', '2026-07-15 09:31:13.574', NULL, '后端', 'parse catalog response failed | 错误: parse catalog response failed: xml: encoding \"gb2312\" declared but Decoder.CharsetReader is nil \n 源文件:/home/wei/code/go-wvp/server/core/server.go:179 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:179\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (42, '2026-07-15 09:31:13.575', '2026-07-15 09:31:13.575', NULL, '后端', 'parse catalog response failed | 错误: parse catalog response failed: xml: encoding \"gb2312\" declared but Decoder.CharsetReader is nil \n 源文件:/home/wei/code/go-wvp/server/core/server.go:179 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:179\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (43, '2026-07-15 09:32:02.444', '2026-07-15 09:32:02.444', NULL, '后端', 'parse catalog response failed | 错误: parse catalog response failed: xml: encoding \"gb2312\" declared but Decoder.CharsetReader is nil \n 源文件:/home/wei/code/go-wvp/server/core/server.go:179 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:179\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (44, '2026-07-15 09:32:02.446', '2026-07-15 09:32:02.446', NULL, '后端', 'parse catalog response failed | 错误: parse catalog response failed: xml: encoding \"gb2312\" declared but Decoder.CharsetReader is nil \n 源文件:/home/wei/code/go-wvp/server/core/server.go:179 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:179\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (45, '2026-07-15 09:32:02.447', '2026-07-15 09:32:02.447', NULL, '后端', 'parse catalog response failed | 错误: parse catalog response failed: xml: encoding \"gb2312\" declared but Decoder.CharsetReader is nil \n 源文件:/home/wei/code/go-wvp/server/core/server.go:179 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:179\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (46, '2026-07-15 09:32:02.447', '2026-07-15 09:32:02.447', NULL, '后端', 'parse catalog response failed | 错误: parse catalog response failed: xml: encoding \"gb2312\" declared but Decoder.CharsetReader is nil \n 源文件:/home/wei/code/go-wvp/server/core/server.go:179 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:179\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (47, '2026-07-15 09:32:02.447', '2026-07-15 09:32:02.447', NULL, '后端', 'parse catalog response failed | 错误: parse catalog response failed: xml: encoding \"gb2312\" declared but Decoder.CharsetReader is nil \n 源文件:/home/wei/code/go-wvp/server/core/server.go:179 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:179\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (48, '2026-07-15 09:32:02.448', '2026-07-15 09:32:02.448', NULL, '后端', 'parse catalog response failed | 错误: parse catalog response failed: xml: encoding \"gb2312\" declared but Decoder.CharsetReader is nil \n 源文件:/home/wei/code/go-wvp/server/core/server.go:179 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:179\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (49, '2026-07-15 09:32:02.448', '2026-07-15 09:32:02.448', NULL, '后端', 'parse catalog response failed | 错误: parse catalog response failed: xml: encoding \"gb2312\" declared but Decoder.CharsetReader is nil \n 源文件:/home/wei/code/go-wvp/server/core/server.go:179 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:179\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (50, '2026-07-15 09:32:02.448', '2026-07-15 09:32:02.448', NULL, '后端', 'parse catalog response failed | 错误: parse catalog response failed: xml: encoding \"gb2312\" declared but Decoder.CharsetReader is nil \n 源文件:/home/wei/code/go-wvp/server/core/server.go:179 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:179\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (51, '2026-07-15 09:32:02.448', '2026-07-15 09:32:02.448', NULL, '后端', 'parse catalog response failed | 错误: parse catalog response failed: xml: encoding \"gb2312\" declared but Decoder.CharsetReader is nil \n 源文件:/home/wei/code/go-wvp/server/core/server.go:179 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:179\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (52, '2026-07-15 10:03:19.193', '2026-07-15 10:03:19.193', NULL, '后端', 'create channel failed | 错误: Error 1062 (23000): Duplicate entry \'34020000001310049102\' for key \'wvp_device_channel.uk_channel_id\' \n 源文件:/home/wei/code/go-wvp/server/api/v1/gb28181/device.go:318 \n 调用栈：wvp-go/server/api/v1/gb28181.QueryDeviceCatalog\n	/home/wei/code/go-wvp/server/api/v1/gb28181/device.go:318\ngithub.com/gin-gonic/gin.(*Context).Next\n	/home/wei/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185\nwvp-go/server/initialize.Routers.CasbinHandler.func4\n	/home/wei/code/go-wvp/server/middleware/casbin_rbac.go:30\ngithub.com/gin-gonic/gin.(*Context).Next\n	/home/wei/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185\nwvp-go/server/initialize.Routers.JWTAuth.func3\n	/home/wei/code/go-wvp/server/middleware/jwt.go:69\ngithub.com/gin-gonic/gin.(*Context).Next\n	/home/wei/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185\ngithub.com/gin-gonic/gin.LoggerWithConfig.func1\n	/home/wei/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/logger.go:249\ngithub.com/gin-gonic/gin.(*Context).Next\n	/home/wei/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185\nwvp-go/server/initialize.Routers.GinRecovery.func2\n	/home/wei/code/go-wvp/server/middleware/error.go:78\ngithub.com/gin-gonic/gin.(*Context).Next\n	/home/wei/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185\ngithub.com/gin-gonic/gin.(*Engine).handleHTTPRequest\n	/home/wei/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/gin.go:633\ngithub.com/gin-gonic/gin.(*Engine).ServeHTTP\n	/home/wei/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/gin.go:589\nnet/http.serverHandler.ServeHTTP\n	/usr/local/go/src/net/http/server.go:3301\nnet/http.(*conn).serve\n	/usr/local/go/src/net/http/server.go:2102 \n 最终调用方法:/home/wei/code/go-wvp/server/api/v1/gb28181/device.go:318 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/api/v1/gb28181/device.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (53, '2026-07-15 10:40:56.704', '2026-07-15 10:40:56.704', NULL, '后端', 'handle keepalive failed | 错误: update keepalive failed: Error 1054 (42S22): Unknown column \'channel_count\' in \'field list\' \n 源文件:/home/wei/code/go-wvp/server/core/server.go:209 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:209\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (54, '2026-07-15 10:41:27.459', '2026-07-15 10:41:27.459', NULL, '后端', 'handle keepalive failed | 错误: update keepalive failed: Error 1054 (42S22): Unknown column \'channel_count\' in \'field list\' \n 源文件:/home/wei/code/go-wvp/server/core/server.go:209 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:209\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (55, '2026-07-15 10:41:57.220', '2026-07-15 10:41:57.220', NULL, '后端', 'handle keepalive failed | 错误: update keepalive failed: Error 1054 (42S22): Unknown column \'channel_count\' in \'field list\' \n 源文件:/home/wei/code/go-wvp/server/core/server.go:209 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:209\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (56, '2026-07-15 11:01:26.191', '2026-07-15 11:01:26.191', NULL, '后端', 'handle keepalive failed | 错误: update keepalive failed: Error 1205 (HY000): Lock wait timeout exceeded; try restarting transaction \n 源文件:/home/wei/code/go-wvp/server/core/server.go:209 \n 调用栈：wvp-go/server/core.startSIPServer.func2\n	/home/wei/code/go-wvp/server/core/server.go:209\nwvp-go/server/internal/gb28181/sip.(*Server).handleRequest\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138\nwvp-go/server/internal/gb28181/sip.(*Server).handleMessage\n	/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:114 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/gb28181/sip/server.go:138 () | extract_err=read file failed: open /home/wei/code/go-wvp/server/internal/gb28181/sip/server.go: no such file or directory', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (57, '2026-07-15 14:37:26.181', '2026-07-15 14:37:26.181', NULL, '前端', '错误信息: AxiosError: Request failed with status code 403\nStack: 调用栈: AxiosError: Request failed with status code 403\n    at settle (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1494:14)\n    at XMLHttpRequest.onloadend (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1801:4)\n    at Axios$1.request (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:2296:37)\n    at async loadCommits (http://localhost:8080/src/view/dashboard/components/table.vue:38:22)', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (58, '2026-07-15 14:45:18.179', '2026-07-15 14:45:18.179', NULL, '前端', '错误信息: AxiosError: Request failed with status code 403\nStack: 调用栈: AxiosError: Request failed with status code 403\n    at settle (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1494:14)\n    at XMLHttpRequest.onloadend (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1801:4)\n    at Axios$1.request (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:2296:37)\n    at async loadCommits (http://localhost:8080/src/view/dashboard/components/table.vue:38:22)', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (59, '2026-07-16 12:21:57.477', '2026-07-16 12:21:57.477', NULL, '前端', '错误信息: AxiosError: Request failed with status code 403\nStack: 调用栈: AxiosError: Request failed with status code 403\n    at settle (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1494:14)\n    at XMLHttpRequest.onloadend (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1801:4)\n    at Axios$1.request (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:2296:37)\n    at async loadCommits (http://localhost:8080/src/view/dashboard/components/table.vue:38:22)', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (60, '2026-07-16 12:22:06.562', '2026-07-16 12:22:06.562', NULL, '前端', '错误信息: AxiosError: Request failed with status code 502\nStack: 调用栈: AxiosError: Request failed with status code 502\n    at settle (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1494:14)\n    at XMLHttpRequest.onloadend (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1801:4)\n    at Axios$1.request (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:2296:37)\n    at async getTableData (http://localhost:8080/src/view/dashboard/components/pluginTable.vue:39:17)', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (61, '2026-07-16 12:22:10.475', '2026-07-16 12:22:10.475', NULL, '前端', '错误信息: AxiosError: Request failed with status code 403\nStack: 调用栈: AxiosError: Request failed with status code 403\n    at settle (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1494:14)\n    at XMLHttpRequest.onloadend (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1801:4)\n    at Axios$1.request (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:2296:37)\n    at async loadCommits (http://localhost:8080/src/view/dashboard/components/table.vue:38:22)', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (62, '2026-07-16 12:22:20.126', '2026-07-16 12:22:20.126', NULL, '前端', '错误信息: AxiosError: Request failed with status code 502\nStack: 调用栈: AxiosError: Request failed with status code 502\n    at settle (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1494:14)\n    at XMLHttpRequest.onloadend (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1801:4)\n    at Axios$1.request (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:2296:37)\n    at async getTableData (http://localhost:8080/src/view/dashboard/components/pluginTable.vue:39:17)', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (63, '2026-07-16 12:22:28.882', '2026-07-16 12:22:28.882', NULL, '前端', '错误信息: AxiosError: Request failed with status code 403\nStack: 调用栈: AxiosError: Request failed with status code 403\n    at settle (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1494:14)\n    at XMLHttpRequest.onloadend (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1801:4)\n    at Axios$1.request (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:2296:37)\n    at async loadCommits (http://localhost:8080/src/view/dashboard/components/table.vue:38:22)', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (64, '2026-07-16 12:22:38.570', '2026-07-16 12:22:38.570', NULL, '前端', '错误信息: AxiosError: Request failed with status code 502\nStack: 调用栈: AxiosError: Request failed with status code 502\n    at settle (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1494:14)\n    at XMLHttpRequest.onloadend (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1801:4)\n    at Axios$1.request (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:2296:37)\n    at async getTableData (http://localhost:8080/src/view/dashboard/components/pluginTable.vue:39:17)', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (65, '2026-07-16 12:46:01.574', '2026-07-16 12:46:01.574', NULL, '前端', '错误信息: AxiosError: Request failed with status code 403\nStack: 调用栈: AxiosError: Request failed with status code 403\n    at settle (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1494:14)\n    at XMLHttpRequest.onloadend (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1801:4)\n    at Axios$1.request (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:2296:37)\n    at async loadCommits (http://localhost:8080/src/view/dashboard/components/table.vue:38:22)', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (66, '2026-07-17 08:59:03.811', '2026-07-17 08:59:03.811', NULL, '前端', '错误信息: AxiosError: Request failed with status code 502\nStack: 调用栈: AxiosError: Request failed with status code 502\n    at settle (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1494:14)\n    at XMLHttpRequest.onloadend (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1801:4)\n    at Axios$1.request (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:2296:37)\n    at async getTableData (http://localhost:8080/src/view/dashboard/components/pluginTable.vue:39:17)', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (67, '2026-07-17 08:59:40.583', '2026-07-17 08:59:40.583', NULL, '前端', '错误信息: AxiosError: Request failed with status code 502\nStack: 调用栈: AxiosError: Request failed with status code 502\n    at settle (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1494:14)\n    at XMLHttpRequest.onloadend (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1801:4)\n    at Axios$1.request (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:2296:37)\n    at async getTableData (http://localhost:8080/src/view/dashboard/components/pluginTable.vue:39:17)', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (68, '2026-07-17 09:00:21.993', '2026-07-17 09:00:21.993', NULL, '前端', '错误信息: AxiosError: Request failed with status code 502\nStack: 调用栈: AxiosError: Request failed with status code 502\n    at settle (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1494:14)\n    at XMLHttpRequest.onloadend (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1801:4)\n    at Axios$1.request (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:2296:37)\n    at async getTableData (http://localhost:8080/src/view/dashboard/components/pluginTable.vue:39:17)', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (69, '2026-07-17 16:55:30.410', '2026-07-17 16:55:30.410', NULL, '后端', 'ZLM API parse response failed | 错误: unexpected end of JSON input \n 源文件:/home/wei/code/go-wvp/server/internal/media/zlm/client.go:121 \n 调用栈：wvp-go/server/internal/media/zlm.(*Client).callAPI\n	/home/wei/code/go-wvp/server/internal/media/zlm/client.go:121\nwvp-go/server/internal/media/zlm.(*Client).GetServerConfig\n	/home/wei/code/go-wvp/server/internal/media/zlm/client.go:186\nwvp-go/server/internal/media/zlm.(*HookHandler).SyncZLMConfig\n	/home/wei/code/go-wvp/server/internal/media/zlm/hook.go:328\nwvp-go/server/internal/media/zlm.InitZLMHooks\n	/home/wei/code/go-wvp/server/internal/media/zlm/init.go:73\nwvp-go/server/core.RunServer.func1\n	/home/wei/code/go-wvp/server/core/server.go:60 \n 最终调用方法:/home/wei/code/go-wvp/server/internal/media/zlm/client.go:121 (callAPI lines 72-138)\n----- 产生日志的方法代码如下 -----\nfunc (c *Client) callAPI(apiPath string, params url.Values) (map[string]interface{}, error) {\n	apiURL := fmt.Sprintf(\"%s%s\", c.GetAPI(), apiPath)\n\n	if params == nil {\n		params = url.Values{}\n	}\n	params.Set(\"secret\", c.config.Secret)\n	body := params.Encode()\n\n	c.logger.Info(\"ZLM API request\",\n		zap.String(\"method\", \"POST\"),\n		zap.String(\"url\", apiURL),\n		zap.String(\"body\", body),\n	)\n\n	req, err := http.NewRequest(\"POST\", apiURL, strings.NewReader(body))\n	if err != nil {\n		c.logger.Error(\"ZLM API create request failed\", zap.Error(err))\n		return nil, fmt.Errorf(\"create request failed: %w\", err)\n	}\n	req.Header.Set(\"Content-Type\", \"application/x-www-form-urlencoded\")\n	req.Header.Set(\"Accept-Encoding\", \"gzip\")\n\n	resp, err := c.client.Do(req)\n	if err != nil {\n		c.logger.Error(\"ZLM API request failed\", zap.String(\"url\", apiURL), zap.Error(err))\n		return nil, fmt.Errorf(\"call API failed: %w\", err)\n	}\n	defer resp.Body.Close()\n\n	respBody, err := io.ReadAll(resp.Body)\n	if err != nil {\n		c.logger.Error(\"ZLM API read response failed\", zap.Error(err))\n		return nil, fmt.Errorf(\"read response failed: %w\", err)\n	}\n\n	c.logger.Info(\"ZLM API response\",\n		zap.Int(\"status\", resp.StatusCode),\n		zap.Int(\"body_len\", len(respBody)),\n	)\n\n	if len(respBody) < 2048 {\n		c.logger.Debug(\"ZLM API response body\",\n			zap.String(\"body\", string(respBody)),\n		)\n	}\n\n	var result map[string]interface{}\n	if err := json.Unmarshal(respBody, &result); err != nil {\n		c.logger.Error(\"ZLM API parse response failed\", zap.Error(err))\n		return nil, fmt.Errorf(\"parse response failed: %w\", err)\n	}\n\n	// Check for ZLM API error codes\n	if code, ok := result[\"code\"].(float64); ok && code != 0 {\n		msg := \"\"\n		if m, ok := result[\"msg\"].(string); ok {\n			msg = m\n		}\n		c.logger.Error(\"ZLM API returned error\",\n			zap.Float64(\"code\", code),\n			zap.String(\"msg\", msg),\n		)\n	}\n\n	return result, nil\n}', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (70, '2026-07-17 16:58:00.200', '2026-07-17 16:58:00.200', NULL, '前端', '错误信息: AxiosError: Request failed with status code 403\nStack: 调用栈: AxiosError: Request failed with status code 403\n    at settle (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1494:14)\n    at XMLHttpRequest.onloadend (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1801:4)\n    at Axios$1.request (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:2296:37)\n    at async loadCommits (http://localhost:8080/src/view/dashboard/components/table.vue:38:22)', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (71, '2026-07-17 16:58:18.287', '2026-07-17 16:58:18.287', NULL, '前端', '错误信息: AxiosError: Request failed with status code 403\nStack: 调用栈: AxiosError: Request failed with status code 403\n    at settle (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1494:14)\n    at XMLHttpRequest.onloadend (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1801:4)\n    at Axios$1.request (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:2296:37)\n    at async loadCommits (http://localhost:8080/src/view/dashboard/components/table.vue:38:22)', 'error', NULL, '未处理');
+INSERT INTO `sys_error` VALUES (72, '2026-07-17 16:58:54.835', '2026-07-17 16:58:54.835', NULL, '前端', '错误信息: AxiosError: Request failed with status code 403\nStack: 调用栈: AxiosError: Request failed with status code 403\n    at settle (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1494:14)\n    at XMLHttpRequest.onloadend (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:1801:4)\n    at Axios$1.request (http://localhost:8080/node_modules/.vite/deps/axios.js?v=6d72dc8e:2296:37)\n    at async loadCommits (http://localhost:8080/src/view/dashboard/components/table.vue:38:22)', 'error', NULL, '未处理');
 
 -- ----------------------------
 -- Table structure for sys_export_template_condition
@@ -1257,7 +1307,7 @@ CREATE TABLE `sys_export_template_condition`  (
   `operator` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '操作符',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_sys_export_template_condition_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_export_template_condition
@@ -1278,7 +1328,7 @@ CREATE TABLE `sys_export_template_join`  (
   `on` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '关联条件',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_sys_export_template_join_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_export_template_join
@@ -1390,7 +1440,7 @@ CREATE TABLE `sys_operation_records`  (
   `user_id` bigint UNSIGNED NULL DEFAULT NULL COMMENT '用户id',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_sys_operation_records_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_operation_records
@@ -1403,6 +1453,11 @@ INSERT INTO `sys_operation_records` VALUES (5, '2026-07-11 19:15:05.818', '2026-
 INSERT INTO `sys_operation_records` VALUES (6, '2026-07-11 19:17:01.494', '2026-07-11 19:17:01.494', NULL, '127.0.0.1', 'GET', '/api/getApiGroups', 200, 2465754, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '', '{}', '{\"code\":0,\"data\":{\"apiGroupMap\":{\"api\":\"api\",\"attachmentCategory\":\"媒体库分类\",\"authority\":\"角色\",\"authorityBtn\":\"按钮权限\",\"autoCode\":\"代码生成器历史\",\"casbin\":\"casbin\",\"customer\":\"客户\",\"email\":\"email\",\"fileUploadAndDownload\":\"文件上传与下载\",\"info\":\"公告\",\"jwt\":\"jwt\",\"menu\":\"菜单\",\"simpleUploader\":\"断点续传(插件版)\",\"skills\":\"skills\",\"sysApiToken\":\"API Token\",\"sysDictionary\":\"系统字典\",\"sysDictionaryDetail\":\"系统字典详情\",\"sysError\":\"错误日志\",\"sysExportTemplate\":\"导出模板\",\"sysLoginLog\":\"登录日志\",\"sysOperationRecord\":\"操作记录\",\"sysParams\":\"参数管理\",\"sysVersion\":\"版本控制\",\"system\":\"系统服务\",\"user\":\"系统用户\"},\"groups\":[\"jwt\",\"登录日志\",\"API Token\",\"系统用户\",\"api\",\"角色\",\"casbin\",\"菜单\",\"分片上传\",\"文件上传与下载\",\"系统服务\",\"skills\",\"客户\",\"代码生成器\",\"模板配置\",\"代码生成器历史\",\"系统字典详情\",\"系统字典\",\"操作记录\",\"断点续传(插件版)\",\"email\",\"按钮权限\",\"导出模板\",\"错误日志\",\"公告\",\"参数管理\",\"媒体库分类\",\"版本控制\"]},\"msg\":\"成功\"}', 1);
 INSERT INTO `sys_operation_records` VALUES (7, '2026-07-11 19:19:45.247', '2026-07-11 19:19:45.247', NULL, '127.0.0.1', 'GET', '/api/getApiGroups', 200, 1560801, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '', '{}', '{\"code\":0,\"data\":{\"apiGroupMap\":{\"api\":\"api\",\"attachmentCategory\":\"媒体库分类\",\"authority\":\"角色\",\"authorityBtn\":\"按钮权限\",\"autoCode\":\"代码生成器历史\",\"casbin\":\"casbin\",\"customer\":\"客户\",\"email\":\"email\",\"fileUploadAndDownload\":\"文件上传与下载\",\"info\":\"公告\",\"jwt\":\"jwt\",\"menu\":\"菜单\",\"simpleUploader\":\"断点续传(插件版)\",\"skills\":\"skills\",\"sysApiToken\":\"API Token\",\"sysDictionary\":\"系统字典\",\"sysDictionaryDetail\":\"系统字典详情\",\"sysError\":\"错误日志\",\"sysExportTemplate\":\"导出模板\",\"sysLoginLog\":\"登录日志\",\"sysOperationRecord\":\"操作记录\",\"sysParams\":\"参数管理\",\"sysVersion\":\"版本控制\",\"system\":\"系统服务\",\"user\":\"系统用户\"},\"groups\":[\"jwt\",\"登录日志\",\"API Token\",\"系统用户\",\"api\",\"角色\",\"casbin\",\"菜单\",\"分片上传\",\"文件上传与下载\",\"系统服务\",\"skills\",\"客户\",\"代码生成器\",\"模板配置\",\"代码生成器历史\",\"系统字典详情\",\"系统字典\",\"操作记录\",\"断点续传(插件版)\",\"email\",\"按钮权限\",\"导出模板\",\"错误日志\",\"公告\",\"参数管理\",\"媒体库分类\",\"版本控制\"]},\"msg\":\"成功\"}', 1);
 INSERT INTO `sys_operation_records` VALUES (8, '2026-07-14 21:02:54.303', '2026-07-14 21:02:54.303', NULL, '127.0.0.1', 'POST', '/casbin/updateCasbin', 200, 88243252, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36', '', '[超出记录长度]', '{\"code\":0,\"data\":{},\"msg\":\"更新成功\"}', 1);
+INSERT INTO `sys_operation_records` VALUES (9, '2026-07-15 10:42:46.455', '2026-07-15 10:42:46.455', NULL, '192.168.10.188', 'GET', '/api/getApiGroups', 200, 1936593, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36', '', '{}', '{\"code\":0,\"data\":{\"apiGroupMap\":{\"alarm\":\"报警管理\",\"api\":\"api\",\"attachmentCategory\":\"媒体库分类\",\"authority\":\"角色\",\"authorityBtn\":\"按钮权限\",\"autoCode\":\"代码生成器历史\",\"casbin\":\"casbin\",\"customer\":\"客户\",\"device\":\"设备控制\",\"email\":\"email\",\"fileUploadAndDownload\":\"文件上传与下载\",\"group\":\"业务分组\",\"info\":\"公告\",\"jwt\":\"jwt\",\"menu\":\"菜单\",\"platform\":\"平台级联\",\"position\":\"移动位置\",\"record\":\"录像回放\",\"region\":\"行政区域\",\"simpleUploader\":\"断点续传(插件版)\",\"skills\":\"skills\",\"stream\":\"推流管理\",\"sysApiToken\":\"API Token\",\"sysDictionary\":\"系统字典\",\"sysDictionaryDetail\":\"系统字典详情\",\"sysError\":\"错误日志\",\"sysExportTemplate\":\"导出模板\",\"sysLoginLog\":\"登录日志\",\"sysOperationRecord\":\"操作记录\",\"sysParams\":\"参数管理\",\"sysVersion\":\"版本控制\",\"system\":\"系统服务\",\"user\":\"系统用户\",\"video\":\"视频点播\"},\"groups\":[\"jwt\",\"登录日志\",\"API Token\",\"系统用户\",\"api\",\"角色\",\"casbin\",\"菜单\",\"分片上传\",\"文件上传与下载\",\"系统服务\",\"skills\",\"客户\",\"代码生成器\",\"模板配置\",\"代码生成器历史\",\"系统字典详情\",\"系统字典\",\"操作记录\",\"断点续传(插件版)\",\"email\",\"按钮权限\",\"导出模板\",\"错误日志\",\"公告\",\"参数管理\",\"媒体库分类\",\"版本控制\",\"业务分组\",\"行政区域\",\"拉流代理\",\"推流管理\",\"录像计划\",\"录像文件\",\"录像回放\",\"设备管理\",\"视频点播\",\"平台级联\",\"报警管理\",\"移动位置\",\"设备控制\"]},\"msg\":\"成功\"}', 1);
+INSERT INTO `sys_operation_records` VALUES (10, '2026-07-15 10:43:17.992', '2026-07-15 10:43:17.992', NULL, '192.168.10.188', 'POST', '/api/createApi', 200, 12909423, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36', '', '{\"path\":\"/channel/list\",\"apiGroup\":\"设备管理\",\"method\":\"GET\",\"description\":\"分页查询通道\"}', '{\"code\":0,\"data\":{},\"msg\":\"创建成功\"}', 1);
+INSERT INTO `sys_operation_records` VALUES (11, '2026-07-15 10:43:18.030', '2026-07-15 10:43:18.030', NULL, '192.168.10.188', 'GET', '/api/getApiGroups', 200, 2092644, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36', '', '{}', '{\"code\":0,\"data\":{\"apiGroupMap\":{\"alarm\":\"报警管理\",\"api\":\"api\",\"attachmentCategory\":\"媒体库分类\",\"authority\":\"角色\",\"authorityBtn\":\"按钮权限\",\"autoCode\":\"代码生成器历史\",\"casbin\":\"casbin\",\"channel\":\"设备管理\",\"customer\":\"客户\",\"device\":\"设备控制\",\"email\":\"email\",\"fileUploadAndDownload\":\"文件上传与下载\",\"group\":\"业务分组\",\"info\":\"公告\",\"jwt\":\"jwt\",\"menu\":\"菜单\",\"platform\":\"平台级联\",\"position\":\"移动位置\",\"record\":\"录像回放\",\"region\":\"行政区域\",\"simpleUploader\":\"断点续传(插件版)\",\"skills\":\"skills\",\"stream\":\"推流管理\",\"sysApiToken\":\"API Token\",\"sysDictionary\":\"系统字典\",\"sysDictionaryDetail\":\"系统字典详情\",\"sysError\":\"错误日志\",\"sysExportTemplate\":\"导出模板\",\"sysLoginLog\":\"登录日志\",\"sysOperationRecord\":\"操作记录\",\"sysParams\":\"参数管理\",\"sysVersion\":\"版本控制\",\"system\":\"系统服务\",\"user\":\"系统用户\",\"video\":\"视频点播\"},\"groups\":[\"jwt\",\"登录日志\",\"API Token\",\"系统用户\",\"api\",\"角色\",\"casbin\",\"菜单\",\"分片上传\",\"文件上传与下载\",\"系统服务\",\"skills\",\"客户\",\"代码生成器\",\"模板配置\",\"代码生成器历史\",\"系统字典详情\",\"系统字典\",\"操作记录\",\"断点续传(插件版)\",\"email\",\"按钮权限\",\"导出模板\",\"错误日志\",\"公告\",\"参数管理\",\"媒体库分类\",\"版本控制\",\"业务分组\",\"行政区域\",\"拉流代理\",\"推流管理\",\"录像计划\",\"录像文件\",\"录像回放\",\"设备管理\",\"视频点播\",\"平台级联\",\"报警管理\",\"移动位置\",\"设备控制\"]},\"msg\":\"成功\"}', 1);
+INSERT INTO `sys_operation_records` VALUES (12, '2026-07-15 10:43:30.267', '2026-07-15 10:43:30.267', NULL, '192.168.10.188', 'POST', '/casbin/updateCasbin', 200, 42092503, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36', '', '[超出记录长度]', '{\"code\":0,\"data\":{},\"msg\":\"更新成功\"}', 1);
+INSERT INTO `sys_operation_records` VALUES (13, '2026-07-15 11:01:32.903', '2026-07-15 11:01:32.903', NULL, '192.168.10.188', 'GET', '/api/getApiGroups', 200, 1880663, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36', '', '{}', '{\"code\":0,\"data\":{\"apiGroupMap\":{\"alarm\":\"报警管理\",\"api\":\"api\",\"attachmentCategory\":\"媒体库分类\",\"authority\":\"角色\",\"authorityBtn\":\"按钮权限\",\"autoCode\":\"代码生成器历史\",\"casbin\":\"casbin\",\"channel\":\"设备管理\",\"customer\":\"客户\",\"device\":\"设备控制\",\"email\":\"email\",\"fileUploadAndDownload\":\"文件上传与下载\",\"group\":\"业务分组\",\"info\":\"公告\",\"jwt\":\"jwt\",\"menu\":\"菜单\",\"platform\":\"平台级联\",\"position\":\"移动位置\",\"record\":\"录像回放\",\"region\":\"行政区域\",\"simpleUploader\":\"断点续传(插件版)\",\"skills\":\"skills\",\"stream\":\"推流管理\",\"sysApiToken\":\"API Token\",\"sysDictionary\":\"系统字典\",\"sysDictionaryDetail\":\"系统字典详情\",\"sysError\":\"错误日志\",\"sysExportTemplate\":\"导出模板\",\"sysLoginLog\":\"登录日志\",\"sysOperationRecord\":\"操作记录\",\"sysParams\":\"参数管理\",\"sysVersion\":\"版本控制\",\"system\":\"系统服务\",\"user\":\"系统用户\",\"video\":\"视频点播\"},\"groups\":[\"jwt\",\"登录日志\",\"API Token\",\"系统用户\",\"api\",\"角色\",\"casbin\",\"菜单\",\"分片上传\",\"文件上传与下载\",\"系统服务\",\"skills\",\"客户\",\"代码生成器\",\"模板配置\",\"代码生成器历史\",\"系统字典详情\",\"系统字典\",\"操作记录\",\"断点续传(插件版)\",\"email\",\"按钮权限\",\"导出模板\",\"错误日志\",\"公告\",\"参数管理\",\"媒体库分类\",\"版本控制\",\"业务分组\",\"行政区域\",\"拉流代理\",\"推流管理\",\"录像计划\",\"录像文件\",\"录像回放\",\"设备管理\",\"视频点播\",\"平台级联\",\"报警管理\",\"移动位置\",\"设备控制\"]},\"msg\":\"成功\"}', 1);
 
 -- ----------------------------
 -- Table structure for sys_params
@@ -1419,7 +1474,7 @@ CREATE TABLE `sys_params`  (
   `desc` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '参数说明',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_sys_params_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_params
@@ -1489,7 +1544,7 @@ CREATE TABLE `sys_versions`  (
   `version_data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '版本数据JSON',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_sys_versions_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_versions
@@ -1557,10 +1612,11 @@ CREATE TABLE `wvp_device`  (
   `online` tinyint(1) NULL DEFAULT 0,
   `register_time` datetime(3) NULL DEFAULT NULL,
   `keepalive_time` datetime(3) NULL DEFAULT NULL,
+  `channel_count` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_device_id`(`device_id` ASC) USING BTREE,
   INDEX `idx_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of wvp_device
@@ -1585,6 +1641,7 @@ CREATE TABLE `wvp_device_channel`  (
   `civil_code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '',
   `address` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '',
   `parental` tinyint NULL DEFAULT 0,
+  `stream_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `safety_way` tinyint NULL DEFAULT 0,
   `register_way` tinyint NULL DEFAULT 1,
   `secrecy` tinyint NULL DEFAULT 0,
@@ -1597,7 +1654,7 @@ CREATE TABLE `wvp_device_channel`  (
   INDEX `idx_device_id`(`device_id` ASC) USING BTREE,
   INDEX `idx_parent_id`(`parent_id` ASC) USING BTREE,
   INDEX `idx_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 137 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of wvp_device_channel
@@ -1752,7 +1809,7 @@ CREATE TABLE `wvp_platform_channel`  (
   INDEX `idx_channel_id`(`channel_id` ASC) USING BTREE,
   INDEX `idx_device_id`(`device_id` ASC) USING BTREE,
   INDEX `idx_deleted_at`(`deleted_at` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of wvp_platform_channel

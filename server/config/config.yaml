@@ -84,3 +84,4 @@ wvp:
     ssrc_random: false
     auto_apply_play: true
     stream_on_demand: true
+    stream_wait_timeout: 8000

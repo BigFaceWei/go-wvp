@@ -14,6 +14,7 @@ import (
 
 	"wvp-go/server/global"
 	"wvp-go/server/internal/gb28181/message"
+	"wvp-go/server/internal/media/zlm"
 	"wvp-go/server/model/system"
 )
 
@@ -197,6 +198,36 @@ func PlayVideo(deviceID, channelID, ssrc string) (*PlayResult, error) {
 			CSeq:       cseqNum + 1, // next CSeq for BYE
 			ChannelID:  channelID,
 		})
+
+		// Wait for stream to be registered in ZLMediaKit
+		streamWaitTimeout := 8 * time.Second
+		if global.GVA_CONFIG.WVP.UserSettings.StreamWaitTimeout > 0 {
+			streamWaitTimeout = time.Duration(global.GVA_CONFIG.WVP.UserSettings.StreamWaitTimeout) * time.Millisecond
+		}
+
+		logger.Info("Waiting for stream registration",
+			zap.String("stream_id", streamID),
+			zap.Duration("timeout", streamWaitTimeout),
+		)
+
+		if err := zlm.WaitForStreamRegistered(streamID, streamWaitTimeout); err != nil {
+			logger.Error("Stream registration failed",
+				zap.String("stream_id", streamID),
+				zap.Error(err),
+			)
+			closeRtpServer(zlmIP, zlmHTTPPort, zlmSecret, streamID)
+			if session, ok := activeSessions.LoadAndDelete(streamID); ok {
+				s := session.(*sipSession)
+				if sendByeErr := sendBye(s, logger); sendByeErr != nil {
+					logger.Warn("Send BYE failed during cleanup", zap.Error(sendByeErr))
+				}
+			}
+			return nil, fmt.Errorf("收流超时，流注册失败: %w", err)
+		}
+
+		logger.Info("Stream registration completed",
+			zap.String("stream_id", streamID),
+		)
 	}
 
 	// Stream URLs match wvp-GB28181-pro: app=rtp, stream=deviceId_channelId
@@ -210,7 +241,7 @@ func PlayVideo(deviceID, channelID, ssrc string) (*PlayResult, error) {
 	httpFlvURL := fmt.Sprintf("http://%s:%d/%s.live.flv", zlmIP, zlmHTTPPort, rtpAppStream)
 	wsFlvURL := fmt.Sprintf("ws://%s:%d/%s.live.flv", zlmIP, zlmHTTPPort, rtpAppStream)
 
-	time.Sleep(2 * time.Second)
+	//time.Sleep(2 * time.Second)
 
 	mediaList, _ := checkMediaList(zlmIP, zlmHTTPPort, zlmSecret, streamID)
 	logger.Info("Play started",
